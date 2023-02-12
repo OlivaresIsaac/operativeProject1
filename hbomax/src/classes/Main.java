@@ -5,18 +5,23 @@
  */
 package classes;
 
+import classes.RM.Producer;
+
 /**
  *
  * @author isaac
  */
 public class Main {
+    
+    public static PTypes ptypes = new PTypes();
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("henlo");
+        Producer pepe = new Producer(ptypes.intro);
+        pepe.start();
     }
     //fdfdf
 }

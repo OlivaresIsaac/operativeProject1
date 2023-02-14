@@ -6,22 +6,25 @@
 package classes;
 
 import classes.RM.Producer;
+import classes.RM.RMStudio;
 
 /**
  *
  * @author isaac
  */
 public class Main {
-    
-    public static PTypes ptypes = new PTypes();
+   
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Producer pepe = new Producer(ptypes.intro);
-        pepe.start();
+        FunctionsUI.openMainPage();
+        RMStudio rm = new RMStudio();
+        rm.run();
+//        Producer pepe = new Producer(PTypes.intro, 1);
+//        pepe.start();
     }
     //fdfdf
 }

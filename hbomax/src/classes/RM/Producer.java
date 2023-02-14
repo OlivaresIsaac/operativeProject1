@@ -14,6 +14,7 @@ public class Producer extends Thread{
     
     private double dolarPerHour;
     private double dailyProduction;
+    private int id;
     // ver como se llevara el registro de lo producido 
     // tomar en cuenta que se puede despachar si es >=1
 //    private double currentProduced;
@@ -21,18 +22,22 @@ public class Producer extends Thread{
     
     final private PTypes type = new PTypes();
     final private boolean active = true;
+    private boolean isAssembler;
     
     
      /**
      * Producer constructor
      * types could be [intro, credit, start, end, twist]
      * @param type (String)
+     * @param id
      */
-    public Producer(String type){
+    public Producer(String type, int id){
+        this.id = id;
         this.producedPart = type;
         this.totalPay = 0;
         this.initializeProducerByType();
     }
+    
     
         @Override
     public void run(){
@@ -42,10 +47,10 @@ public class Producer extends Thread{
                 // aumentar el seamforo release (signal)
                 // revisar esto
                 this.payProducerADay();
-                this.showTotalPay();
+//                this.showTotalPay();
                 Thread.sleep(1000);
             } catch (InterruptedException ex){
-                System.out.println("ferror");
+                System.out.println("error");
             }
         }
     }
@@ -54,7 +59,7 @@ public class Producer extends Thread{
      * Initializes all important parameters of producer
      * is trigger when created or when the producer type changes
      */
-    private void initializeProducerByType(){
+        private void initializeProducerByType(){
         if (this.producedPart.equals(type.intro)) {
             this.dolarPerHour = 5;
             this.dailyProduction = 2;
@@ -71,9 +76,18 @@ public class Producer extends Thread{
         } else if (this.producedPart.equals(type.twist)) {
              this.dolarPerHour = 10;
              this.dailyProduction = (1/3);
+        
+        }  else if (this.producedPart.equals(type.assembler)) {
+             this.dolarPerHour = 8;
+             this.dailyProduction = (0.5);
+             this.isAssembler = true;
+             return;
+        
         } else {
              System.out.println("INVALID PRODUCER TYPE");
         }
+        
+        this.isAssembler = false;
         
         
     }
@@ -95,6 +109,9 @@ public class Producer extends Thread{
         return this.dolarPerHour;
     }
     
+     /**
+     * Pays the producer three 8 hours shift in a day
+     */
     public void payProducerADay(){
         this.totalPay += (getDolarPerHour()*24);
     }
@@ -104,6 +121,10 @@ public class Producer extends Thread{
     }
     
     public void showTotalPay(){
-        System.out.println("$"+this.getTotalPay());
+        System.out.println("id:"+this.getProducerId()+" has been pay $"+this.getTotalPay());
+    }
+    
+    public int getProducerId(){
+        return this.id;
     }
 }

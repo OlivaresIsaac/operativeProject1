@@ -69,6 +69,6 @@ public final class RMStudio extends Thread{
     }
     
     public void printAllSalariesPayed(){
-        System.out.println("R&M has payed so far $"+this.getAllSalariesPayed()+"in salaries");
+        System.out.println("R&M has payed so far $"+this.getAllSalariesPayed()+" in salaries");
     }
 }

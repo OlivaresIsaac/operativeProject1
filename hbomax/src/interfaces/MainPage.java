@@ -52,13 +52,17 @@ public class MainPage extends javax.swing.JFrame {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         mainDashBoard1 = new interfaces.MainDashBoard();
+        RMDashBoard1 = new interfaces.RMDashBoard();
+        TLOUDashBoard1 = new interfaces.TLOUDashBoard();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.addTab("DashBoard", mainDashBoard1);
+        jTabbedPane1.addTab("R&M Studio", RMDashBoard1);
+        jTabbedPane1.addTab("TLOU Studio", TLOUDashBoard1);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 480));
+        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -104,6 +108,8 @@ public class MainPage extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private interfaces.RMDashBoard RMDashBoard1;
+    private interfaces.TLOUDashBoard TLOUDashBoard1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private interfaces.MainDashBoard mainDashBoard1;
     // End of variables declaration//GEN-END:variables
@@ -111,4 +117,13 @@ public class MainPage extends javax.swing.JFrame {
     public MainDashBoard getMainDashBoard1() {
         return mainDashBoard1;
     }
+
+    public RMDashBoard getRMDashBoard1() {
+        return RMDashBoard1;
+    }
+    
+    public TLOUDashBoard getTLOUDashBoard(){
+        return TLOUDashBoard1;
+    }
+            
 }

@@ -35,31 +35,62 @@ public class MainDashBoard extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        loadFileButton = new javax.swing.JButton();
+        hboLogo = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         TotalPayedLabel = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("DashBoard");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(272, 20, -1, -1));
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("HBO DASHBOARD");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+
+        loadFileButton.setText("Guardar");
+        loadFileButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loadFileButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(loadFileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+
+        hboLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/hboLogo.png"))); // NOI18N
+        jPanel1.add(hboLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 0, 300, 90));
+
+        jPanel2.setBackground(new java.awt.Color(102, 0, 102));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        TotalPayedLabel.setBackground(new java.awt.Color(255, 255, 255));
+        TotalPayedLabel.setForeground(new java.awt.Color(255, 255, 255));
+        TotalPayedLabel.setText("$0");
+        jPanel2.add(TotalPayedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 110, -1));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 90));
 
         jLabel2.setText("Dinero en sueldos:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 50, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
-        TotalPayedLabel.setText("$0");
-        jPanel1.add(TotalPayedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 110, -1));
-
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 680, 480));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void loadFileButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loadFileButtonActionPerformed
+        System.out.println("henlo");
+    }//GEN-LAST:event_loadFileButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TotalPayedLabel;
+    private javax.swing.JLabel hboLogo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton loadFileButton;
     // End of variables declaration//GEN-END:variables
 
 

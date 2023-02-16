@@ -5,6 +5,7 @@
  */
 package classes.RM;
 
+import classes.FunctionsTXT;
 import classes.FunctionsUI;
 import classes.PTypes;
 
@@ -16,6 +17,9 @@ public final class RMStudio extends Thread{
    
     final private Producer[] producers;
     final private boolean active = true;
+    final private Drive drive;
+
+   
     
     public RMStudio(){
         this.producers = new Producer[15];
@@ -23,6 +27,16 @@ public final class RMStudio extends Thread{
             producers[i] = new Producer(PTypes.intro, i);
         }
         this.startProduction();
+        
+        String initialParametersFile = "src\\assets\\initialParametersRM.txt";
+        DriveObject[] driveParts = FunctionsTXT.loadInitialParameters(initialParametersFile);
+        this.drive = new Drive(driveParts);
+        getDrive().showDriveParts();
+        
+    }
+    
+     public Drive getDrive() {
+        return drive;
     }
 
     @Override

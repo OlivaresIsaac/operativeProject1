@@ -16,6 +16,7 @@ public class PTypes {
     static public String end = "end";
     static public String twist = "twist";
     static public String assembler = "assembler";
+    static public String noType = "noType";
     static public String chapter = "chapter";
     
      /**

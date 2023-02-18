@@ -50,9 +50,8 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        producersQtyController1 = new interfaces.ProducersQtyController(15);
+        producersQtyController1 = new interfaces.ProducersQtyController(15, "RM");
         rmWallpaper = new javax.swing.JLabel();
-        producersQtyController2 = new interfaces.ProducersQtyController(15);
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -161,11 +160,10 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("PM:");
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
-        jPanel1.add(producersQtyController1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        jPanel1.add(producersQtyController1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
         rmWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/rmWallpaper.png"))); // NOI18N
         jPanel1.add(rmWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
-        jPanel1.add(producersQtyController2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
     }// </editor-fold>//GEN-END:initComponents
@@ -193,7 +191,6 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private interfaces.ProducersQtyController producersQtyController1;
-    private interfaces.ProducersQtyController producersQtyController2;
     private javax.swing.JLabel rmWallpaper;
     // End of variables declaration//GEN-END:variables
 

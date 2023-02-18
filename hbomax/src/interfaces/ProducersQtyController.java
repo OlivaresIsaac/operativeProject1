@@ -18,14 +18,16 @@ public final class ProducersQtyController extends javax.swing.JPanel {
      * Creates new form ProducersQtyController
      */
     private final int maxProducerQty;
+    private final String studio;
     private final JSpinner[] spinners;
     
-    public ProducersQtyController(int max) {
+    public ProducersQtyController(int max, String studio) {
         initComponents();
         this.jPanel1.setOpaque(false);
         this.setOpaque(false);
         this.maxProducerQty = max;
         this.spinners = new JSpinner[6];
+        this.studio = studio;
         fillSpinners();
         setAvailableProducers();
     }
@@ -177,32 +179,32 @@ public final class ProducersQtyController extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void endSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_endSpinnerStateChanged
-        this.endSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), endSpinner.getValue().toString()));
+        this.endSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), endSpinner.getValue().toString(), studio));
         setAvailableProducers();
     }//GEN-LAST:event_endSpinnerStateChanged
 
     private void twistSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_twistSpinnerStateChanged
-        this.twistSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), twistSpinner.getValue().toString()));
+        this.twistSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), twistSpinner.getValue().toString(), studio));
         setAvailableProducers();
     }//GEN-LAST:event_twistSpinnerStateChanged
 
     private void creditSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_creditSpinnerStateChanged
-       this.creditSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), creditSpinner.getValue().toString()));
+       this.creditSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), creditSpinner.getValue().toString(), studio));
        setAvailableProducers();
     }//GEN-LAST:event_creditSpinnerStateChanged
 
     private void startSpinnerrStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_startSpinnerrStateChanged
-        this.startSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), startSpinner.getValue().toString()));
+        this.startSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), startSpinner.getValue().toString(), studio));
         setAvailableProducers();
     }//GEN-LAST:event_startSpinnerrStateChanged
 
     private void introSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_introSpinnerStateChanged
-        this.introSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), introSpinner.getValue().toString()));
+        this.introSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), introSpinner.getValue().toString(), studio));
         setAvailableProducers();
     }//GEN-LAST:event_introSpinnerStateChanged
 
     private void assemblerSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_assemblerSpinnerStateChanged
-    this.assemblerSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), assemblerSpinner.getValue().toString()));
+    this.assemblerSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), assemblerSpinner.getValue().toString(), studio));
     setAvailableProducers();
     }//GEN-LAST:event_assemblerSpinnerStateChanged
 

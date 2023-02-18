@@ -43,13 +43,21 @@ public class FunctionsUI {
      * @param maxProducersQty
      * @param spinners
      * @param originalValue
+     * @param studio
      * @return spinnerValue
      */
-    public static int validateNumberSpinnerRM(int maxProducersQty, JSpinner[] spinners, String originalValue) {
+    public static int validateNumberSpinnerRM(int maxProducersQty, JSpinner[] spinners, String originalValue, String studio) {
         int acc = calculateCurrentProducersQty(spinners);
         int newValue = Integer.parseInt(originalValue);
         
         if (acc <= maxProducersQty){
+            if (studio.equals("RM")) {
+                System.out.println("REASIGNANDO PRODUCTORES RM");
+                Main.rm.reAssingProducerRoles(spinners);
+            } else {
+                //TODO poner reasignacción productores TLOU
+            }
+            
             return newValue;
         } else {
             return newValue-1;

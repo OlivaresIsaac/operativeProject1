@@ -14,14 +14,13 @@ import classes.RM.RMStudio;
  */
 public class Main {
    
-
+     static RMStudio rm = new RMStudio();
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
         FunctionsUI.openMainPage();
-        RMStudio rm = new RMStudio();
         rm.run();
 //        Producer pepe = new Producer(PTypes.intro, 1);
 //        pepe.start();

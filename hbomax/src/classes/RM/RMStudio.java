@@ -8,6 +8,7 @@ package classes.RM;
 import classes.FunctionsTXT;
 import classes.FunctionsUI;
 import classes.PTypes;
+import javax.swing.JSpinner;
 
 /**
  *
@@ -44,8 +45,13 @@ public final class RMStudio extends Thread{
               while(this.active){
             try {
                 this.printAllSalariesPayed();
+//                for (Producer producer : producers) {
+//                    producer.printProducertype();
+//                    
+//                }
+//                System.out.println("\n\n");
                 FunctionsUI.updateMainDashBoardUI("$"+Integer.toString(this.getAllSalariesPayed()));
-                Thread.sleep(1000);
+                Thread.sleep(3000);
             } catch (InterruptedException ex){
                 System.out.println("error");
             }
@@ -84,5 +90,48 @@ public final class RMStudio extends Thread{
     
     public void printAllSalariesPayed(){
         System.out.println("R&M has payed so far $"+this.getAllSalariesPayed()+" in salaries");
+    }
+    
+    
+     /**
+     * reAssings the roles of all producers
+     * @param spinners
+     */
+    public void reAssingProducerRoles(JSpinner[] spinners){
+        int outerCounter = 0;
+        int innerCounter = 0;
+        for (JSpinner spinner : spinners) {
+            int typeAmount = Integer.parseInt(spinner.getValue().toString());
+            for (int i = 0; i < typeAmount; i++) {
+                
+                getProducer(innerCounter).setProducerType(getProducerTypeByOrder(outerCounter));
+                innerCounter += 1;
+            }
+            outerCounter+=1;
+        }
+        
+        while (innerCounter <=14){
+            getProducer(innerCounter).setProducerType(PTypes.noType);
+            innerCounter += 1;
+        }
+    }
+    
+    public String getProducerTypeByOrder(int position){
+        switch (position) {
+            case 0:
+                return PTypes.intro;
+            case 1:
+                return PTypes.start;
+            case 2:
+                return PTypes.credit;
+            case 3:
+                return PTypes.twist;
+            case 4:
+                return PTypes.end;
+            case 5:
+                return PTypes.assembler;
+            default:
+                return PTypes.noType;
+        }
     }
 }

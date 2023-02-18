@@ -86,7 +86,9 @@ public class Producer extends Thread{
              return;
         
         } else {
-             System.out.println("INVALID PRODUCER TYPE");
+             this.dolarPerHour = 0;
+             this.dailyProduction = 0;
+             
         }
         
         this.isAssembler = false;
@@ -122,9 +124,9 @@ public class Producer extends Thread{
         this.accProduction += getDailyProduction();
     }
     
-    public void addTodaysProduct(){
-        
-    }
+//    public void addTodaysProduct(){
+//        
+//    }
     
     public void showTotalPay(){
         System.out.println("id:"+this.getProducerId()+" has been pay $"+this.getTotalPay());
@@ -165,5 +167,9 @@ public class Producer extends Thread{
 
     public void setIsAssembler(boolean isAssembler) {
         this.isAssembler = isAssembler;
+    }
+    
+    public void printProducertype(){
+        System.out.println("El productor ID: "+getId()+" es de tipo "+getProducedPart()+" y cobra $"+getDolarPerHour()*24+" diarios");
     }
 }

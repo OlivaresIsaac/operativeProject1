@@ -7,6 +7,7 @@ package interfaces;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTabbedPane;
 
 /**
  *
@@ -50,7 +51,7 @@ public class MainPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabbedPane = new javax.swing.JTabbedPane();
         mainDashBoard1 = new interfaces.MainDashBoard();
         RMDashBoard1 = new interfaces.RMDashBoard();
         TLOUDashBoard1 = new interfaces.TLOUDashBoard();
@@ -58,11 +59,11 @@ public class MainPage extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTabbedPane1.addTab("DashBoard", mainDashBoard1);
-        jTabbedPane1.addTab("R&M Studio", RMDashBoard1);
-        jTabbedPane1.addTab("TLOU Studio", TLOUDashBoard1);
+        tabbedPane.addTab("DashBoard", mainDashBoard1);
+        tabbedPane.addTab("R&M Studio", RMDashBoard1);
+        tabbedPane.addTab("TLOU Studio", TLOUDashBoard1);
 
-        getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
+        getContentPane().add(tabbedPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -110,8 +111,8 @@ public class MainPage extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private interfaces.RMDashBoard RMDashBoard1;
     private interfaces.TLOUDashBoard TLOUDashBoard1;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private interfaces.MainDashBoard mainDashBoard1;
+    private javax.swing.JTabbedPane tabbedPane;
     // End of variables declaration//GEN-END:variables
 
     public MainDashBoard getMainDashBoard1() {
@@ -124,6 +125,9 @@ public class MainPage extends javax.swing.JFrame {
     
     public TLOUDashBoard getTLOUDashBoard(){
         return TLOUDashBoard1;
+    }
+     public JTabbedPane getTabbedPane(){
+        return tabbedPane;
     }
             
 }

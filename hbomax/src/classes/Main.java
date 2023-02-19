@@ -14,7 +14,7 @@ import classes.RM.RMStudio;
  */
 public class Main {
    
-     static RMStudio rm = new RMStudio();
+     public static RMStudio rm = new RMStudio();
     /**
      * @param args the command line arguments
      */

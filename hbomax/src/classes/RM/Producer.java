@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package classes.RM;
+import classes.Main;
 import classes.PTypes;
+import java.util.concurrent.Semaphore;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author isaac
@@ -25,7 +29,11 @@ public class Producer extends Thread{
     final private boolean active = true;
     private boolean isAssembler;
     
+  
+
+
     
+   
      /**
      * Producer constructor
      * types could be [intro, credit, start, end, twist]
@@ -48,9 +56,11 @@ public class Producer extends Thread{
                 // diminuir el semafoto acquire (wait)
                 // aumentar el seamforo release (signal)
                 // revisar esto
+                this.produceChapterSection();    
+                this.addTodaysProduct();
                 this.payProducerADay();
 //                this.showTotalPay();
-                Thread.sleep(1000);
+                Thread.sleep(3000);
             } catch (InterruptedException ex){
                 System.out.println("error");
             }
@@ -71,13 +81,13 @@ public class Producer extends Thread{
         }
         else if (this.producedPart.equals(PTypes.start)) {
             this.dolarPerHour = 7;
-            this.dailyProduction = (1/3);
+            this.dailyProduction = 0.34;
         } else if (this.producedPart.equals(PTypes.end)) {
              this.dolarPerHour = 7.5;
              this.dailyProduction = 0.5;
         } else if (this.producedPart.equals(PTypes.twist)) {
              this.dolarPerHour = 10;
-             this.dailyProduction = (1/3);
+             this.dailyProduction = 0.34;
         
         }  else if (this.producedPart.equals(PTypes.assembler)) {
              this.dolarPerHour = 8;
@@ -95,6 +105,8 @@ public class Producer extends Thread{
         
         
     }
+        
+
     
     public void setProducerType(String type){
         this.producedPart = type;
@@ -120,13 +132,31 @@ public class Producer extends Thread{
         this.totalPay += (getDolarPerHour()*24);
     }
     
-    public void producePart(){
+    public void produceChapterSection(){
         this.accProduction += getDailyProduction();
     }
     
-//    public void addTodaysProduct(){
-//        
-//    }
+    public void addTodaysProduct(){
+        if (getAccProduction() >= 1) {
+            int production = (int) Math.floor(getAccProduction());
+            
+            try {
+                // assembler todavia no funciona
+                String chapterSection = this.isAssembler ? PTypes.chapter : getProducerType();
+                
+                Main.rm.getDrive().getDriveSemaphore().acquire(); // sección entrada
+                boolean completed = Main.rm.getDrive().addProduction(chapterSection, production); // sección crítica
+                Main.rm.getDrive().getDriveSemaphore().release(); // sección salida
+                if (completed) { // sección restante
+                    setAccProduction(0);
+                }
+                
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+        }
+    }
     
     public void showTotalPay(){
         System.out.println("id:"+this.getProducerId()+" has been pay $"+this.getTotalPay());

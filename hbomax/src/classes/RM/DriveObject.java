@@ -10,7 +10,7 @@ package classes.RM;
  * @author isaac
  */
 public class DriveObject {
-    private int producedQty;
+    private volatile int  producedQty;
     private int MaxCapacity;
     private String partName;
 
@@ -42,6 +42,10 @@ public class DriveObject {
 
     public void setMaxCapacity(int MaxCapacity) {
         this.MaxCapacity = MaxCapacity;
+    }
+    
+    public boolean isSpaceAvailable(){
+        return (getProducedQty() < getMaxCapacity());
     }
     
     

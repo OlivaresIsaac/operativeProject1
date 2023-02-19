@@ -18,14 +18,14 @@ public final class RMStudio extends Thread{
    
     final private Producer[] producers;
     final private boolean active = true;
-    final private Drive drive;
+    final private  Drive drive;
 
    
     
     public RMStudio(){
         this.producers = new Producer[15];
         for (int i=0;i<15;i++){
-            producers[i] = new Producer(PTypes.intro, i);
+            producers[i] = new Producer(PTypes.noType, i);
         }
         this.startProduction();
         
@@ -44,7 +44,8 @@ public final class RMStudio extends Thread{
     public void run() {
               while(this.active){
             try {
-                this.printAllSalariesPayed();
+                getDrive().showDriveParts();
+//                this.printAllSalariesPayed();
 //                for (Producer producer : producers) {
 //                    producer.printProducertype();
 //                    

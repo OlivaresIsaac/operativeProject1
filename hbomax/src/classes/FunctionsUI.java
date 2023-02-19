@@ -5,6 +5,7 @@
  */
 package classes;
 
+import static classes.GlobalUI.updateTotalPayedText;
 import interfaces.MainPage;
 import javax.swing.JSpinner;
 
@@ -13,27 +14,10 @@ import javax.swing.JSpinner;
  * @author isaac
  */
 public class FunctionsUI {
-    private static final MainPage mainPage = new MainPage();
-
-    public static MainPage getMainPage() {
-        return mainPage;
-    }
-    
-        /**
-     * Opens project MainPage
-     */
-    public static void openMainPage() {
-        getMainPage().setVisible(true);
-        
-    }
     
     
-    public static void updateMainDashBoardUI(String text){
+        public static void updateMainDashBoardUI(String text){
        updateTotalPayedText(text);
-    }
-    
-    public static void updateTotalPayedText(String text){
-        mainPage.getMainDashBoard1().setTotalPayedLabel(text);
     }
     
       /**

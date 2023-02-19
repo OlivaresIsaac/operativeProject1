@@ -20,7 +20,7 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        FunctionsUI.openMainPage();
+        GlobalUI.openMainPage();
         rm.run();
 //        Producer pepe = new Producer(PTypes.intro, 1);
 //        pepe.start();

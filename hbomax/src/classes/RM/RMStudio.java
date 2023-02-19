@@ -19,6 +19,9 @@ public final class RMStudio extends Thread{
     final private Producer[] producers;
     final private boolean active = true;
     final private  Drive drive;
+    private int plotTwistChapterCounter;
+
+
 
    
     
@@ -33,7 +36,16 @@ public final class RMStudio extends Thread{
         DriveObject[] driveParts = FunctionsTXT.loadInitialParameters(initialParametersFile);
         this.drive = new Drive(driveParts);
         getDrive().showDriveParts();
+        plotTwistChapterCounter = 0;
         
+    }
+    
+        public int getPlotTwistChapterCounter() {
+        return plotTwistChapterCounter;
+    }
+
+    public void setPlotTwistChapterCounter(int plotTwistChapterCounter) {
+        this.plotTwistChapterCounter = plotTwistChapterCounter;
     }
     
      public Drive getDrive() {
@@ -47,7 +59,7 @@ public final class RMStudio extends Thread{
                 getDrive().showDriveParts();
 //                this.printAllSalariesPayed();
 //                for (Producer producer : producers) {
-//                    producer.printProducertype();
+//                    producer.printProducerProduction();
 //                    
 //                }
 //                System.out.println("\n\n");
@@ -134,5 +146,13 @@ public final class RMStudio extends Thread{
             default:
                 return PTypes.noType;
         }
+    }
+    
+    public boolean isNextChapterAPlotTwist(){
+        return (getPlotTwistChapterCounter() >= 5);
+    }
+    
+    public void newChapterCreated(){
+        setPlotTwistChapterCounter(getPlotTwistChapterCounter()+1);
     }
 }

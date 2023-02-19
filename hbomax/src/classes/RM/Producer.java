@@ -21,8 +21,7 @@ public class Producer extends Thread{
 
     private double accProduction;
     private final int id;
-    // ver como se llevara el registro de lo producido 
-    // tomar en cuenta que se puede despachar si es >=1
+
 //    private double currentProduced;
     private String producedPart;
     
@@ -91,7 +90,7 @@ public class Producer extends Thread{
         
         }  else if (this.producedPart.equals(PTypes.assembler)) {
              this.dolarPerHour = 8;
-             this.dailyProduction = (0.5);
+             this.dailyProduction = 0.5;
              this.isAssembler = true;
              return;
         
@@ -100,8 +99,8 @@ public class Producer extends Thread{
              this.dailyProduction = 0;
              
         }
-        
-        this.isAssembler = false;
+            setAccProduction(0);
+            setIsAssembler(false);
         
         
     }
@@ -141,15 +140,14 @@ public class Producer extends Thread{
             int production = (int) Math.floor(getAccProduction());
             
             try {
-                // assembler todavia no funciona
                 String chapterSection = this.isAssembler ? PTypes.chapter : getProducerType();
                 
                 Main.rm.getDrive().getDriveSemaphore().acquire(); // sección entrada
-                boolean completed = Main.rm.getDrive().addProduction(chapterSection, production); // sección crítica
+                Main.rm.getDrive().addProduction(chapterSection, production, Main.rm.isNextChapterAPlotTwist()); // sección crítica
                 Main.rm.getDrive().getDriveSemaphore().release(); // sección salida
-                if (completed) { // sección restante
-                    setAccProduction(0);
-                }
+               
+                    setAccProduction(0);  // sección restante
+                
                 
             } catch (InterruptedException ex) {
                 Logger.getLogger(Producer.class.getName()).log(Level.SEVERE, null, ex);
@@ -201,5 +199,9 @@ public class Producer extends Thread{
     
     public void printProducertype(){
         System.out.println("El productor ID: "+getId()+" es de tipo "+getProducedPart()+" y cobra $"+getDolarPerHour()*24+" diarios");
+    }
+    
+    public void printProducerProduction(){
+        System.out.println("El productor ID: "+getId()+" es de tipo "+getProducedPart()+" y produce $"+getDailyProduction()+" diarios, y lleva "+getAccProduction() );
     }
 }

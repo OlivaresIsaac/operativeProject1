@@ -5,6 +5,8 @@
  */
 package classes.RM;
 
+import classes.PTypes;
+
 /**
  *
  * @author isaac
@@ -45,6 +47,14 @@ public class DriveObject {
     }
     
     public boolean isSpaceAvailable(){
+        if (getMaxCapacity() == -1) {
+            return true;
+        }
+        
+        if (getPartName().equals(PTypes.intro) || getPartName().equals(PTypes.credit)) {
+            return (getProducedQty() < getMaxCapacity()-1);
+        } 
+        
         return (getProducedQty() < getMaxCapacity());
     }
     

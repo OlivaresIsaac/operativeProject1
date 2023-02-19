@@ -21,6 +21,13 @@ public final class ProducersQtyController extends javax.swing.JPanel {
     private final String studio;
     private final JSpinner[] spinners;
     
+        public ProducersQtyController(){
+        initComponents();
+        maxProducerQty = 1;
+        studio = "dummy";
+        spinners = new JSpinner[6];
+    }
+    
     public ProducersQtyController(int max, String studio) {
         initComponents();
         this.jPanel1.setOpaque(false);

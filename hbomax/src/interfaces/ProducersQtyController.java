@@ -20,23 +20,62 @@ public final class ProducersQtyController extends javax.swing.JPanel {
     private final int maxProducerQty;
     private final String studio;
     private final JSpinner[] spinners;
+    private final boolean isDrive;
+    private final boolean doesUpdate;
+    private boolean init;
+
+
     
         public ProducersQtyController(){
         initComponents();
         maxProducerQty = 1;
         studio = "dummy";
         spinners = new JSpinner[6];
+        this.isDrive = false;
+        this.doesUpdate = false;
+        
     }
     
-    public ProducersQtyController(int max, String studio) {
+    public ProducersQtyController(int max, String studio, String Label, boolean isDrive, boolean doesUpdate) {
         initComponents();
         this.jPanel1.setOpaque(false);
         this.setOpaque(false);
         this.maxProducerQty = max;
         this.spinners = new JSpinner[6];
         this.studio = studio;
+        this.titleLabel.setText(Label);
+        this.isDrive = isDrive;
+        this.doesUpdate = doesUpdate;
+        if (isDrive){
+        this.chaptersLabel.setText("Capítulos");
+        this.availableProducerQty.setVisible(false);
+        }
+        else {
+        hideCheckbox();
+        }
+        
+        this.init = doesUpdate;
+        
+
         fillSpinners();
-        setAvailableProducers();
+        if (!doesUpdate) {
+             setAvailableProducers();
+        }
+        
+    }
+    
+        public void setInit(boolean init) {
+        this.init = init;
+    }
+    
+    public void hideCheckbox(){
+        this.introInfinite.setVisible(false);
+        this.startInfinite.setVisible(false);
+        this.endInfinite.setVisible(false);
+        this.twistInfinite.setVisible(false);
+        this.creditInfinite.setVisible(false);
+        this.chapterInfinite.setVisible(false);
+        
     }
     
     public void setAvailableProducers(){
@@ -72,14 +111,20 @@ public final class ProducersQtyController extends javax.swing.JPanel {
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        chaptersLabel = new javax.swing.JLabel();
         introSpinner = new javax.swing.JSpinner();
         startSpinner = new javax.swing.JSpinner();
         creditSpinner = new javax.swing.JSpinner();
         twistSpinner = new javax.swing.JSpinner();
         endSpinner = new javax.swing.JSpinner();
         availableProducerQty = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
+        chapterInfinite = new javax.swing.JCheckBox();
+        introInfinite = new javax.swing.JCheckBox();
+        startInfinite = new javax.swing.JCheckBox();
+        creditInfinite = new javax.swing.JCheckBox();
+        twistInfinite = new javax.swing.JCheckBox();
+        endInfinite = new javax.swing.JCheckBox();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -124,11 +169,11 @@ public final class ProducersQtyController extends javax.swing.JPanel {
         jLabel23.setText("Cierre");
         jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
-        jLabel24.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel24.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("Ensambladores");
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+        chaptersLabel.setBackground(new java.awt.Color(255, 255, 255));
+        chaptersLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        chaptersLabel.setForeground(new java.awt.Color(255, 255, 255));
+        chaptersLabel.setText("Ensambladores");
+        jPanel1.add(chaptersLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
 
         introSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
         introSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -176,61 +221,136 @@ public final class ProducersQtyController extends javax.swing.JPanel {
         availableProducerQty.setText("n");
         jPanel1.add(availableProducerQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, -1, -1));
 
-        jLabel26.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel26.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("Productores Disponibles: ");
-        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
+        titleLabel.setBackground(new java.awt.Color(255, 255, 255));
+        titleLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        titleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        titleLabel.setText("Productores Disponibles: ");
+        jPanel1.add(titleLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 150));
+        chapterInfinite.setText("Infinito");
+        jPanel1.add(chapterInfinite, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, -1, -1));
+
+        introInfinite.setText("Infinito");
+        jPanel1.add(introInfinite, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, -1, -1));
+
+        startInfinite.setText("Infinito");
+        jPanel1.add(startInfinite, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 40, -1, -1));
+
+        creditInfinite.setText("Infinito");
+        jPanel1.add(creditInfinite, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, -1, -1));
+
+        twistInfinite.setText("Infinito");
+        jPanel1.add(twistInfinite, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, -1, -1));
+
+        endInfinite.setText("Infinito");
+        jPanel1.add(endInfinite, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, -1, -1));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 260, 150));
     }// </editor-fold>//GEN-END:initComponents
 
     private void endSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_endSpinnerStateChanged
-        this.endSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), endSpinner.getValue().toString(), studio));
+        if (!this.isDrive && !this.init){
+             this.endSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), endSpinner.getValue().toString(), studio, this.doesUpdate));
         setAvailableProducers();
+        }
+       
     }//GEN-LAST:event_endSpinnerStateChanged
 
     private void twistSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_twistSpinnerStateChanged
-        this.twistSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), twistSpinner.getValue().toString(), studio));
+        if (!this.isDrive && !this.init){
+        this.twistSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), twistSpinner.getValue().toString(), studio, this.doesUpdate));
         setAvailableProducers();
+        }
     }//GEN-LAST:event_twistSpinnerStateChanged
 
     private void creditSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_creditSpinnerStateChanged
-       this.creditSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), creditSpinner.getValue().toString(), studio));
+       if (!this.isDrive && !this.init){ 
+        this.creditSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), creditSpinner.getValue().toString(), studio, this.doesUpdate));
        setAvailableProducers();
+       }
     }//GEN-LAST:event_creditSpinnerStateChanged
 
     private void startSpinnerrStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_startSpinnerrStateChanged
-        this.startSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), startSpinner.getValue().toString(), studio));
+        if (!this.isDrive && !this.init){
+        this.startSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), startSpinner.getValue().toString(), studio, this.doesUpdate));
         setAvailableProducers();
+        }
     }//GEN-LAST:event_startSpinnerrStateChanged
 
     private void introSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_introSpinnerStateChanged
-        this.introSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), introSpinner.getValue().toString(), studio));
+        if (!this.isDrive && !this.init) {
+        this.introSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), introSpinner.getValue().toString(), studio, this.doesUpdate));
         setAvailableProducers();
+        }
     }//GEN-LAST:event_introSpinnerStateChanged
 
     private void assemblerSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_assemblerSpinnerStateChanged
-    this.assemblerSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), assemblerSpinner.getValue().toString(), studio));
+    if (!this.isDrive && !this.init){
+        this.assemblerSpinner.setValue(FunctionsUI.validateNumberSpinnerRM(this.maxProducerQty, getSpinners(), assemblerSpinner.getValue().toString(), studio, this.doesUpdate));
     setAvailableProducers();
+    }
     }//GEN-LAST:event_assemblerSpinnerStateChanged
+   
+    public int[] getDriveQtys(){ 
+        int[] driveQtys = new int[6];
+        driveQtys[0] = this.introInfinite.isSelected() ? -1 : Integer.parseInt(this.introSpinner.getValue().toString());
+        driveQtys[1] = this.creditInfinite.isSelected() ? -1 : Integer.parseInt(this.creditSpinner.getValue().toString());
+        driveQtys[2] = this.startInfinite.isSelected() ? -1 : Integer.parseInt(this.startSpinner.getValue().toString());
+        driveQtys[3] = this.endInfinite.isSelected() ? -1 : Integer.parseInt(this.endSpinner.getValue().toString());
+        driveQtys[4] = this.twistInfinite.isSelected() ? -1 : Integer.parseInt(this.twistSpinner.getValue().toString());
+        driveQtys[5] = this.chapterInfinite.isSelected() ? -1 : Integer.parseInt(this.assemblerSpinner.getValue().toString());
+       
+        return driveQtys;
+    }
+    
+        public int[] getProducersQtys(){ 
+        int[] producersQty = new int[6];
+        producersQty[0] = Integer.parseInt(this.introSpinner.getValue().toString());
+        producersQty[1] = Integer.parseInt(this.creditSpinner.getValue().toString());
+        producersQty[2] = Integer.parseInt(this.startSpinner.getValue().toString());
+        producersQty[3] = Integer.parseInt(this.endSpinner.getValue().toString());
+        producersQty[4] = Integer.parseInt(this.twistSpinner.getValue().toString());
+        producersQty[5] = Integer.parseInt(this.assemblerSpinner.getValue().toString());
+       
+        return producersQty;
+    }
+        
+        public void setProducersQtys(int [] producerQty){ 
+            System.out.println(producerQty[0]);
+        this.introSpinner.setValue(producerQty[0]);
+        this.creditSpinner.setValue(producerQty[1]);
+        this.startSpinner.setValue(producerQty[2]);
+        this.endSpinner.setValue(producerQty[3]);
+        this.twistSpinner.setValue(producerQty[4]);
+        this.assemblerSpinner.setValue(producerQty[5]);
+        setAvailableProducers();
+   
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner assemblerSpinner;
     private javax.swing.JLabel availableProducerQty;
+    private javax.swing.JCheckBox chapterInfinite;
+    private javax.swing.JLabel chaptersLabel;
+    private javax.swing.JCheckBox creditInfinite;
     private javax.swing.JSpinner creditSpinner;
+    private javax.swing.JCheckBox endInfinite;
     private javax.swing.JSpinner endSpinner;
+    private javax.swing.JCheckBox introInfinite;
     private javax.swing.JSpinner introSpinner;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JCheckBox startInfinite;
     private javax.swing.JSpinner startSpinner;
+    private javax.swing.JLabel titleLabel;
+    private javax.swing.JCheckBox twistInfinite;
     private javax.swing.JSpinner twistSpinner;
     // End of variables declaration//GEN-END:variables
 }
+
+ 

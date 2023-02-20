@@ -43,6 +43,7 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jProgressBar1 = new javax.swing.JProgressBar();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -51,7 +52,7 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        producersQtyController1 = new interfaces.ProducersQtyController(15, "RM");
+        producersQtyController1 = new interfaces.ProducersQtyController(15, "RM","Productores disponibles", false, true);
         jLabel11 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
@@ -75,6 +76,7 @@ public class RMDashBoard extends javax.swing.JPanel {
         startDriveMax = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         rmWallpaper = new javax.swing.JLabel();
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -133,6 +135,7 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Próximo corte en");
         jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 210, -1));
+        jPanel3.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 270, -1));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 90));
 
@@ -158,8 +161,8 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Visualizar Recursos");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
+        jLabel10.setText("Estadísticas mensuales");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, -1, -1));
 
         twistChapterQty.setBackground(new java.awt.Color(255, 255, 255));
         twistChapterQty.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -214,7 +217,7 @@ public class RMDashBoard extends javax.swing.JPanel {
         introDriveMax.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         introDriveMax.setForeground(new java.awt.Color(255, 255, 255));
         introDriveMax.setText("0");
-        jPanel1.add(introDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 20, -1));
+        jPanel1.add(introDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 100, -1));
 
         jLabel22.setBackground(new java.awt.Color(255, 255, 255));
         jLabel22.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -292,25 +295,25 @@ public class RMDashBoard extends javax.swing.JPanel {
         endDriveMax.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         endDriveMax.setForeground(new java.awt.Color(255, 255, 255));
         endDriveMax.setText("0");
-        jPanel1.add(endDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, 20, -1));
+        jPanel1.add(endDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, 120, -1));
 
         twistDriveMax.setBackground(new java.awt.Color(255, 255, 255));
         twistDriveMax.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         twistDriveMax.setForeground(new java.awt.Color(255, 255, 255));
         twistDriveMax.setText("0");
-        jPanel1.add(twistDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 20, -1));
+        jPanel1.add(twistDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 100, -1));
 
         creditDriveMax.setBackground(new java.awt.Color(255, 255, 255));
         creditDriveMax.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         creditDriveMax.setForeground(new java.awt.Color(255, 255, 255));
         creditDriveMax.setText("0");
-        jPanel1.add(creditDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 20, -1));
+        jPanel1.add(creditDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 100, -1));
 
         startDriveMax.setBackground(new java.awt.Color(255, 255, 255));
         startDriveMax.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         startDriveMax.setForeground(new java.awt.Color(255, 255, 255));
         startDriveMax.setText("0");
-        jPanel1.add(startDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 20, -1));
+        jPanel1.add(startDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 100, -1));
 
         jLabel21.setBackground(new java.awt.Color(255, 255, 255));
         jLabel21.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -323,6 +326,12 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Capitulos con twist");
         jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, 20));
+
+        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel14.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Visualizar Recursos");
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
 
         rmWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/rmWallpaper.png"))); // NOI18N
         jPanel1.add(rmWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
@@ -344,6 +353,7 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
@@ -367,6 +377,7 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel normalChapterQty;
     private interfaces.ProducersQtyController producersQtyController1;
     private javax.swing.JLabel rmWallpaper;

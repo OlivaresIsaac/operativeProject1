@@ -15,11 +15,21 @@ public class DriveObject {
     private volatile int  producedQty;
     private int MaxCapacity;
     private String partName;
+    private int initialProducerQty;
 
-    public DriveObject(String partName, int producedQty, int MaxCapacity) {
+    public DriveObject(String partName, int producedQty, int MaxCapacity, int InitialProducerQty) {
         this.producedQty = producedQty;
         this.MaxCapacity = MaxCapacity;
         this.partName = partName;
+        this.initialProducerQty = InitialProducerQty;
+    }
+    
+    public int getInitialProducerQty() {
+        return initialProducerQty;
+    }
+
+    public void setInitialProducerQty(int initialProducerQty) {
+        this.initialProducerQty = initialProducerQty;
     }
 
     public String getPartName() {

@@ -19,6 +19,25 @@ public class PTypes {
     static public String noType = "noType";
     static public String chapter = "chapter";
     
+    
+        public static String getChapterTypeByOrder(int position){
+        switch (position) {
+            case 0:
+                return PTypes.intro;
+            case 1:
+                return PTypes.start;
+            case 2:
+                return PTypes.credit;
+            case 3:
+                return PTypes.twist;
+            case 4:
+                return PTypes.end;
+            case 5:
+                return PTypes.chapter;
+            default:
+                return PTypes.noType;
+        }
+    }
      /**
      * Class that defines constants for producer type
      */

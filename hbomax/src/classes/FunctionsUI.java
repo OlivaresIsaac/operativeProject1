@@ -30,14 +30,17 @@ public class FunctionsUI {
      * @param studio
      * @return spinnerValue
      */
-    public static int validateNumberSpinnerRM(int maxProducersQty, JSpinner[] spinners, String originalValue, String studio) {
+    public static int validateNumberSpinnerRM(int maxProducersQty, JSpinner[] spinners, String originalValue, String studio, boolean doesUpdate) {
         int acc = calculateCurrentProducersQty(spinners);
         int newValue = Integer.parseInt(originalValue);
         
         if (acc <= maxProducersQty){
             if (studio.equals("RM")) {
-                System.out.println("REASIGNANDO PRODUCTORES RM");
+                if (doesUpdate) {
+                 System.out.println("REASIGNANDO PRODUCTORES RM");
                 Main.rm.reAssingProducerRoles(spinners);
+                }
+               
             } else {
                 //TODO poner reasignacción productores TLOU
             }
@@ -53,7 +56,7 @@ public class FunctionsUI {
           /**
      * Calculates the current the sum of producers in all spinners
      * than the max
-     * @param spinner
+     * @param spinners
      * @return spinnerValue
      */
     public static int calculateCurrentProducersQty(JSpinner[] spinners) {

@@ -9,6 +9,7 @@ import classes.FunctionsTXT;
 import classes.FunctionsUI;
 import classes.GlobalUI;
 import classes.PTypes;
+import interfaces.ProducersQtyController;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 
@@ -23,21 +24,48 @@ public final class RMStudio extends Thread{
     final private  Drive drive;
     private int plotTwistChapterCounter;
     private int dayDuration;
+    private int daysUntilLaunch;
     private final JLabel utilityLabel;
+    private final ProducersQtyController producersController;
 
 
     
-    public RMStudio(int dayDuration){
+    public RMStudio(int dayDuration, int daysUntilLaunch){
+        
         this.utilityLabel = GlobalUI.getMainPage().getRMDashBoard1().getTotalUtility();
+        this.producersController = GlobalUI.getMainPage().getRMDashBoard1().getProducersQtyController1();
         this.dayDuration = dayDuration;
-        this.producers = new Producer[15];
-        for (int i=0;i<15;i++){
-            producers[i] = new Producer(PTypes.noType, i);
-        }
-        this.startProduction();
+       
         
         String initialParametersFile = "src\\assets\\initialParametersRM.txt";
-        DriveObject[] driveParts = FunctionsTXT.loadInitialParameters(initialParametersFile);
+        DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParameters(initialParametersFile);
+        this.producers = new Producer[15];
+        int count = 0;
+        int[] producersQty= new int[6];
+        int producerCount = 0;
+        for (DriveObject initialDriveInfo : driveParts){
+            for (int i = 0; i<initialDriveInfo.getInitialProducerQty(); i++) {
+                producers[count] = new Producer( (initialDriveInfo.getPartName().equals(PTypes.chapter) ? PTypes.assembler : initialDriveInfo.getPartName()), count);
+                count++;
+            }
+            
+            producersQty[producerCount] = initialDriveInfo.getInitialProducerQty();
+            producerCount++;
+            
+        }
+        producersController.setProducersQtys(producersQty);
+        producersController.setInit(false);
+        producersController.setAvailableProducers();
+        
+        
+        while (count < 15){
+            producers[count] = new Producer(PTypes.noType, count);
+            count++;
+        }
+        
+        this.startProduction();
+        
+        
         this.drive = new Drive(driveParts);
         getDrive().showDriveParts();
         plotTwistChapterCounter = 0;

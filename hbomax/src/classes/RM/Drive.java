@@ -243,10 +243,11 @@ public final class Drive {
         */  
     public void fillDriveMaxLabels(){
         getUiDriveMaxLabels()[0] = GlobalUI.getMainPage().getRMDashBoard1().getIntroDriveMax();
-        getUiDriveMaxLabels()[1] = GlobalUI.getMainPage().getRMDashBoard1().getCreditDriveMax();
-        getUiDriveMaxLabels()[2] = GlobalUI.getMainPage().getRMDashBoard1().getStartDriveMax();
-        getUiDriveMaxLabels()[3] = GlobalUI.getMainPage().getRMDashBoard1().getEndDriveMax();
-        getUiDriveMaxLabels()[4] = GlobalUI.getMainPage().getRMDashBoard1().getTwistDriveMax();
+        getUiDriveMaxLabels()[1] = GlobalUI.getMainPage().getRMDashBoard1().getStartDriveMax();
+        getUiDriveMaxLabels()[2] = GlobalUI.getMainPage().getRMDashBoard1().getCreditDriveMax();
+        getUiDriveMaxLabels()[3] = GlobalUI.getMainPage().getRMDashBoard1().getTwistDriveMax();
+        getUiDriveMaxLabels()[4] = GlobalUI.getMainPage().getRMDashBoard1().getEndDriveMax();
+      
         
         for (int i = 0; i<getDriveSections().length-1; i++) {
             

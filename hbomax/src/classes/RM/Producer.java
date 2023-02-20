@@ -59,7 +59,7 @@ public class Producer extends Thread{
                 this.addTodaysProduct();
                 this.payProducerADay();
 //                this.showTotalPay();
-                Thread.sleep(3000);
+                Thread.sleep(Main.rm.getDayDuration());
             } catch (InterruptedException ex){
                 System.out.println("error");
             }

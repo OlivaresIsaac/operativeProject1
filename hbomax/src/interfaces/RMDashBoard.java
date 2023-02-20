@@ -7,6 +7,7 @@
 package interfaces;
 
 import classes.FunctionsUI;
+import javax.swing.JLabel;
 import javax.swing.JSpinner;
 
 /**
@@ -37,8 +38,8 @@ public class RMDashBoard extends javax.swing.JPanel {
         jPanel3 = new javax.swing.JPanel();
         RMLogo1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        totalChapterQty = new javax.swing.JLabel();
+        totalUtility = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -46,11 +47,34 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel9 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        twistChapterQty = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         producersQtyController1 = new interfaces.ProducersQtyController(15, "RM");
+        jLabel11 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        normalChapterQty = new javax.swing.JLabel();
+        introDriveMax = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        introDriveQty = new javax.swing.JLabel();
+        startDriveQty = new javax.swing.JLabel();
+        creditDriveQty = new javax.swing.JLabel();
+        twistDriveQty = new javax.swing.JLabel();
+        endDriveQty = new javax.swing.JLabel();
+        endDriveMax = new javax.swing.JLabel();
+        twistDriveMax = new javax.swing.JLabel();
+        creditDriveMax = new javax.swing.JLabel();
+        startDriveMax = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
         rmWallpaper = new javax.swing.JLabel();
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -80,17 +104,17 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel6.setText("5 días");
         jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 120, -1));
 
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("12");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 30, 30));
+        totalChapterQty.setBackground(new java.awt.Color(255, 255, 255));
+        totalChapterQty.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        totalChapterQty.setForeground(new java.awt.Color(255, 255, 255));
+        totalChapterQty.setText("0");
+        jPanel3.add(totalChapterQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 100, 30));
 
-        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel8.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("$1.200.350");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 130, 30));
+        totalUtility.setBackground(new java.awt.Color(255, 255, 255));
+        totalUtility.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        totalUtility.setForeground(new java.awt.Color(255, 255, 255));
+        totalUtility.setText("$1.200.350");
+        jPanel3.add(totalUtility, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 130, 30));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -134,14 +158,14 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Gestionar empleados");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+        jLabel10.setText("Visualizar Recursos");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
 
-        jLabel14.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel14.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Director:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        twistChapterQty.setBackground(new java.awt.Color(255, 255, 255));
+        twistChapterQty.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        twistChapterQty.setForeground(new java.awt.Color(255, 255, 255));
+        twistChapterQty.setText("0");
+        jPanel1.add(twistChapterQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, -1, 20));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -162,6 +186,144 @@ public class RMDashBoard extends javax.swing.JPanel {
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
         jPanel1.add(producersQtyController1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
 
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Gestionar empleados");
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, -1, -1));
+
+        jLabel18.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel18.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setText("Director:");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+
+        jLabel19.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel19.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setText("Cierre");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 310, -1, -1));
+
+        normalChapterQty.setBackground(new java.awt.Color(255, 255, 255));
+        normalChapterQty.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        normalChapterQty.setForeground(new java.awt.Color(255, 255, 255));
+        normalChapterQty.setText("0");
+        jPanel1.add(normalChapterQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 140, -1, -1));
+
+        introDriveMax.setBackground(new java.awt.Color(255, 255, 255));
+        introDriveMax.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        introDriveMax.setForeground(new java.awt.Color(255, 255, 255));
+        introDriveMax.setText("0");
+        jPanel1.add(introDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 230, 20, -1));
+
+        jLabel22.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel22.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel22.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel22.setText("Máximo");
+        jPanel1.add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 210, -1, -1));
+
+        jLabel23.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel23.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setText("Inicio");
+        jPanel1.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, -1, -1));
+
+        jLabel24.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel24.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel24.setText("Créditos");
+        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
+
+        jLabel25.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel25.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel25.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel25.setText("Plot Twist");
+        jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, -1, -1));
+
+        jLabel26.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel26.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel26.setText("Intro");
+        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 230, -1, -1));
+
+        jLabel28.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel28.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel28.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel28.setText("Disponible");
+        jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, -1, -1));
+
+        jLabel29.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel29.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel29.setText("Partes");
+        jPanel1.add(jLabel29, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 50, -1));
+
+        introDriveQty.setBackground(new java.awt.Color(255, 255, 255));
+        introDriveQty.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        introDriveQty.setForeground(new java.awt.Color(255, 255, 255));
+        introDriveQty.setText("0");
+        jPanel1.add(introDriveQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 230, 30, -1));
+
+        startDriveQty.setBackground(new java.awt.Color(255, 255, 255));
+        startDriveQty.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        startDriveQty.setForeground(new java.awt.Color(255, 255, 255));
+        startDriveQty.setText("0");
+        jPanel1.add(startDriveQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 250, 30, -1));
+
+        creditDriveQty.setBackground(new java.awt.Color(255, 255, 255));
+        creditDriveQty.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        creditDriveQty.setForeground(new java.awt.Color(255, 255, 255));
+        creditDriveQty.setText("0");
+        jPanel1.add(creditDriveQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 270, 30, -1));
+
+        twistDriveQty.setBackground(new java.awt.Color(255, 255, 255));
+        twistDriveQty.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        twistDriveQty.setForeground(new java.awt.Color(255, 255, 255));
+        twistDriveQty.setText("0");
+        jPanel1.add(twistDriveQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 290, 30, -1));
+
+        endDriveQty.setBackground(new java.awt.Color(255, 255, 255));
+        endDriveQty.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        endDriveQty.setForeground(new java.awt.Color(255, 255, 255));
+        endDriveQty.setText("0");
+        jPanel1.add(endDriveQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 310, 30, -1));
+
+        endDriveMax.setBackground(new java.awt.Color(255, 255, 255));
+        endDriveMax.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        endDriveMax.setForeground(new java.awt.Color(255, 255, 255));
+        endDriveMax.setText("0");
+        jPanel1.add(endDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 310, 20, -1));
+
+        twistDriveMax.setBackground(new java.awt.Color(255, 255, 255));
+        twistDriveMax.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        twistDriveMax.setForeground(new java.awt.Color(255, 255, 255));
+        twistDriveMax.setText("0");
+        jPanel1.add(twistDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 290, 20, -1));
+
+        creditDriveMax.setBackground(new java.awt.Color(255, 255, 255));
+        creditDriveMax.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        creditDriveMax.setForeground(new java.awt.Color(255, 255, 255));
+        creditDriveMax.setText("0");
+        jPanel1.add(creditDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 270, 20, -1));
+
+        startDriveMax.setBackground(new java.awt.Color(255, 255, 255));
+        startDriveMax.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        startDriveMax.setForeground(new java.awt.Color(255, 255, 255));
+        startDriveMax.setText("0");
+        jPanel1.add(startDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 20, -1));
+
+        jLabel21.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel21.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Capitulos regulares");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
+
+        jLabel20.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel20.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Capitulos con twist");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, 20));
+
         rmWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/rmWallpaper.png"))); // NOI18N
         jPanel1.add(rmWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
 
@@ -172,27 +334,130 @@ public class RMDashBoard extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel RMLogo;
     private javax.swing.JLabel RMLogo1;
+    private javax.swing.JLabel creditDriveMax;
+    private javax.swing.JLabel creditDriveQty;
+    private javax.swing.JLabel endDriveMax;
+    private javax.swing.JLabel endDriveQty;
+    private javax.swing.JLabel introDriveMax;
+    private javax.swing.JLabel introDriveQty;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JLabel normalChapterQty;
     private interfaces.ProducersQtyController producersQtyController1;
     private javax.swing.JLabel rmWallpaper;
+    private javax.swing.JLabel startDriveMax;
+    private javax.swing.JLabel startDriveQty;
+    private javax.swing.JLabel totalChapterQty;
+    private javax.swing.JLabel totalUtility;
+    private javax.swing.JLabel twistChapterQty;
+    private javax.swing.JLabel twistDriveMax;
+    private javax.swing.JLabel twistDriveQty;
     // End of variables declaration//GEN-END:variables
+
+    public JLabel getCreditDriveMax() {
+        return creditDriveMax;
+    }
+
+
+
+    public JLabel getCreditDriveQty() {
+        return creditDriveQty;
+    }
+
+    public JLabel getEndDriveMax() {
+        return endDriveMax;
+    }
+
+  
+
+    public JLabel getEndDriveQty() {
+        return endDriveQty;
+    }
+
+
+
+    public JLabel getIntroDriveMax() {
+        return introDriveMax;
+    }
+
+
+    public JLabel getIntroDriveQty() {
+        return introDriveQty;
+    }
+
+
+
+    public JLabel getNormalChapterQty() {
+        return normalChapterQty;
+    }
+
+ 
+
+    public ProducersQtyController getProducersQtyController1() {
+        return producersQtyController1;
+    }
+
+
+    public JLabel getStartDriveMax() {
+        return startDriveMax;
+    }
+
+ 
+
+    public JLabel getStartDriveQty() {
+        return startDriveQty;
+    }
+
+  
+
+    public JLabel getTwistChapterQty() {
+        return twistChapterQty;
+    }
+
+
+    public JLabel getTwistDriveMax() {
+        return twistDriveMax;
+    }
+
+
+
+    public JLabel getTwistDriveQty() {
+        return twistDriveQty;
+    }
+    
+    public JLabel getTotalChapterQty(){
+        return totalChapterQty;
+    }
+    public JLabel getTotalUtility(){
+        return totalUtility;
+    }
+
+  
 
 
 

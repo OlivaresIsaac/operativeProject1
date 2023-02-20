@@ -5,16 +5,43 @@
  */
 package classes.RM;
 
+import classes.GlobalUI;
+import classes.Main;
 import classes.PTypes;
 import java.util.concurrent.Semaphore;
+import javax.swing.JLabel;
 
 /**
  *
  * @author isaac
  */
-public class Drive {
+public final class Drive {
     private final DriveObject[] driveSections;
     final private Semaphore driveSemaphore = new Semaphore(1);
+    private final JLabel[] uiDriveQtyLabels = new JLabel[5];
+    private final JLabel totalChapters = GlobalUI.getMainPage().getRMDashBoard1().getTotalChapterQty();
+
+    public JLabel getTotalChapters() {
+        return totalChapters;
+    }
+
+
+    private final JLabel[] uiDriveMaxLabels = new JLabel[5];
+    
+    public Drive(DriveObject[] currentParameters) {
+        this.driveSections = currentParameters;
+        fillDriveQtyLabels();
+        fillDriveMaxLabels();
+    }
+    
+        public JLabel[] getUiDriveQtyLabels() {
+        return uiDriveQtyLabels;
+    }
+
+    public JLabel[] getUiDriveMaxLabels() {
+        return uiDriveMaxLabels;
+    }
+
 
     public DriveObject[] getDriveSections() {
         return driveSections;
@@ -25,9 +52,7 @@ public class Drive {
     }
 
 
-    public Drive(DriveObject[] currentParameters) {
-        this.driveSections = currentParameters;
-    }
+    
     
     public void showDriveParts(){
         System.out.println("Drive Parts:\n");
@@ -49,8 +74,7 @@ public class Drive {
             return;
         }
         
-        // agregar parte que considera al chapter, y restar de las otras partes
-        // considerar un contador para saber cuando toca twist
+        int count = 0;
         
         for (DriveObject section : getDriveSections()) {
             if (section.getPartName().equals(partName)) {
@@ -60,26 +84,40 @@ public class Drive {
                         if (isChapterWithTwist) {
                             if (arePartsForTwistChapterAvailable()) {
                                 produceTwistChapter();
+                                Main.rm.setPlotTwistChapterCounter(0);
+                                int chapterQty = Integer.parseInt(GlobalUI.getMainPage().getRMDashBoard1().getTwistChapterQty().getText());
+                                GlobalUI.getMainPage().getRMDashBoard1().getTwistChapterQty().setText(String.valueOf(chapterQty + 1));
                             }
                         } else {
                             // normal chapter
                             if (arePartsForNormalChapterAvailable()) {
                                  produceNormalChapter();
+                                 int chapterQty = Integer.parseInt(GlobalUI.getMainPage().getRMDashBoard1().getNormalChapterQty().getText());
+                                 GlobalUI.getMainPage().getRMDashBoard1().getNormalChapterQty().setText(String.valueOf(chapterQty + 1));
+                                 Main.rm.newChapterCreated();
                             }
                         }
+                        getTotalChapters().setText(String.valueOf(section.getProducedQty()));
+                        
                     } else {
                         // add new part to drive
                         section.setProducedQty(section.getProducedQty()+production);
-                    
+                        getUiDriveQtyLabels()[count].setText(String.valueOf(section.getProducedQty()));
                     }
                         return;
                 }
                 return;
             }
+            count++;
         }
         System.out.println("no se encontró la sección: "+partName);
     }
     
+        /**
+     * Checks if there are enough parts for a normal chapter
+     * to be produced
+     * @return boolean
+        */
     public boolean arePartsForNormalChapterAvailable(){
         boolean canProceed = true;
         
@@ -109,7 +147,11 @@ public class Drive {
         
         return canProceed;
     }
-    
+            /**
+     * Checks if there are enough parts for a twist chapter
+     * to be produced
+     * @return boolean
+        */
        public boolean arePartsForTwistChapterAvailable(){
          boolean canProceed = true;
         
@@ -139,7 +181,9 @@ public class Drive {
         
         return canProceed;
     }
-       
+             /**
+     * Chnnges qty of drive to create a normal chapter
+        */  
     public void produceNormalChapter(){
         
         for (DriveObject chapterPart : getDriveSections()) {
@@ -159,7 +203,9 @@ public class Drive {
         }
         
     }
-        
+     /**
+     * Chnnges qty of drive to create a twist chapter
+     */  
     public void produceTwistChapter(){
         
         for (DriveObject chapterPart : getDriveSections()) {
@@ -179,6 +225,45 @@ public class Drive {
         }
         
     }
+    
+    /**
+     * Gets labels in UI in other to be updated later
+        */  
+    public void fillDriveQtyLabels(){
+        getUiDriveQtyLabels()[0] = GlobalUI.getMainPage().getRMDashBoard1().getIntroDriveQty();
+        getUiDriveQtyLabels()[1] = GlobalUI.getMainPage().getRMDashBoard1().getCreditDriveQty();
+        getUiDriveQtyLabels()[2] = GlobalUI.getMainPage().getRMDashBoard1().getStartDriveQty();
+        getUiDriveQtyLabels()[3] = GlobalUI.getMainPage().getRMDashBoard1().getEndDriveQty();
+        getUiDriveQtyLabels()[4] = GlobalUI.getMainPage().getRMDashBoard1().getTwistDriveQty();
+        
+    }
+    
+     /**
+     * Gets labels in UI and updates them
+        */  
+    public void fillDriveMaxLabels(){
+        getUiDriveMaxLabels()[0] = GlobalUI.getMainPage().getRMDashBoard1().getIntroDriveMax();
+        getUiDriveMaxLabels()[1] = GlobalUI.getMainPage().getRMDashBoard1().getCreditDriveMax();
+        getUiDriveMaxLabels()[2] = GlobalUI.getMainPage().getRMDashBoard1().getStartDriveMax();
+        getUiDriveMaxLabels()[3] = GlobalUI.getMainPage().getRMDashBoard1().getEndDriveMax();
+        getUiDriveMaxLabels()[4] = GlobalUI.getMainPage().getRMDashBoard1().getTwistDriveMax();
+        
+        for (int i = 0; i<getDriveSections().length-1; i++) {
+            
+            if (getDriveSections()[i].getMaxCapacity() == -1) {
+                getUiDriveMaxLabels()[i].setText("Sin límite");
+            } else {
+                getUiDriveMaxLabels()[i].setText(String.valueOf(getDriveSections()[i].getMaxCapacity()));
+            }
+            
+ 
+        }
+    }
+    
+    public int getTotalAmountOfChapters(){
+        return getDriveSections()[getDriveSections().length-1].getProducedQty();
+    }    
+    
     
     
 }

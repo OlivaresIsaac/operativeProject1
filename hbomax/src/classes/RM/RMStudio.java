@@ -7,7 +7,9 @@ package classes.RM;
 
 import classes.FunctionsTXT;
 import classes.FunctionsUI;
+import classes.GlobalUI;
 import classes.PTypes;
+import javax.swing.JLabel;
 import javax.swing.JSpinner;
 
 /**
@@ -20,12 +22,14 @@ public final class RMStudio extends Thread{
     final private boolean active = true;
     final private  Drive drive;
     private int plotTwistChapterCounter;
+    private int dayDuration;
+    private final JLabel utilityLabel;
 
 
-
-   
     
-    public RMStudio(){
+    public RMStudio(int dayDuration){
+        this.utilityLabel = GlobalUI.getMainPage().getRMDashBoard1().getTotalUtility();
+        this.dayDuration = dayDuration;
         this.producers = new Producer[15];
         for (int i=0;i<15;i++){
             producers[i] = new Producer(PTypes.noType, i);
@@ -38,6 +42,17 @@ public final class RMStudio extends Thread{
         getDrive().showDriveParts();
         plotTwistChapterCounter = 0;
         
+    }
+        public JLabel getUtilityLabel() {
+        return utilityLabel;
+    }
+    
+    public int getDayDuration() {
+        return dayDuration;
+    }
+
+    public void setDayDuration(int dayDuration) {
+        this.dayDuration = dayDuration;
     }
     
         public int getPlotTwistChapterCounter() {
@@ -57,6 +72,7 @@ public final class RMStudio extends Thread{
               while(this.active){
             try {
                 getDrive().showDriveParts();
+                getUtilityLabel().setText(getUtilityAsString());
 //                this.printAllSalariesPayed();
 //                for (Producer producer : producers) {
 //                    producer.printProducerProduction();
@@ -64,7 +80,7 @@ public final class RMStudio extends Thread{
 //                }
 //                System.out.println("\n\n");
                 FunctionsUI.updateMainDashBoardUI("$"+Integer.toString(this.getAllSalariesPayed()));
-                Thread.sleep(3000);
+                Thread.sleep(getDayDuration());
             } catch (InterruptedException ex){
                 System.out.println("error");
             }
@@ -98,7 +114,7 @@ public final class RMStudio extends Thread{
         for(int i = 0; i<15;i++){
             total += getProducer(i).getTotalPay();
         }
-        return total;
+        return (total/1000);
     }
     
     public void printAllSalariesPayed(){
@@ -154,5 +170,18 @@ public final class RMStudio extends Thread{
     
     public void newChapterCreated(){
         setPlotTwistChapterCounter(getPlotTwistChapterCounter()+1);
+    }
+    
+    public double getTotalUtility(){
+        return ((getDrive().getTotalAmountOfChapters()*666.666)-getAllSalariesPayed());
+    }
+    
+    public String getUtilityAsString(){
+        double num  = (getTotalUtility() < 1000 ) ? (Math.round((Math.abs(getTotalUtility()))*100)/100) : (Math.round((Math.abs(getTotalUtility()))*100)/100)/100;
+        String sufix = (getTotalUtility() >= 1000 )? "M" : "K";
+        String prefix = (getTotalUtility() < 0) ? "-$" : "$";
+        
+        return (prefix + num + sufix);
+     
     }
 }

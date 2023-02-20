@@ -23,17 +23,17 @@ public class FunctionsTXT {
      * @return DriveObject[]
  */
     public static DriveObject[] loadInitialParameters(String direction){
-        DriveObject[] formatedParamters = new DriveObject[6];
+        DriveObject[] formatedParameters = new DriveObject[6];
         String data = loadTextFromFile(direction);
         System.out.println(data);
         String[] dataFragment = data.split("\n");
         for (int i = 0; i<dataFragment.length; i++){
             String[] partParameters = dataFragment[i].split(",");
             DriveObject wholePart = new DriveObject(partParameters[0],Integer.parseInt(partParameters[1]),Integer.parseInt(partParameters[2]));
-            formatedParamters[i] = wholePart;
+            formatedParameters[i] = wholePart;
         }
         
-        return formatedParamters;
+        return formatedParameters;
             
     }
     

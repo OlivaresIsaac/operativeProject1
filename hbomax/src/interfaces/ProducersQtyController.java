@@ -6,6 +6,7 @@
 package interfaces;
 
 import classes.FunctionsUI;
+import javax.swing.JCheckBox;
 import javax.swing.JSpinner;
 
 /**
@@ -294,38 +295,67 @@ public final class ProducersQtyController extends javax.swing.JPanel {
     public int[] getDriveQtys(){ 
         int[] driveQtys = new int[6];
         driveQtys[0] = this.introInfinite.isSelected() ? -1 : Integer.parseInt(this.introSpinner.getValue().toString());
-        driveQtys[1] = this.creditInfinite.isSelected() ? -1 : Integer.parseInt(this.creditSpinner.getValue().toString());
-        driveQtys[2] = this.startInfinite.isSelected() ? -1 : Integer.parseInt(this.startSpinner.getValue().toString());
-        driveQtys[3] = this.endInfinite.isSelected() ? -1 : Integer.parseInt(this.endSpinner.getValue().toString());
-        driveQtys[4] = this.twistInfinite.isSelected() ? -1 : Integer.parseInt(this.twistSpinner.getValue().toString());
+        driveQtys[1] = this.startInfinite.isSelected() ? -1 : Integer.parseInt(this.startSpinner.getValue().toString());
+        driveQtys[2] = this.creditInfinite.isSelected() ? -1 : Integer.parseInt(this.creditSpinner.getValue().toString());
+        driveQtys[3] = this.twistInfinite.isSelected() ? -1 : Integer.parseInt(this.twistSpinner.getValue().toString());
+        driveQtys[4] = this.endInfinite.isSelected() ? -1 : Integer.parseInt(this.endSpinner.getValue().toString());
         driveQtys[5] = this.chapterInfinite.isSelected() ? -1 : Integer.parseInt(this.assemblerSpinner.getValue().toString());
        
         return driveQtys;
     }
     
-        public int[] getProducersQtys(){ 
+    public int[] getProducersQtys(){ 
         int[] producersQty = new int[6];
         producersQty[0] = Integer.parseInt(this.introSpinner.getValue().toString());
-        producersQty[1] = Integer.parseInt(this.creditSpinner.getValue().toString());
-        producersQty[2] = Integer.parseInt(this.startSpinner.getValue().toString());
-        producersQty[3] = Integer.parseInt(this.endSpinner.getValue().toString());
-        producersQty[4] = Integer.parseInt(this.twistSpinner.getValue().toString());
+        producersQty[1] = Integer.parseInt(this.startSpinner.getValue().toString());
+        producersQty[2] = Integer.parseInt(this.creditSpinner.getValue().toString());
+        producersQty[3] = Integer.parseInt(this.twistSpinner.getValue().toString());
+        producersQty[4] = Integer.parseInt(this.endSpinner.getValue().toString());
         producersQty[5] = Integer.parseInt(this.assemblerSpinner.getValue().toString());
        
         return producersQty;
     }
         
-        public void setProducersQtys(int [] producerQty){ 
-            System.out.println(producerQty[0]);
-        this.introSpinner.setValue(producerQty[0]);
-        this.creditSpinner.setValue(producerQty[1]);
-        this.startSpinner.setValue(producerQty[2]);
-        this.endSpinner.setValue(producerQty[3]);
-        this.twistSpinner.setValue(producerQty[4]);
-        this.assemblerSpinner.setValue(producerQty[5]);
+    public void setSpinnersQtys(int [] spinnerQty){ 
+        this.introSpinner.setValue(spinnerQty[0]);
+        this.startSpinner.setValue(spinnerQty[1]);
+        this.creditSpinner.setValue(spinnerQty[2]);
+        this.twistSpinner.setValue(spinnerQty[3]);
+        this.endSpinner.setValue(spinnerQty[4]);
+        this.assemblerSpinner.setValue(spinnerQty[5]);
         setAvailableProducers();
+        
    
     }
+        
+     public void updateQtysInSpinners(int[] producersQty){
+        setInit(true);
+        setSpinnersQtys(producersQty);
+        setInit(false);
+        setAvailableProducers();
+    }
+     
+     public JCheckBox returnCheckBoxByOrder(int position){
+              
+        switch (position) {
+            case 0:
+                return this.introInfinite;
+            case 1:
+                return this.startInfinite;
+            case 2:
+                return this.creditInfinite;
+            case 3:
+                return this.twistInfinite;
+            case 4:
+                return this.endInfinite;
+            case 5:
+                return this.chapterInfinite;
+            default:
+                return null;
+        
+        }
+     }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

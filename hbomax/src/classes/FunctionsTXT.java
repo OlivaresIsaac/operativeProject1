@@ -38,6 +38,12 @@ public class FunctionsTXT {
             
     }
     
+    
+        /**
+     * Returns an array of 2 main parameters, ms of a day 
+     * and days until launch
+     * @return parameters[]
+ */
     public static int[] loadGeneralInitialParameters(){
         String direction = "src\\assets\\initialParametersGeneral.txt";
         String data = loadTextFromFile(direction);
@@ -117,6 +123,9 @@ public class FunctionsTXT {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo guardar la información");
         }
+        Main.rm.updateSpinnerAndProducersType(rmProducersQty);
+        Main.rm.getDrive().updateDriveMaxLabels(driveMax);
+        
     }
     
               /**

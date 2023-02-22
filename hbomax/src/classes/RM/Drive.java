@@ -231,10 +231,11 @@ public final class Drive {
         */  
     public void fillDriveQtyLabels(){
         getUiDriveQtyLabels()[0] = GlobalUI.getMainPage().getRMDashBoard1().getIntroDriveQty();
-        getUiDriveQtyLabels()[1] = GlobalUI.getMainPage().getRMDashBoard1().getCreditDriveQty();
-        getUiDriveQtyLabels()[2] = GlobalUI.getMainPage().getRMDashBoard1().getStartDriveQty();
-        getUiDriveQtyLabels()[3] = GlobalUI.getMainPage().getRMDashBoard1().getEndDriveQty();
-        getUiDriveQtyLabels()[4] = GlobalUI.getMainPage().getRMDashBoard1().getTwistDriveQty();
+        getUiDriveQtyLabels()[1] = GlobalUI.getMainPage().getRMDashBoard1().getStartDriveQty();
+        getUiDriveQtyLabels()[2] = GlobalUI.getMainPage().getRMDashBoard1().getCreditDriveQty();
+        getUiDriveQtyLabels()[3] = GlobalUI.getMainPage().getRMDashBoard1().getTwistDriveQty();
+        getUiDriveQtyLabels()[4] = GlobalUI.getMainPage().getRMDashBoard1().getEndDriveQty();
+        
         
     }
     
@@ -248,16 +249,45 @@ public final class Drive {
         getUiDriveMaxLabels()[3] = GlobalUI.getMainPage().getRMDashBoard1().getTwistDriveMax();
         getUiDriveMaxLabels()[4] = GlobalUI.getMainPage().getRMDashBoard1().getEndDriveMax();
       
+        updateDriveMaxLabels();
         
-        for (int i = 0; i<getDriveSections().length-1; i++) {
+        int[] spinnerQty = new int[6];
+        for (int i = 0; i<getDriveSections().length;i++){
+            if (getDriveSections()[i].getMaxCapacity() != -1 ) {
+                 spinnerQty[i] = getDriveSections()[i].getMaxCapacity();
+            } else {
+                 spinnerQty[i] = 1;
+                  GlobalUI.getMainPage().getMainDashBoard1().getDriveController().returnCheckBoxByOrder(i).setSelected(true);
+            }
+           
+        }
+        GlobalUI.getMainPage().getMainDashBoard1().getDriveController().setSpinnersQtys(spinnerQty);
+       
+    }
+    
+    public void updateDriveMaxLabels(){
+         for (int i = 0; i<getDriveSections().length-1; i++) {
+             
+            
             
             if (getDriveSections()[i].getMaxCapacity() == -1) {
                 getUiDriveMaxLabels()[i].setText("Sin límite");
             } else {
                 getUiDriveMaxLabels()[i].setText(String.valueOf(getDriveSections()[i].getMaxCapacity()));
             }
+        }
+    }
+    
+    public void updateDriveMaxLabels(int[] driveMax){
+         for (int i = 0; i<getDriveSections().length-1; i++) {
             
- 
+             getDriveSections()[i].setMaxCapacity(driveMax[i]);
+             
+            if (driveMax[i] == -1) {
+                getUiDriveMaxLabels()[i].setText("Sin límite");
+            } else {
+                getUiDriveMaxLabels()[i].setText(String.valueOf(driveMax[i]));
+            }
         }
     }
     

@@ -182,5 +182,17 @@ public class MainDashBoard extends javax.swing.JPanel {
     private interfaces.ProducersQtyController tlouController;
     // End of variables declaration//GEN-END:variables
 
+    public ProducersQtyController getDriveController() {
+        return driveController;
+    }
+
+    public ProducersQtyController getRmController() {
+        return rmController;
+    }
+
+    public ProducersQtyController getTlouController() {
+        return tlouController;
+    }
+
 
 }

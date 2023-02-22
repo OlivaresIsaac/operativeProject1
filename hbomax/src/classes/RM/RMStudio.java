@@ -27,13 +27,14 @@ public final class RMStudio extends Thread{
     private int daysUntilLaunch;
     private final JLabel utilityLabel;
     private final ProducersQtyController producersController;
+    private final ProducersQtyController dashboardProducerController;
 
 
-    
     public RMStudio(int dayDuration, int daysUntilLaunch){
         
         this.utilityLabel = GlobalUI.getMainPage().getRMDashBoard1().getTotalUtility();
         this.producersController = GlobalUI.getMainPage().getRMDashBoard1().getProducersQtyController1();
+        this.dashboardProducerController = GlobalUI.getMainPage().getMainDashBoard1().getRmController();
         this.dayDuration = dayDuration;
        
         
@@ -53,9 +54,7 @@ public final class RMStudio extends Thread{
             producerCount++;
             
         }
-        producersController.setProducersQtys(producersQty);
-        producersController.setInit(false);
-        producersController.setAvailableProducers();
+
         
         
         while (count < 15){
@@ -63,20 +62,45 @@ public final class RMStudio extends Thread{
             count++;
         }
         
+       this.updateSpinnerAndProducersType(producersQty);
+       this.updateDashboardSpinner(producersQty);
         this.startProduction();
-        
-        
+       
         this.drive = new Drive(driveParts);
-        getDrive().showDriveParts();
-        plotTwistChapterCounter = 0;
+        this.plotTwistChapterCounter = 0;
         
     }
-        public JLabel getUtilityLabel() {
+    
+     /**
+     * Updates the value of the producers spinners in RmDashcboard
+     * @param producersQty
+     */
+    public void updateSpinnerAndProducersType(int [] producersQty){
+    producersController.updateQtysInSpinners(producersQty);
+        reAssingProducerRoles(getProducersController().getSpinners());
+    }
+    
+    
+         /**
+     * Updates the value of the producers spinners in MainDashboard
+     * @param producersQty
+     */
+    public void updateDashboardSpinner(int [] producersQty){
+    dashboardProducerController.updateQtysInSpinners(producersQty);
+        reAssingProducerRoles(getProducersController().getSpinners());
+    }
+
+    
+    public JLabel getUtilityLabel() {
         return utilityLabel;
     }
     
     public int getDayDuration() {
         return dayDuration;
+    }
+    
+    public ProducersQtyController getDashboardProducerController() {
+        return dashboardProducerController;
     }
 
     public void setDayDuration(int dayDuration) {
@@ -99,15 +123,15 @@ public final class RMStudio extends Thread{
     public void run() {
               while(this.active){
             try {
-                getDrive().showDriveParts();
+//                getDrive().showDriveParts();
                 getUtilityLabel().setText(getUtilityAsString());
 //                this.printAllSalariesPayed();
-//                for (Producer producer : producers) {
-//                    producer.printProducerProduction();
-//                    
-//                }
-//                System.out.println("\n\n");
-                FunctionsUI.updateMainDashBoardUI("$"+Integer.toString(this.getAllSalariesPayed()));
+                for (Producer producer : producers) {
+                    producer.printProducerProduction();
+                    
+                }
+                System.out.println("\n");
+//                FunctionsUI.updateMainDashBoardUI("$"+Integer.toString(this.getAllSalariesPayed()));
                 Thread.sleep(getDayDuration());
             } catch (InterruptedException ex){
                 System.out.println("error");
@@ -211,5 +235,9 @@ public final class RMStudio extends Thread{
         
         return (prefix + num + sufix);
      
+    }
+    
+    public ProducersQtyController getProducersController() {
+        return producersController;
     }
 }

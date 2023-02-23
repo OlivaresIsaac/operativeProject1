@@ -10,6 +10,7 @@ import classes.FunctionsUI;
 import classes.GlobalUI;
 import classes.PTypes;
 import interfaces.ProducersQtyController;
+import java.text.DecimalFormat;
 import java.util.concurrent.Semaphore;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
@@ -273,12 +274,14 @@ public final class RMStudio extends Thread{
     }
     
     public String getUtilityAsString(){
-        // to do arreglar el redondeo
-        double num  = (getTotalUtility() < 1000 ) ? (Math.round((Math.abs(getTotalUtility()))*100)/100) : (Math.round((getTotalUtility()/1000)));
+        
+        final DecimalFormat df = new DecimalFormat("0.00");
+        double num  = (getTotalUtility() < 1000 ) ? (Math.abs(getTotalUtility())) : ((getTotalUtility()/1000));
+//        double num  = (getTotalUtility() < 1000 ) ? (Math.round((Math.abs(getTotalUtility()))*100)/100) : (Math.round((getTotalUtility()/1000)));
         String sufix = (getTotalUtility() >= 1000 )? "M" : "K";
         String prefix = (getTotalUtility() < 0) ? "-$" : "$";
         
-        return (prefix + num + sufix);
+        return (prefix + df.format(num) + sufix);
      
     }
     

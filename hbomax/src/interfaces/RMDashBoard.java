@@ -165,7 +165,7 @@ public class RMDashBoard extends javax.swing.JPanel {
         pmFaultsLabel.setBackground(new java.awt.Color(255, 255, 255));
         pmFaultsLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         pmFaultsLabel.setForeground(new java.awt.Color(255, 255, 255));
-        pmFaultsLabel.setText("16 faltas");
+        pmFaultsLabel.setText("0 faltas");
         jPanel1.add(pmFaultsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
@@ -183,7 +183,7 @@ public class RMDashBoard extends javax.swing.JPanel {
         directorStateLabel.setBackground(new java.awt.Color(255, 255, 255));
         directorStateLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         directorStateLabel.setForeground(new java.awt.Color(255, 255, 255));
-        directorStateLabel.setText("Haciendo galletas");
+        directorStateLabel.setText("Trabajando");
         jPanel1.add(directorStateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
         pmStateLabel.setBackground(new java.awt.Color(255, 255, 255));
@@ -346,7 +346,7 @@ public class RMDashBoard extends javax.swing.JPanel {
         pmSalaryLabel.setBackground(new java.awt.Color(255, 255, 255));
         pmSalaryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         pmSalaryLabel.setForeground(new java.awt.Color(255, 255, 255));
-        pmSalaryLabel.setText("16 faltas");
+        pmSalaryLabel.setText("$0");
         jPanel1.add(pmSalaryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
 
         jLabel27.setBackground(new java.awt.Color(255, 255, 255));

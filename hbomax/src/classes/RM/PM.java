@@ -118,6 +118,8 @@ public class PM extends Thread{
 
     public void setTotalPay(float totalPay) {
         this.totalPay = totalPay;
+        String label = "$"+String.valueOf(getTotalPay());
+        GlobalUI.getMainPage().getRMDashBoard1().getPmSalaryLabel().setText(label);
     }
 
     public float getDolarPerHour() {
@@ -130,9 +132,7 @@ public class PM extends Thread{
     
     public void payPmADay(){
         setTotalPay(getTotalPay()+(getDolarPerHour()*24));
-        String label = "$"+String.valueOf(getTotalPay());
-        GlobalUI.getMainPage().getRMDashBoard1().getPmSalaryLabel().setText(label);
-        
+     
     }
     
     public int getFaults() {

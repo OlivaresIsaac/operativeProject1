@@ -7,6 +7,7 @@ package classes.RM;
 
 import classes.GlobalUI;
 import classes.Main;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,7 +36,6 @@ public class Director extends Thread{
     public void run() {
         
          while(this.active){
-            try {
             payDirectorADay();
             boolean reportToHBOmax = checkCounter();
             if (reportToHBOmax) {
@@ -46,13 +46,6 @@ public class Director extends Thread{
                 normalWork();
                 // codigo de revisión
             }
-            
-            sleep(Main.rm.getDayDuration()); // this should change
-         
-            } catch (InterruptedException ex){
-                System.out.println("error");
-            }
-        
       
         }
     }
@@ -60,10 +53,12 @@ public class Director extends Thread{
        /**
      * Gives the chapter to HBO max and updates UI
      */
+    //DOCUMENTA
     public void launchChapters(){
         try {
             // hace entrega de capitulos
-            
+            setDirectorState("Entregando capítulos");
+            launchAccChapters();
             sleep(Main.rm.getDayDuration());
         } catch (InterruptedException ex) {
             Logger.getLogger(Director.class.getName()).log(Level.SEVERE, null, ex);
@@ -73,9 +68,44 @@ public class Director extends Thread{
     
        /**
        * Works most of the day, and checks the PM in randoms periods of time
-     */
+     */ //DOCUMENTA
     public void normalWork(){
+        setDirectorState("Trabajando");
+        Random random = new Random();
+        float startCheckingPm = (random.nextInt(7)+12);  // check this
+        int firstBreak = (int)((startCheckingPm/24)*Main.rm.getDayDuration());
+    
         
+        float timeToCheckPM = (random.nextInt(61)+30);
+        int secondBreak = (int) ((timeToCheckPM/1440)*Main.rm.getDayDuration());
+        System.out.println(secondBreak);
+        int thirdBreak = Main.rm.getDayDuration()-firstBreak-secondBreak;
+        // ahora implementar el random para vigilar a PM
+        int checking = 0;
+        
+        try {
+            //trabaja normal
+            sleep(firstBreak);
+            // vigila al PM
+            setDirectorState("Vigilando al PM");
+            sleep(secondBreak);
+            
+            Main.rm.getPm().setTotalPay(Main.rm.getPm().getTotalPay()-1);
+            Main.rm.getPm().setFaults(Main.rm.getPm().getFaults()+1);
+            String faultLabel = ( String.valueOf(Main.rm.getPm().getFaults())+ " faltas");
+            GlobalUI.getMainPage().getRMDashBoard1().getPmFaultsLabel().setText(faultLabel);
+            
+           
+            
+            setDirectorState("Trabajando");
+            sleep(thirdBreak);
+            // sleep (el resto del dia)
+            
+            
+            
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Director.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     
@@ -88,7 +118,6 @@ public class Director extends Thread{
             Main.rm.getCounterMutex().acquire();
             if (Main.rm.getPm().getDaysToPublish() <= 0) {
                 Main.rm.getPm().setDaysToPublish(getOriginalLaunchDays());
-                launchAccChapters();
                 Main.rm.getCounterMutex().release();
                 return true;
             }
@@ -165,10 +194,11 @@ public class Director extends Thread{
     }
     
     
-        /**
+ /**
  * Launch all chapters made when the deadline meets, also
  * changes the ui label
  */
+//    DOCUMENTA
     public void launchAccChapters(){
         GlobalUI.getMainPage().getRMDashBoard1().getRegularChapterLaunchLabel().setText(String.valueOf(getNormalChaptersAcc()));
         GlobalUI.getMainPage().getRMDashBoard1().getTwistChapterLaunchLabel().setText(String.valueOf(getTwitChaptersAcc()));

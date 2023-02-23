@@ -134,10 +134,10 @@ public class MainDashBoard extends javax.swing.JPanel {
         jPanel3.add(rmController, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, -1, -1));
 
         daysToLaunchSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-        jPanel3.add(daysToLaunchSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, -1, -1));
+        jPanel3.add(daysToLaunchSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 40, -1));
 
         dayDurationSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-        jPanel3.add(dayDurationSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, -1, -1));
+        jPanel3.add(dayDurationSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 40, -1));
 
         loadFileButton.setText("Guardar");
         loadFileButton.addActionListener(new java.awt.event.ActionListener() {

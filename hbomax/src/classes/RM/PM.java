@@ -21,12 +21,12 @@ public class PM extends Thread{
    
     private final boolean active = true;
     private String pmState;
+    private int faults;
 
 
-    
-    
     public PM (int daysToPublish) {
         this.daysToPublish = daysToPublish;
+        this.faults = 0;
         this.dolarPerHour = 7;
         this.totalPay = 0;
     }
@@ -40,6 +40,8 @@ public class PM extends Thread{
         try {
             setPmState("changing counter");
             Main.rm.getCounterMutex().acquire();
+            setPmState("Cambiando contador");
+            sleep((Main.rm.getDayDuration())/4); // 6 hours
             setDaysToPublish(getDaysToPublish()-1);
 
             String newValue = (String.valueOf(getDaysToPublish())+" días");
@@ -67,18 +69,34 @@ public class PM extends Thread{
     public void run() {
         
            while(this.active){
-            try {
+           
             payPmADay();
-            
-                
             updateCounter();
-            sleep(Main.rm.getDayDuration());
-         
-            } catch (InterruptedException ex){
-                System.out.println("error");
-            }
+            restOfDay();
+
+        }
+    }
+    
+       /**
+ *
+ * Makes the PM watch series or work, alternating between the day
+ * in intervalas of 20 minutes
+ */
+    public void restOfDay(){
+        boolean work = true;
         
-      
+        for (int i = 0; i<54;i++) {
+            if (work) {
+                setPmState("Trabajando");
+            } else {
+                setPmState("Viendo series");
+            }
+            work = !work;
+            try {
+                sleep((Main.rm.getDayDuration())/72); // 20 minutes intervals
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PM.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
@@ -90,6 +108,7 @@ public class PM extends Thread{
 
     public void setPmState(String state) {
         this.pmState = state;
+        GlobalUI.getMainPage().getRMDashBoard1().getPmStateLabel().setText(state);
     }
 
     
@@ -111,6 +130,19 @@ public class PM extends Thread{
     
     public void payPmADay(){
         setTotalPay(getTotalPay()+(getDolarPerHour()*24));
+        String label = "$"+String.valueOf(getTotalPay());
+        GlobalUI.getMainPage().getRMDashBoard1().getPmSalaryLabel().setText(label);
+        
+    }
+    
+    public int getFaults() {
+        return faults;
+    }
+
+    public void setFaults(int faults) {
+        this.faults = faults;
+        String label = (String.valueOf(faults) + " faltas");
+        GlobalUI.getMainPage().getRMDashBoard1().getPmFaultsLabel().setText(label);
     }
     
     

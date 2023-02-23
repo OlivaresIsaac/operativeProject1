@@ -53,6 +53,8 @@ public class FunctionsTXT {
         values[0] = Integer.parseInt(split[0].replace("\n", ""));
         values[1] = Integer.parseInt(split[1].replace("\n", ""));
 
+        String newValue = (String.valueOf(values[1])+" días");
+        GlobalUI.getMainPage().getRMDashBoard1().getDaysToLaunchLabel().setText(newValue);
         FunctionsUI.updateDaytoLaunchAndDayTime(values[1], (values[0]/1000));
         
         return values;
@@ -89,7 +91,6 @@ public class FunctionsTXT {
      * @param tlouProducersQty
  */
     public static void saveInitialParameters(int durationDayinSec, int daysToLaunch, int[] driveMax, int[] rmProducersQty, int []tlouProducersQty){
-        System.out.println("llegué");
         int durationDayInms = durationDayinSec*1000;
         String path = "src\\assets\\initialParametersGeneral.txt";
         String generalParamters = (String.valueOf(durationDayInms)+","+String.valueOf(daysToLaunch));

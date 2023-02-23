@@ -30,6 +30,7 @@ public final class RMStudio extends Thread{
     private final ProducersQtyController producersController;
     private final ProducersQtyController dashboardProducerController;
     private final Semaphore counterMutex = new Semaphore(1);
+//    private final Semaphore synchPmAndDirector = new Semaphore(1);
     private final PM pm;
     private final Director director;
 

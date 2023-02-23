@@ -46,11 +46,11 @@ public class RMDashBoard extends javax.swing.JPanel {
         jProgressBar1 = new javax.swing.JProgressBar();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        pmFaultsLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         twistChapterQty = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        directorStateLabel = new javax.swing.JLabel();
+        pmStateLabel = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         producersQtyController1 = new interfaces.ProducersQtyController(15, "RM","Productores disponibles", false, true);
         jLabel11 = new javax.swing.JLabel();
@@ -77,6 +77,16 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel21 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        pmSalaryLabel = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        jLabel32 = new javax.swing.JLabel();
+        jLabel33 = new javax.swing.JLabel();
+        jLabel34 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel35 = new javax.swing.JLabel();
+        jLabel36 = new javax.swing.JLabel();
         rmWallpaper = new javax.swing.JLabel();
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -152,17 +162,17 @@ public class RMDashBoard extends javax.swing.JPanel {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 390, 270));
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("16 faltas");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, -1));
+        pmFaultsLabel.setBackground(new java.awt.Color(255, 255, 255));
+        pmFaultsLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        pmFaultsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        pmFaultsLabel.setText("16 faltas");
+        jPanel1.add(pmFaultsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Estadísticas mensuales");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, -1, -1));
+        jLabel10.setText("Estadísticas Por Mes");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 240, -1, -1));
 
         twistChapterQty.setBackground(new java.awt.Color(255, 255, 255));
         twistChapterQty.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -170,24 +180,24 @@ public class RMDashBoard extends javax.swing.JPanel {
         twistChapterQty.setText("0");
         jPanel1.add(twistChapterQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 160, -1, 20));
 
-        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel15.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Haciendo galletas");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, -1, -1));
+        directorStateLabel.setBackground(new java.awt.Color(255, 255, 255));
+        directorStateLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        directorStateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        directorStateLabel.setText("Haciendo galletas");
+        jPanel1.add(directorStateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, -1, -1));
 
-        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel16.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Viendo Series");
-        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, -1, -1));
+        pmStateLabel.setBackground(new java.awt.Color(255, 255, 255));
+        pmStateLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        pmStateLabel.setForeground(new java.awt.Color(255, 255, 255));
+        pmStateLabel.setText("Viendo Series");
+        jPanel1.add(pmStateLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, -1, -1));
 
         jLabel17.setBackground(new java.awt.Color(255, 255, 255));
         jLabel17.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("PM:");
         jPanel1.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
-        jPanel1.add(producersQtyController1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 190, -1, -1));
+        jPanel1.add(producersQtyController1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
         jLabel11.setBackground(new java.awt.Color(255, 255, 255));
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -318,20 +328,80 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel21.setBackground(new java.awt.Color(255, 255, 255));
         jLabel21.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("Capitulos regulares");
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
+        jLabel21.setText("$0");
+        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 280, 20, -1));
 
         jLabel20.setBackground(new java.awt.Color(255, 255, 255));
         jLabel20.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("Capitulos con twist");
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, 20));
+        jLabel20.setText("$0");
+        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 190, -1, 20));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Visualizar Recursos");
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 100, -1, -1));
+
+        pmSalaryLabel.setBackground(new java.awt.Color(255, 255, 255));
+        pmSalaryLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        pmSalaryLabel.setForeground(new java.awt.Color(255, 255, 255));
+        pmSalaryLabel.setText("16 faltas");
+        jPanel1.add(pmSalaryLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, -1, -1));
+
+        jLabel27.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel27.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel27.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel27.setText("Capitulos regulares");
+        jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 140, -1, -1));
+
+        jLabel30.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel30.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel30.setText("Capitulos con twist");
+        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, 20));
+
+        jLabel31.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel31.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel31.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel31.setText("Salarios Mensuales");
+        jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 280, -1, 20));
+
+        jLabel32.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel32.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel32.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel32.setText("Capitulos regulares");
+        jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, -1, -1));
+
+        jLabel33.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel33.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel33.setText("0");
+        jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 140, -1, -1));
+
+        jLabel34.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel34.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel34.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel34.setText("Ganancias del mes");
+        jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, -1, 20));
+
+        jLabel15.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel15.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setText("Estadísticas Por lote");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, -1, -1));
+
+        jLabel35.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel35.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel35.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel35.setText("Capitulos con twist");
+        jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, -1, 20));
+
+        jLabel36.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel36.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel36.setText("0");
+        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 160, -1, -1));
 
         rmWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/rmWallpaper.png"))); // NOI18N
         jPanel1.add(rmWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
@@ -346,6 +416,7 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel creditDriveMax;
     private javax.swing.JLabel creditDriveQty;
     private javax.swing.JLabel daysToLaunchLabel;
+    private javax.swing.JLabel directorStateLabel;
     private javax.swing.JLabel endDriveMax;
     private javax.swing.JLabel endDriveQty;
     private javax.swing.JLabel introDriveMax;
@@ -356,7 +427,6 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
@@ -367,10 +437,17 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
+    private javax.swing.JLabel jLabel33;
+    private javax.swing.JLabel jLabel34;
+    private javax.swing.JLabel jLabel35;
+    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -379,6 +456,9 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel normalChapterQty;
+    private javax.swing.JLabel pmFaultsLabel;
+    private javax.swing.JLabel pmSalaryLabel;
+    private javax.swing.JLabel pmStateLabel;
     private interfaces.ProducersQtyController producersQtyController1;
     private javax.swing.JLabel rmWallpaper;
     private javax.swing.JLabel startDriveMax;
@@ -472,7 +552,21 @@ public class RMDashBoard extends javax.swing.JPanel {
     {
         return daysToLaunchLabel;
     }
-  
+    
+    public JLabel getPmStateLabel(){
+        return pmStateLabel;
+    }
+    
+    public JLabel getDirectorStateLabel(){
+        return directorStateLabel;
+    }
+    
+    public JLabel getPmFaultsLabel(){
+        return pmFaultsLabel;
+    }
+    public JLabel getPmSalaryLabel(){
+        return pmSalaryLabel;
+    }
 
 
 

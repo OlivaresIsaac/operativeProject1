@@ -7,8 +7,11 @@
 package interfaces;
 
 import classes.FunctionsUI;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+import org.jfree.chart.ChartPanel;
 
 /**
  *
@@ -17,10 +20,22 @@ import javax.swing.JSpinner;
 public class RMDashBoard extends javax.swing.JPanel {
 
     /** Creates new form RMDashBoard */
+   ChartPanel producerPie;
+
+    public ChartPanel getProducerPie() {
+        return producerPie;
+    }
+    
     public RMDashBoard() {
         initComponents();
-   
+        producerPie = PieChart.createProducersPieChart("Productores", this.producersQtyController1.getProducersQtys());
+        producersChartPane.removeAll();
+        producersChartPane.setLayout(new FlowLayout(FlowLayout.LEFT));
+     
+        producerPie.setPreferredSize(new Dimension(350,200));
+        producersChartPane.add(producerPie);
     }
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -44,7 +59,7 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jProgressBar1 = new javax.swing.JProgressBar();
-        jPanel4 = new javax.swing.JPanel();
+        producersChartPane = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         pmFaultsLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -151,16 +166,16 @@ public class RMDashBoard extends javax.swing.JPanel {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 90));
 
-        jPanel4.setBackground(new java.awt.Color(153, 102, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        producersChartPane.setBackground(new java.awt.Color(153, 102, 255));
+        producersChartPane.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Gráfico de producción");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
+        producersChartPane.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 390, 270));
+        jPanel1.add(producersChartPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 370, 220));
 
         pmFaultsLabel.setBackground(new java.awt.Color(255, 255, 255));
         pmFaultsLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -449,7 +464,6 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel launchIncomeLabel;
     private javax.swing.JLabel monthlySalariesLabel;
@@ -457,6 +471,7 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel pmFaultsLabel;
     private javax.swing.JLabel pmSalaryLabel;
     private javax.swing.JLabel pmStateLabel;
+    private javax.swing.JPanel producersChartPane;
     private interfaces.ProducersQtyController producersQtyController1;
     private javax.swing.JLabel regularChapterLaunchLabel;
     private javax.swing.JLabel rmWallpaper;

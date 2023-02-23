@@ -7,7 +7,6 @@ package classes;
 
 import classes.RM.Producer;
 import classes.RM.RMStudio;
-
 /**
  *
  * @author isaac
@@ -23,8 +22,10 @@ public class Main {
         
         GlobalUI.openMainPage();
         rm.run();
-//        Producer pepe = new Producer(PTypes.intro, 1);
-//        pepe.start();
+        
+//        PieChart_AWT test = new PieChart_AWT("test");
+//        test.main();
+
     }
-    //fdfdf
+
 }

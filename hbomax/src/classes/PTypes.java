@@ -38,6 +38,25 @@ public class PTypes {
                 return PTypes.noType;
         }
     }
+        
+           public static String getChartProducerLabels(int position){
+        switch (position) {
+            case 0:
+                return "Intro";
+            case 1:
+                return "Inicio";
+            case 2:
+                return "Créditos";
+            case 3:
+                return "Plot Twist";
+            case 4:
+                return "Cierre";
+            case 5:
+                return "Ensamblador";
+            default:
+                return PTypes.noType;
+        }
+    }
      /**
      * Class that defines constants for producer type
      */

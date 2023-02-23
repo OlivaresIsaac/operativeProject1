@@ -37,7 +37,8 @@ public class FunctionsUI {
         if (acc <= maxProducersQty){
             if (studio.equals("RM")) {
                 if (doesUpdate) {
-                 System.out.println("REASIGNANDO PRODUCTORES RM");
+//                 System.out.println("REASIGNANDO PRODUCTORES RM");
+                 
                 Main.rm.reAssingProducerRoles(spinners);
                 }
                

@@ -9,6 +9,7 @@ import classes.FunctionsTXT;
 import classes.FunctionsUI;
 import classes.GlobalUI;
 import classes.PTypes;
+import interfaces.PieChart;
 import interfaces.ProducersQtyController;
 import java.text.DecimalFormat;
 import java.util.concurrent.Semaphore;
@@ -51,6 +52,7 @@ public final class RMStudio extends Thread{
         DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParametersRM(initialParametersFile);
 
        int [] producersQty = this.initializeProducers(driveParts);
+       GlobalUI.getMainPage().getRMDashBoard1().getProducerPie().setChart(PieChart.createChart(PieChart.createDataset(producersQty), "Productores"));
         
        this.updateSpinnerAndProducersType(producersQty);
        this.updateDashboardSpinner(producersQty);
@@ -224,13 +226,17 @@ public final class RMStudio extends Thread{
     public void reAssingProducerRoles(JSpinner[] spinners){
         int outerCounter = 0;
         int innerCounter = 0;
+        int[] producersQty = new int[6];
         for (JSpinner spinner : spinners) {
+           
             int typeAmount = Integer.parseInt(spinner.getValue().toString());
             for (int i = 0; i < typeAmount; i++) {
                 
                 getProducer(innerCounter).setProducerType(getProducerTypeByOrder(outerCounter));
                 innerCounter += 1;
             }
+            
+            producersQty[outerCounter] = typeAmount;
             outerCounter+=1;
         }
         
@@ -238,7 +244,7 @@ public final class RMStudio extends Thread{
             getProducer(innerCounter).setProducerType(PTypes.noType);
             innerCounter += 1;
         }
-        
+                GlobalUI.getMainPage().getRMDashBoard1().getProducerPie().setChart(PieChart.createChart(PieChart.createDataset(producersQty), "Productores"));
         setMonthlySalaries();
     }
     

@@ -11,22 +11,25 @@ package classes.TLOU;
  */
 public class ProducerType {
 
-    private final String id;
+    private final String pType;
 
     private final double salary;
 
     private final int deliverables;
     private final int daysForDelivery;
+    
+    
 
-    public ProducerType(String id, double salary, int deliverables, int daysForDelivery) {
-        this.id = id;
+    public ProducerType(String pType, double salary, int deliverables, int daysForDelivery) {
+        this.pType = pType;
         this.salary = salary;
         this.deliverables = deliverables;
         this.daysForDelivery = daysForDelivery;
+        
     }
 
-    public String getId() {
-        return id;
+    public String getPType() {
+        return pType;
     }
 
     public double getSalary() {
@@ -40,5 +43,7 @@ public class ProducerType {
     public int getdaysForDelivery() {
         return daysForDelivery;
     }
+
+    
 
 }

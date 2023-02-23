@@ -42,10 +42,11 @@ public class Drive {
     public boolean allPartsValidation() {
         for (int i = 0; i < this.numProducerSections; i++) {
             DriveSection producerSection = this.producerSections[i];
+            
             if (!this.isCapWithPlotTwist() && producerSection.getPType().equals(PTypes.twist)) {
                 continue;
             }
-            if (producerSection.getCurrent() < 1) {
+            if (producerSection.getCurrent() < producerSection.getNeededToChapter()) {
                 return false;
             }
         }
@@ -64,15 +65,15 @@ public class Drive {
 
     
     public void insertChapter() {
-        this.chapterSection.insertWork();
+        this.chapterSection.insertWork(1);
     }
     
     private DriveSection[] setProducerSections() {
-        DriveSection intro = new DriveSection(PTypes.intro, 30);
-        DriveSection credit = new DriveSection(PTypes.credit, 25);
-        DriveSection start = new DriveSection(PTypes.start, 50);
-        DriveSection end = new DriveSection(PTypes.end, 55);
-        DriveSection twist = new DriveSection(PTypes.twist, 40);
+        DriveSection intro = new DriveSection(PTypes.intro, 30, 1);
+        DriveSection credit = new DriveSection(PTypes.credit, 25, 1);
+        DriveSection start = new DriveSection(PTypes.start, 50, 2);
+        DriveSection end = new DriveSection(PTypes.end, 55, 2);
+        DriveSection twist = new DriveSection(PTypes.twist, 40, 2);
 
         DriveSection[] aux = {intro, credit, start, end, twist};
 
@@ -91,7 +92,7 @@ public class Drive {
     
     private DriveSection setChapterSection() {
         // TODO: PONER CHAPTER COMO SIN LIMITE
-        DriveSection chapter = new DriveSection(PTypes.chapter, 100);
+        DriveSection chapter = new DriveSection(PTypes.chapter, 100, 0);
         
         return chapter;
     }

@@ -49,7 +49,7 @@ public class Director extends Thread {
 
                     Thread.sleep(TLOUStudio.timeSleep);
                     
-                    System.out.print("a");
+//                    System.out.print("a");
 
                 } else {
                     int randomNumber1 = this.getRandomNumber(12, 18);
@@ -70,7 +70,7 @@ public class Director extends Thread {
 
                     Thread.sleep(restOfTheDay);
                     
-                    System.out.print("b");
+//                    System.out.print("b");
                 }
 
                 this.payDay();

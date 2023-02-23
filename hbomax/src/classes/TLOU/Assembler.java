@@ -47,7 +47,9 @@ public class Assembler extends Thread {
                         semaphore.acquire();
                         if (this.drive.allPartsValidation()) {
                             this.drive.excludeParts();
-                            this.drive.getChapterSection().insertWork();
+                            this.drive.getChapterSection().insertWork(1);
+                            System.out.print("chapter" + ": " + this.drive.getChapterSection().getCurrent());
+                            System.out.print("\n");
                             this.daysGone = 0;
                         }
                         semaphore.release();

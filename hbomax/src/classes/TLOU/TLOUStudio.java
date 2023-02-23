@@ -21,7 +21,6 @@ public class TLOUStudio extends Thread {
     private final int numProducerTypes;
     private final int numProducerSections;
 
-//    private final ProducerType[] producerTypes;
     private Drive drive;
     private ProducerTypes producerTypes;
     private Counter counter;

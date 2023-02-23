@@ -36,7 +36,7 @@ public class ProducerTypes {
     public ProducerType getProducerType(String id) {
         for (int i = 0; i < this.numProducerTypes; i++) {
             ProducerType aux = this.producerTypes[i];
-            if (aux.getId().equals(id)) {
+            if (aux.getPType().equals(id)) {
                 return aux;
             }
         }

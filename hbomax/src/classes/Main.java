@@ -24,10 +24,8 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         
-        GlobalUI.openMainPage();
-        rm.run();
+//        GlobalUI.openMainPage();
+//        rm.run();
         tlou.run();
-        Producer pepe = new Producer(PTypes.intro, 1);
-        pepe.start();
     }
 }

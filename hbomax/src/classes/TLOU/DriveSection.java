@@ -13,24 +13,30 @@ import java.util.concurrent.Semaphore;
  */
 public class DriveSection {
 
-    private String pType;
+    private final String pType;
 
     private int limit;
     private int current;
+    
+    private final int neededToChapter;
+    
+    
 
-    public DriveSection(String pType, int limit) {
+    public DriveSection(String pType, int limit, int neededToChapter) {
         this.pType = pType;
 
         this.limit = limit;
         this.current = 0;
+        
+        this.neededToChapter = neededToChapter;
     }
 
-    public boolean partValidation() {
-        return this.current + 1 <= this.limit;
+    public boolean partValidation(int deliverables) {
+        return this.current + deliverables <= this.limit;
     }
 
-    public void insertWork() {
-        this.current += 1;
+    public void insertWork(int deliverables) {
+        this.current += deliverables;
     }
 
     public void excludeWork() {
@@ -56,4 +62,10 @@ public class DriveSection {
     public void setCurrent(int current) {
         this.current = current;
     }
+    
+    public int getNeededToChapter() {
+        return neededToChapter;
+    }
+    
+    
 }

@@ -21,7 +21,7 @@ public class Main {
         // TODO code application logic here
         
         GlobalUI.openMainPage();
-        rm.run();
+        rm.start();
         
 //        PieChart_AWT test = new PieChart_AWT("test");
 //        test.main();

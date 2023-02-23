@@ -11,6 +11,7 @@ import classes.GlobalUI;
 import classes.PTypes;
 import interfaces.PieChart;
 import interfaces.ProducersQtyController;
+import interfaces.XYChart;
 import java.text.DecimalFormat;
 import java.util.concurrent.Semaphore;
 import javax.swing.JLabel;
@@ -35,6 +36,10 @@ public final class RMStudio extends Thread{
 //    private final Semaphore synchPmAndDirector = new Semaphore(1);
     private final PM pm;
     private final Director director;
+    private final double[] utilityOverTime = new double [100];
+
+
+    int totalDayCounter = 0;
 
 
 
@@ -113,6 +118,10 @@ public final class RMStudio extends Thread{
         }
         return producersQty;
     }
+    
+    public double[] getUtilityOverTime() {
+        return utilityOverTime;
+    }
 
     
     public JLabel getUtilityLabel() {
@@ -149,6 +158,7 @@ public final class RMStudio extends Thread{
             try {
 //                getDrive().showDriveParts();
                 getUtilityLabel().setText(getUtilityAsString());
+                registerTodayUility();
 //                this.printAllSalariesPayed();
 //                for (Producer producer : producers) {
 //                    producer.printProducerProduction();
@@ -244,7 +254,7 @@ public final class RMStudio extends Thread{
             getProducer(innerCounter).setProducerType(PTypes.noType);
             innerCounter += 1;
         }
-                GlobalUI.getMainPage().getRMDashBoard1().getProducerPie().setChart(PieChart.createChart(PieChart.createDataset(producersQty), "Productores"));
+        GlobalUI.getMainPage().getRMDashBoard1().getProducerPie().setChart(PieChart.createChart(PieChart.createDataset(producersQty), "Productores"));
         setMonthlySalaries();
     }
     
@@ -323,6 +333,13 @@ public final class RMStudio extends Thread{
     public float getLaunchIncome(){
     int totalChapters = getDirector().getNormalChaptersAcc() + getDirector().getTwitChaptersAcc();
     return (float) (totalChapters*666.666);
+    }
+    
+    public void registerTodayUility(){
+        this.utilityOverTime[this.totalDayCounter] = getTotalUtility()/1000;
+        this.totalDayCounter+=1;
+        GlobalUI.getMainPage().getRMDashBoard1().getTotalDaysLabel().setText(String.valueOf(this.totalDayCounter)+" dias");
+        GlobalUI.getMainPage().getRMDashBoard1().getUtilityChart().setChart(XYChart.createChart(XYChart.createDataset(this.utilityOverTime), "Utilidad vs Tiempo"));
     }
 
 

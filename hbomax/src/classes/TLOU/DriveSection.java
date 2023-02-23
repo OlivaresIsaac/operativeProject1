@@ -16,6 +16,8 @@ public class DriveSection {
     private final String pType;
 
     private int limit;
+    private boolean limited;
+    
     private int current;
     
     private final int neededToChapter;
@@ -26,12 +28,17 @@ public class DriveSection {
         this.pType = pType;
 
         this.limit = limit;
+        this.limited = true;
+        
         this.current = 0;
         
         this.neededToChapter = neededToChapter;
     }
 
     public boolean partValidation(int deliverables) {
+        if (!limited) {
+            return true;
+        }
         return this.current + deliverables <= this.limit;
     }
 

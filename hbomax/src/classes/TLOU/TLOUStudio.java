@@ -185,9 +185,9 @@ public class TLOUStudio extends Thread {
     @Override
     public void run() {
         this.startProducers();
-        this.startAssemblers();
-        this.startDirector();
-        this.startManager();
+//        this.startAssemblers();
+//        this.startDirector();
+//        this.startManager();
 
         while (TLOUStudio.isWorking) {
             try {

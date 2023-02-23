@@ -15,8 +15,8 @@ import classes.TLOU.TLOUStudio;
  */
 public class Main {
     public static int[] generalParameters = FunctionsTXT.loadGeneralInitialParameters();
-    public static RMStudio rm = new RMStudio(generalParameters[0], generalParameters[1]);
-    static TLOUStudio tlou = new TLOUStudio(4, 500, 1, 1, 1, 1, 1, 1);
+//    public static RMStudio rm = new RMStudio(generalParameters[0], generalParameters[1]);
+    static TLOUStudio tlou = new TLOUStudio(4, 100, 1, 1, 1, 1, 1, 1);
     
     /**
      * @param args the command line arguments

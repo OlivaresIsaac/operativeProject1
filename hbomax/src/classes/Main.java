@@ -7,6 +7,7 @@ package classes;
 
 import classes.RM.Producer;
 import classes.RM.RMStudio;
+import classes.TLOU.TLOUStudio;
 
 /**
  *
@@ -15,6 +16,8 @@ import classes.RM.RMStudio;
 public class Main {
     public static int[] generalParameters = FunctionsTXT.loadGeneralInitialParameters();
     public static RMStudio rm = new RMStudio(generalParameters[0], generalParameters[1]);
+    static TLOUStudio tlou = new TLOUStudio(4, 500, 1, 1, 1, 1, 1, 1);
+    
     /**
      * @param args the command line arguments
      */
@@ -23,8 +26,8 @@ public class Main {
         
         GlobalUI.openMainPage();
         rm.run();
-//        Producer pepe = new Producer(PTypes.intro, 1);
-//        pepe.start();
+        tlou.run();
+        Producer pepe = new Producer(PTypes.intro, 1);
+        pepe.start();
     }
-    //fdfdf
 }

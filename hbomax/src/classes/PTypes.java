@@ -20,7 +20,7 @@ public class PTypes {
     static public String chapter = "chapter";
     
     
-        public static String getChapterTypeByOrder(int position){
+        public static String getChapterPartByOrder(int position){
         switch (position) {
             case 0:
                 return PTypes.intro;

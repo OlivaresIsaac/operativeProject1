@@ -10,6 +10,7 @@ import classes.FunctionsUI;
 import classes.GlobalUI;
 import classes.PTypes;
 import interfaces.ProducersQtyController;
+import java.util.concurrent.Semaphore;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
 
@@ -19,15 +20,19 @@ import javax.swing.JSpinner;
  */
 public final class RMStudio extends Thread{
    
-    final private Producer[] producers;
+    private Producer[] producers;
     final private boolean active = true;
     final private  Drive drive;
     private int plotTwistChapterCounter;
     private int dayDuration;
-    private int daysUntilLaunch;
+    private final int daysUntilLaunch;
     private final JLabel utilityLabel;
     private final ProducersQtyController producersController;
     private final ProducersQtyController dashboardProducerController;
+    private final Semaphore counterMutex = new Semaphore(1);
+    private final PM pm;
+    private final Director director;
+
 
 
     public RMStudio(int dayDuration, int daysUntilLaunch){
@@ -36,35 +41,18 @@ public final class RMStudio extends Thread{
         this.producersController = GlobalUI.getMainPage().getRMDashBoard1().getProducersQtyController1();
         this.dashboardProducerController = GlobalUI.getMainPage().getMainDashBoard1().getRmController();
         this.dayDuration = dayDuration;
+        this.daysUntilLaunch = daysUntilLaunch;
+        this.pm = new PM(this.daysUntilLaunch);
+        this.director = new Director(this.daysUntilLaunch);
        
-        
         String initialParametersFile = "src\\assets\\initialParametersRM.txt";
-        DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParameters(initialParametersFile);
-        this.producers = new Producer[15];
-        int count = 0;
-        int[] producersQty= new int[6];
-        int producerCount = 0;
-        for (DriveObject initialDriveInfo : driveParts){
-            for (int i = 0; i<initialDriveInfo.getInitialProducerQty(); i++) {
-                producers[count] = new Producer( (initialDriveInfo.getPartName().equals(PTypes.chapter) ? PTypes.assembler : initialDriveInfo.getPartName()), count);
-                count++;
-            }
-            
-            producersQty[producerCount] = initialDriveInfo.getInitialProducerQty();
-            producerCount++;
-            
-        }
+        DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParametersRM(initialParametersFile);
 
-        
-        
-        while (count < 15){
-            producers[count] = new Producer(PTypes.noType, count);
-            count++;
-        }
+       int [] producersQty = this.initializeProducers(driveParts);
         
        this.updateSpinnerAndProducersType(producersQty);
        this.updateDashboardSpinner(producersQty);
-        this.startProduction();
+       this.startProduction();
        
         this.drive = new Drive(driveParts);
         this.plotTwistChapterCounter = 0;
@@ -88,6 +76,38 @@ public final class RMStudio extends Thread{
     public void updateDashboardSpinner(int [] producersQty){
     dashboardProducerController.updateQtysInSpinners(producersQty);
         reAssingProducerRoles(getProducersController().getSpinners());
+    }
+    
+    
+         /**
+     * Initizalizes all producers in the studio, returns the producers 
+     * count of each category
+     * @param driveParts
+     * @return producersQty
+     */
+    public int [] initializeProducers( DriveObject[] driveParts){
+        this.producers = new Producer[15];
+        int count = 0;
+        int[] producersQty= new int[6];
+        int producerCount = 0;
+        for (DriveObject initialDriveInfo : driveParts){
+            for (int i = 0; i<initialDriveInfo.getInitialProducerQty(); i++) {
+                producers[count] = new Producer( (initialDriveInfo.getPartName().equals(PTypes.chapter) ? PTypes.assembler : initialDriveInfo.getPartName()), count);
+                count++;
+            }
+            
+            producersQty[producerCount] = initialDriveInfo.getInitialProducerQty();
+            producerCount++;
+            
+        }
+
+        
+        
+        while (count < 15){
+            producers[count] = new Producer(PTypes.noType, count);
+            count++;
+        }
+        return producersQty;
     }
 
     
@@ -126,11 +146,11 @@ public final class RMStudio extends Thread{
 //                getDrive().showDriveParts();
                 getUtilityLabel().setText(getUtilityAsString());
 //                this.printAllSalariesPayed();
-                for (Producer producer : producers) {
-                    producer.printProducerProduction();
-                    
-                }
-                System.out.println("\n");
+//                for (Producer producer : producers) {
+//                    producer.printProducerProduction();
+//                    
+//                }
+//                System.out.println("\n");
 //                FunctionsUI.updateMainDashBoardUI("$"+Integer.toString(this.getAllSalariesPayed()));
                 Thread.sleep(getDayDuration());
             } catch (InterruptedException ex){
@@ -143,6 +163,9 @@ public final class RMStudio extends Thread{
     
     public void startProduction(){
         startAllEmployees();
+        getPm().start();
+        getDirector().start();
+        
     }
          /**
      * Starts Thread of all employees
@@ -166,6 +189,8 @@ public final class RMStudio extends Thread{
         for(int i = 0; i<15;i++){
             total += getProducer(i).getTotalPay();
         }
+        total += getPm().getTotalPay();
+        total += getDirector().getTotalPay();
         return (total/1000);
     }
     
@@ -240,4 +265,26 @@ public final class RMStudio extends Thread{
     public ProducersQtyController getProducersController() {
         return producersController;
     }
+    
+        public PM getPm() {
+        return pm;
+    }
+
+    public Semaphore getCounterMutex() {
+        return counterMutex;
+    }
+    
+    public Producer[] getProducers() {
+        return producers;
+    }
+
+    public void setProducers(Producer[] producers) {
+        this.producers = producers;
+    }
+    public Director getDirector() {
+        return director;
+    }
+
+
+
 }

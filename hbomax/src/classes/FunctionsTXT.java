@@ -23,7 +23,7 @@ public class FunctionsTXT {
      * @param direction
      * @return DriveObject[]
  */
-    public static DriveObject[] loadStudioInitialParameters(String direction){
+    public static DriveObject[] loadStudioInitialParametersRM(String direction){
         DriveObject[] formatedParameters = new DriveObject[6];
         String data = loadTextFromFile(direction);
         System.out.println(data);
@@ -53,6 +53,7 @@ public class FunctionsTXT {
         values[0] = Integer.parseInt(split[0].replace("\n", ""));
         values[1] = Integer.parseInt(split[1].replace("\n", ""));
 
+        FunctionsUI.updateDaytoLaunchAndDayTime(values[1], (values[0]/1000));
         
         return values;
     }
@@ -103,6 +104,10 @@ public class FunctionsTXT {
         saveInitialParametersRM(driveMax, rmProducersQty);
         saveInitialParametersTLOU(driveMax, tlouProducersQty);
         JOptionPane.showMessageDialog(null, "Guardado Éxitoso!");
+        FunctionsUI.updateDaytoLaunchAndDayTime(daysToLaunch, durationDayinSec);
+        Main.rm.setDayDuration(durationDayInms);
+        Main.rm.getPm().setDaysToPublish(daysToLaunch);
+        Main.rm.getDirector().setOriginalLaunchDays(daysToLaunch);
         
     }
           /**
@@ -113,7 +118,7 @@ public class FunctionsTXT {
     public static void saveInitialParametersRM(int[] driveMax, int[] rmProducersQty){
        String parameters = "";
        for (int i = 0; i<driveMax.length; i++) {
-           parameters+=(PTypes.getChapterTypeByOrder(i)+","+"0"+","+driveMax[i]+","+rmProducersQty[i]+"\n");
+           parameters+=(PTypes.getChapterPartByOrder(i)+","+"0"+","+driveMax[i]+","+rmProducersQty[i]+"\n");
        }
        String path = "src\\assets\\initialParametersRM.txt";
         try {
@@ -125,6 +130,7 @@ public class FunctionsTXT {
         }
         Main.rm.updateSpinnerAndProducersType(rmProducersQty);
         Main.rm.getDrive().updateDriveMaxLabels(driveMax);
+       
         
     }
     
@@ -136,7 +142,7 @@ public class FunctionsTXT {
     public static void saveInitialParametersTLOU(int[] driveMax, int []tlouProducersQty){
                String parameters = "";
        for (int i = 0; i<driveMax.length; i++) {
-           parameters+=(PTypes.getChapterTypeByOrder(i)+","+"0"+","+driveMax[i]+","+tlouProducersQty[i]+"\n");
+           parameters+=(PTypes.getChapterPartByOrder(i)+","+"0"+","+driveMax[i]+","+tlouProducersQty[i]+"\n");
        }
        String path = "src\\assets\\initialParametersTLOU.txt";
         try {

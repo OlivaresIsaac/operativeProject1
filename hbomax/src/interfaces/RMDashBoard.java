@@ -37,7 +37,7 @@ public class RMDashBoard extends javax.swing.JPanel {
         RMLogo = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         RMLogo1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        daysToLaunchLabel = new javax.swing.JLabel();
         totalChapterQty = new javax.swing.JLabel();
         totalUtility = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -100,11 +100,11 @@ public class RMDashBoard extends javax.swing.JPanel {
         RMLogo1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/RMLogo.png"))); // NOI18N
         jPanel3.add(RMLogo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 10, -1, 80));
 
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("5 días");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 120, -1));
+        daysToLaunchLabel.setBackground(new java.awt.Color(255, 255, 255));
+        daysToLaunchLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        daysToLaunchLabel.setForeground(new java.awt.Color(255, 255, 255));
+        daysToLaunchLabel.setText("5 días");
+        jPanel3.add(daysToLaunchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 120, -1));
 
         totalChapterQty.setBackground(new java.awt.Color(255, 255, 255));
         totalChapterQty.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -345,6 +345,7 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel RMLogo1;
     private javax.swing.JLabel creditDriveMax;
     private javax.swing.JLabel creditDriveQty;
+    private javax.swing.JLabel daysToLaunchLabel;
     private javax.swing.JLabel endDriveMax;
     private javax.swing.JLabel endDriveQty;
     private javax.swing.JLabel introDriveMax;
@@ -371,7 +372,6 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -467,7 +467,11 @@ public class RMDashBoard extends javax.swing.JPanel {
     public JLabel getTotalUtility(){
         return totalUtility;
     }
-
+    
+    public JLabel getDaysToLaunchLabel()
+    {
+        return daysToLaunchLabel;
+    }
   
 
 

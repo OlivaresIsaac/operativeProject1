@@ -7,6 +7,7 @@ package interfaces;
 
 import classes.FunctionsTXT;
 import javax.swing.JLabel;
+import javax.swing.JSpinner;
 
 /**
  *
@@ -192,6 +193,14 @@ public class MainDashBoard extends javax.swing.JPanel {
 
     public ProducersQtyController getTlouController() {
         return tlouController;
+    }
+    
+    public JSpinner getDaysToLaunchSpinner(){
+        return daysToLaunchSpinner;
+    }
+    
+    public JSpinner getDayDurationSpinner(){
+        return dayDurationSpinner;
     }
 
 

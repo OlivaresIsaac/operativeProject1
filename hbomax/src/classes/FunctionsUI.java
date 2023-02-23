@@ -77,6 +77,13 @@ public class FunctionsUI {
         String result = String.valueOf((maxProducersQty-acc));
         return result;
      }
+     
+     public static void updateDaytoLaunchAndDayTime(int dayToLaunch, int dayInSeconds){
+         GlobalUI.getMainPage().getMainDashBoard1().getDayDurationSpinner().setValue(dayInSeconds);
+         GlobalUI.getMainPage().getMainDashBoard1().getDaysToLaunchSpinner().setValue(dayToLaunch);
+
+//poner TLOU aqui también
+     }
 
 
 }

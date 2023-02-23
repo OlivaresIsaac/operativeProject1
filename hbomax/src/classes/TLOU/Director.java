@@ -10,17 +10,25 @@ package classes.TLOU;
  * @author dsre1
  */
 public class Director {
+    
+    private double totalPaid;
 
     private final double salary;
     private final double discountToManager;
-    private final int originalCounter;
 
-    public Director(int originalCounter) {
+    public Director() {
         this.salary = 100;
         this.discountToManager = 1;
-        this.originalCounter = originalCounter;
     }
 
+    public double getTotalPaid() {
+        return totalPaid;
+    }
+
+    public void setTotalPaid(double totalPaid) {
+        this.totalPaid = totalPaid;
+    }
+    
     public double getSalary() {
         return salary;
     }
@@ -28,8 +36,9 @@ public class Director {
     public double getDiscountToManager() {
         return discountToManager;
     }
-
-    public int getOriginalCounter() {
-        return originalCounter;
+    
+    public void payDay() {
+        this.totalPaid += this.salary;
     }
+
 }

@@ -13,10 +13,10 @@ public class ProducerType {
 
     private final String id;
 
-    private final double salary; //hours
+    private final double salary;
 
-    private final int deliverables; //quantity
-    private final int timeForDeliver; //days
+    private final int deliverables;
+    private final int timeForDeliver;
 
     public ProducerType(String id, double salary, int deliverables, int timeForDeliver) {
         this.id = id;

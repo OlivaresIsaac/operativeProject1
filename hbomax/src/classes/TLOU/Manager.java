@@ -10,26 +10,26 @@ package classes.TLOU;
  * @author dsre1
  */
 public class Manager {
+    
+    private double totalPaid;
 
-    private int countdown; //days
     private int workingTime; //hours
     private int interval; //minutes
     
     private double salary;
 
-    public Manager(int countdown) {
-        this.countdown = countdown;
+    public Manager() {
         this.workingTime = 7;
         this.interval = 21;
         this.salary = 7;
     }
 
-    public int getCountdown() {
-        return countdown;
+    public double getTotalPaid() {
+        return totalPaid;
     }
 
-    public void setCountdown(int countdown) {
-        this.countdown = countdown;
+    public void setTotalPaid(double totalPaid) {
+        this.totalPaid = totalPaid;
     }
 
     public int getWorkingTime() {
@@ -50,6 +50,10 @@ public class Manager {
 
     public double getSalary() {
         return salary;
+    }
+    
+    public void payDay() {
+        this.totalPaid += this.salary;
     }
 
 }

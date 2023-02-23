@@ -11,12 +11,36 @@ package classes.TLOU;
  */
 public class Producer {
 
+    private String id;
+
+    private double totalPaid;
+
     private DriveSection driveSection;
     private ProducerType producerType;
 
-    public Producer(DriveSection driveSection, ProducerType producerType) {
+    public Producer(String id, DriveSection driveSection, ProducerType producerType) {
+        this.id = id;
+
+        this.totalPaid = 0;
+
         this.driveSection = driveSection;
         this.producerType = producerType;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public double getTotalPaid() {
+        return totalPaid;
+    }
+
+    public void setTotalPaid(double totalPaid) {
+        this.totalPaid = totalPaid;
     }
 
     public DriveSection getDriveSection() {

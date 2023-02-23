@@ -12,30 +12,32 @@ import classes.PTypes;
  * @author dsre1
  */
 public class TLOUStudio {
-    
-    private final int numWorkers;
+
+    private final int numProducers;
+    private final int numAssemblers;
     private final int numProducerTypes;
     private final int numDriveSections;
 
-//    private Producer[] producers;
     private final ProducerType[] producerTypes;
     private final DriveSection[] driveSections;
-    
-    private Worker[] workers;
-    private Manager manager;
-    
 
-    public TLOUStudio(int countdown) {
-        this.numWorkers = 16;
+    private Producer[] producers;
+    private Assembler[] assemblers;
+    private Manager manager;
+    private Director director;
+
+    public TLOUStudio(int countdown, int initAmount, int creditAmount, int startAmount, int endAmount, int twistAmount, int assemblersAmount) {
+        this.numProducers = 16;
         this.numProducerTypes = this.numDriveSections = 5;
-        
+        this.numAssemblers = this.numProducers - this.numProducerTypes;
+
         this.producerTypes = this.setProducerTypes();
         this.driveSections = this.setDriveSections();
-        
-        this.workers = this.setWorkers();
-        this.manager = new Manager(countdown);
-        
-//        this.producers = this.setProducers();
+
+        this.producers = setProducers(initAmount, creditAmount, startAmount, endAmount, twistAmount);
+        this.assemblers = setAssemblers(assemblersAmount);
+        this.manager = new Manager();
+        this.director = new Director();
     }
 
     private ProducerType[] setProducerTypes() {
@@ -48,6 +50,16 @@ public class TLOUStudio {
         ProducerType[] aux = {intro, credit, start, end, twist};
 
         return aux;
+    }
+    
+    private ProducerType getProducerType(String id) {
+        for (int i = 0; i <= this.numProducerTypes; i++) {
+            ProducerType aux = this.producerTypes[i];
+            if (aux.getId().equals(id)) {
+                return aux;
+            }
+        }
+        return null;
     }
 
     private DriveSection[] setDriveSections() {
@@ -62,39 +74,6 @@ public class TLOUStudio {
         return aux;
     }
     
-    private Worker[] setWorkers() {
-        Worker[] aux = new Worker[this.numWorkers];
-        
-        for (int i = 0; i < this.numWorkers; i++) {
-            ProducerType producerType = this.getProducerTypes(PTypes.intro);
-            DriveSection section = this.getDriveSection(PTypes.intro);
-            
-            Producer producer = new Producer(section, producerType);
-            Worker worker = new Worker(producer);
-            
-            aux[i] = worker;
-        }
-        
-//        for (int i = 14; i < 16; i++) {
-//            Assembler assembler = new Assembler();
-//            Worker worker = new Worker(assembler);
-//            
-//            aux[i] = worker;
-//        }
-        
-        return aux;
-    }
-    
-    private ProducerType getProducerTypes(String id) {
-        for (int i = 0; i <= this.numProducerTypes; i++) {
-            ProducerType aux = this.producerTypes[i];
-            if (aux.getId().equals(id)) {
-                return aux;
-            }
-        }
-        return null;
-    }
-
     private DriveSection getDriveSection(String id) {
         for (int i = 0; i <= this.numDriveSections; i++) {
             DriveSection aux = this.driveSections[i];
@@ -104,31 +83,109 @@ public class TLOUStudio {
         }
         return null;
     }
+    
+    private void addProducer(Producer[] aux, String id) {
+        for (int i = 0; i < this.numProducers; i++) {
+            Producer producer = aux[i];
+            if (producer == null) {
+                ProducerType producerType = this.getProducerType(id);
+                DriveSection driveSection = this.getDriveSection(id);
 
-//    private Producer[] setProducers() {
-//        Producer[] aux = new Producer[16];
-//
-//        for (int i = 0; i < 16; i++) {
-//            ProducerType producerType = this.getProducerTypes(PTypes.intro);
-//            DriveSection section = this.getDriveSection(PTypes.intro);
-//            
-//            Producer producer = new Producer(section, producerType);
-//            
-//            aux[i] = producer;
-//        }
-//
-//        return aux;
-//    }
+                Producer newProducer = new Producer(id, driveSection, producerType);
+                
+                producer = newProducer;
+                
+                return;
+            }
+        }
+    }
 
-//    private void changeProducerType(String initPType, String finalPType) {
-//        for (int i = 0; i <= 5; i++) {
-//            Producer aux = this.producers[i];
-//            if (aux.getDriveSection().getId().equals(initPType)) {
-//                DriveSection section = this.getDriveSection(finalPType);
-//                aux.setDriveSection(section);
-//            }
-//        }
-//    }
+    private Producer[] setProducers(int initAmount, int creditAmount, int startAmount, int endAmount, int twistAmount) {
+        Producer[] aux = new Producer[this.numProducers];
+
+        int totalAmount = initAmount + creditAmount + startAmount + endAmount + twistAmount;
+        int noType = this.numProducers - totalAmount;
+
+        for (int i = 0; i < initAmount; i++) {
+            this.addProducer(aux, PTypes.intro);
+        }
+        for (int i = 0; i < creditAmount; i++) {
+            this.addProducer(aux, PTypes.credit);
+        }
+        for (int i = 0; i < startAmount; i++) {
+            this.addProducer(aux, PTypes.start);
+        }
+        for (int i = 0; i < endAmount; i++) {
+            this.addProducer(aux, PTypes.end);
+        }
+        for (int i = 0; i < twistAmount; i++) {
+            this.addProducer(aux, PTypes.twist);
+        }
+        for (int i = 0; i < noType; i++) {
+            this.addProducer(aux, PTypes.noType);
+        }
+        
+        return aux;
+    }
+    
+    private void assignProducer(String id) {
+        for (int i = 0; i < this.numProducers; i++) {
+            Producer producer = this.producers[i];
+            if (producer.getId().equals(PTypes.noType)) {
+                DriveSection driveSection = this.getDriveSection(id);
+                ProducerType producerType = this.getProducerType(id);
+                
+                producer.setId(id);
+                producer.setDriveSection(driveSection);
+                producer.setProducerType(producerType);
+                
+                return;
+            }
+        }
+    }
+
+    private void unassignProducer(String id) {
+        for (int i = 0; i < this.numProducers; i++) {
+            Producer producer = this.producers[i];
+            if (producer.getId().equals(id)) {
+                producer.setId(PTypes.noType);
+                producer.setDriveSection(null);
+                producer.setProducerType(null);
+                
+                return;
+            }
+        }
+    }
+    
+    private void addAssembler(Assembler[] aux, boolean isActive) {
+        for (int i = 0; i < this.numAssemblers; i++) {
+            Assembler assembler = aux[i];
+            if (assembler == null) {
+                Assembler newAssembler = new Assembler(isActive);
+                
+                assembler = newAssembler;
+                
+                return;
+            }
+        }
+    }
+
+    private Assembler[] setAssemblers(int assemblersAmount) {
+        Assembler[] aux = new Assembler[this.numAssemblers];
+        int noActiveAmount = this.numAssemblers - assemblersAmount;
+
+        for (int i = 0; i < assemblersAmount; i++) {
+            this.addAssembler(aux, true);
+        }
+        
+        for (int i = 0; i < noActiveAmount; i++) {
+            this.addAssembler(aux, false);
+        }
+
+        return aux;
+    }
+
+    
 
     public void startTest() {
 

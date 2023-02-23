@@ -184,8 +184,59 @@ public class TLOUStudio {
 
         return aux;
     }
-
     
+    private double payDay() {
+        double totalPaidToday = 0;
+        double payDay = 0;
+
+        for (int i = 0; i <= this.numProducers; i++) {
+            Producer producer = this.producers[i];
+            if (producer != null && !producer.getId().equals(PTypes.noType)) {
+                payDay = producer.getProducerType().getSalary();
+                totalPaidToday += payDay;
+                producer.setTotalPaid(producer.getTotalPaid() + payDay);
+            }
+        }
+
+        for (int i = 0; i <= this.numAssemblers; i++) {
+            Assembler assembler = this.assemblers[i];
+            if (assembler != null && assembler.getIsActive()) {
+                payDay = assembler.getSalary();
+                totalPaidToday += payDay;
+                assembler.setTotalPaid(assembler.getTotalPaid() + payDay);
+            }
+        }
+        
+        payDay = this.manager.getSalary();
+        totalPaidToday += payDay;
+        this.manager.setTotalPaid(this.manager.getTotalPaid() + payDay);
+
+        payDay = this.director.getSalary();
+        totalPaidToday += payDay;
+        this.director.setTotalPaid(this.director.getTotalPaid() + payDay);
+
+        return totalPaidToday;
+    }
+    
+    private double getTotalPaid() {
+        double totalPaid = 0;
+
+        for (int i = 0; i <= this.numProducers; i++) {
+            Producer producer = this.producers[i];
+            totalPaid += producer.getTotalPaid();
+        }
+
+        for (int i = 0; i <= this.numAssemblers; i++) {
+            Assembler assembler = this.assemblers[i];
+            totalPaid += assembler.getTotalPaid();
+        }
+        
+        totalPaid += this.manager.getTotalPaid();
+        
+        totalPaid += this.director.getTotalPaid();
+        
+        return totalPaid;
+    }
 
     public void startTest() {
 

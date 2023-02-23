@@ -27,43 +27,43 @@ public class Producer extends Thread {
 
         this.totalPaid = 0;
         this.daysGone = 0;
-        
+
         this.drive = drive;
         this.producerTypes = producerTypes;
     }
-    
+
     @Override
     public void run() {
-        while(TLOUStudio.working) {
-            try{
-                if(!this.pType.equals(PTypes.noType)) {
+        while (TLOUStudio.isWorking) {
+            try {
+                if (!this.pType.equals(PTypes.noType)) {
                     Semaphore semaphore = this.drive.getSemaphore();
                     DriveSection producerSection = this.drive.getProducerSection(this.pType);
                     ProducerType producerType = this.producerTypes.getProducerType(this.pType);
-                    
+
                     this.daysGone += 1;
-                    
-                    if(this.daysGone >= producerType.getdaysForDelivery()) {
+
+                    if (this.daysGone >= producerType.getdaysForDelivery()) {
                         semaphore.acquire();
-                        if(producerSection.partValidation()) {
+                        if (producerSection.partValidation()) {
                             producerSection.insertWork();
                             this.daysGone = 0;
                         }
                         semaphore.release();
                     }
-                    
+
                     this.payDay();
                 }
                 Thread.sleep(TLOUStudio.timeSleep);
-            } catch(InterruptedException e) {
+            } catch (InterruptedException e) {
                 System.out.println(e);
             }
         }
     }
-    
+
     private void payDay() {
         ProducerType producerType = this.producerTypes.getProducerType(this.pType);
-        
+
         this.totalPaid += producerType.getSalary();
     }
 
@@ -78,5 +78,5 @@ public class Producer extends Thread {
     public double getTotalPaid() {
         return this.totalPaid;
     }
-    
+
 }

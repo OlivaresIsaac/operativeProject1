@@ -24,14 +24,13 @@ public class DriveSection {
         this.limit = limit;
         this.current = 0;
     }
-    
+
     public boolean partValidation() {
         return this.current + 1 <= this.limit;
     }
 
     public void insertWork() {
         this.current += 1;
-//        System.out.println(this.pType + ": " + this.current);
     }
 
     public void excludeWork() {

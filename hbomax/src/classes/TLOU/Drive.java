@@ -35,6 +35,10 @@ public class Drive {
         return (this.chapterSection.getCurrent() + 1) % 5 == 0;
     }
     
+    public void resetChapterDrive() {
+        this.chapterSection.setCurrent(0);
+    }
+    
     public boolean allPartsValidation() {
         for (int i = 0; i < this.numProducerSections; i++) {
             DriveSection producerSection = this.producerSections[i];
@@ -54,12 +58,8 @@ public class Drive {
             if (!this.isCapWithPlotTwist() && producerSection.getPType().equals(PTypes.twist)) {
                 continue;
             }
-//            if (this.isCapWithPlotTwist() && producerSection.getPType().equals(PTypes.twist))  {
-//                System.out.println("SE EXCLUYE TWIST");
-//            }
             producerSection.excludeWork();
         }
-        
     }
 
     
@@ -90,7 +90,7 @@ public class Drive {
     }
     
     private DriveSection setChapterSection() {
-        // TODO PONER CHAPTER COMO SIN LIMITE
+        // TODO: PONER CHAPTER COMO SIN LIMITE
         DriveSection chapter = new DriveSection(PTypes.chapter, 100);
         
         return chapter;

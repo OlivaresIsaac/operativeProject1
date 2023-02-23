@@ -15,18 +15,17 @@ import classes.TLOU.TLOUStudio;
  */
 public class Main {
    
-//     static RMStudio rm = new RMStudio();
-     static TLOUStudio tlou = new TLOUStudio(404, 5000, 1, 1, 1, 1, 1, 1);
+     static RMStudio rm = new RMStudio();
+     static TLOUStudio tlou = new TLOUStudio(4, 500, 1, 1, 1, 1, 1, 1);
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
-//        FunctionsUI.openMainPage();
-//        rm.run();
+        FunctionsUI.openMainPage();
+        rm.run();
         tlou.run();
-//        Producer pepe = new Producer(PTypes.intro, 1);
-//        pepe.start();
+        Producer pepe = new Producer(PTypes.intro, 1);
+        pepe.start();
     }
-    //fdfdf
 }

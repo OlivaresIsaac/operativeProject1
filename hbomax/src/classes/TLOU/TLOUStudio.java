@@ -12,9 +12,9 @@ import classes.PTypes;
  * @author dsre1
  */
 public class TLOUStudio extends Thread {
-    
+
     static public int timeSleep;
-    static public boolean working;
+    static public boolean isWorking;
 
     private final int numProducers;
     private final int numAssemblers;
@@ -22,21 +22,20 @@ public class TLOUStudio extends Thread {
     private final int numProducerSections;
 
 //    private final ProducerType[] producerTypes;
-
     private Drive drive;
     private ProducerTypes producerTypes;
     private Counter counter;
-    
+
     private Producer[] producers;
     private Assembler[] assemblers;
     private Manager manager;
     private Director director;
 
     public TLOUStudio(int countdown, int timeSleep, int initAmount, int creditAmount, int startAmount, int endAmount, int twistAmount, int assemblersAmount) {
-        
+
         this.timeSleep = timeSleep;
-        this.working = true;
-        
+        this.isWorking = true;
+
         this.numProducers = 16;
         this.numProducerTypes = 5;
         this.numAssemblers = this.numProducers - this.numProducerTypes;
@@ -48,17 +47,17 @@ public class TLOUStudio extends Thread {
 
         this.producers = this.setProducers(initAmount, creditAmount, startAmount, endAmount, twistAmount);
         this.assemblers = this.setAssemblers(assemblersAmount);
-        this.manager = new Manager(this.counter);
-        this.director = new Director();
+        this.director = new Director(this.counter, this.drive);
+        this.manager = new Manager(this.counter, this.director);
     }
-    
+
     private void addProducer(Producer[] aux, String pType) {
         for (int i = 0; i < this.numProducers; i++) {
             if (aux[i] == null) {
                 Producer producer = new Producer(pType, this.drive, this.producerTypes);
-                
+
                 aux[i] = producer;
-                return ;
+                return;
             }
         }
     }
@@ -87,18 +86,18 @@ public class TLOUStudio extends Thread {
         for (int i = 0; i < noType; i++) {
             this.addProducer(aux, PTypes.noType);
         }
-        
+
         return aux;
     }
-    
+
     private void assignProducer(String pType) {
         for (int i = 0; i < this.numProducers; i++) {
             Producer producer = this.producers[i];
             if (producer.getPType().equals(PTypes.noType)) {
-                
+
                 producer.setPType(pType);
                 return;
-                
+
             }
         }
     }
@@ -107,21 +106,21 @@ public class TLOUStudio extends Thread {
         for (int i = 0; i < this.numProducers; i++) {
             Producer producer = this.producers[i];
             if (producer.getPType().equals(pType)) {
-               
+
                 producer.setPType(PTypes.noType);
                 return;
-                
+
             }
         }
     }
-    
+
     private void addAssembler(Assembler[] aux, boolean isActive) {
         for (int i = 0; i < this.numAssemblers; i++) {
             if (aux[i] == null) {
                 Assembler assembler = new Assembler(this.drive, isActive);
-                
+
                 aux[i] = assembler;
-                
+
                 return;
             }
         }
@@ -134,14 +133,14 @@ public class TLOUStudio extends Thread {
         for (int i = 0; i < assemblersAmount; i++) {
             this.addAssembler(aux, true);
         }
-        
+
         for (int i = 0; i < noActiveAmount; i++) {
             this.addAssembler(aux, false);
         }
 
         return aux;
     }
-    
+
     private double getTotalPaid() {
         double totalPaid = 0;
 
@@ -154,28 +153,32 @@ public class TLOUStudio extends Thread {
             Assembler assembler = this.assemblers[i];
             totalPaid += assembler.getTotalPaid();
         }
-        
+
         totalPaid += this.manager.getTotalPaid();
-        
+
         totalPaid += this.director.getTotalPaid();
-        
+
         return totalPaid;
     }
-    
+
     private void startProducers() {
         for (int i = 0; i < this.numProducers; i++) {
             Producer producer = this.producers[i];
             producer.start();
         }
     }
-    
+
     private void startAssemblers() {
         for (int i = 0; i < this.numAssemblers; i++) {
             Assembler assembler = this.assemblers[i];
             assembler.start();
         }
     }
-    
+
+    private void startDirector() {
+        this.director.start();
+    }
+
     private void startManager() {
         this.manager.start();
     }
@@ -184,9 +187,10 @@ public class TLOUStudio extends Thread {
     public void run() {
         this.startProducers();
         this.startAssemblers();
+        this.startDirector();
         this.startManager();
-        
-        while(TLOUStudio.working) {
+
+        while (TLOUStudio.isWorking) {
             try {
                 double totalPaid = this.getTotalPaid();
 //                System.out.println(totalPaid);

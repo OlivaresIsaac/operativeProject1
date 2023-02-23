@@ -13,9 +13,9 @@ import java.util.concurrent.Semaphore;
  * @author dsre1
  */
 public class Assembler extends Thread {
-    
+
     private final Drive drive;
-    
+
     private double totalPaid;
     private boolean isActive;
     private int daysGone;
@@ -25,34 +25,34 @@ public class Assembler extends Thread {
 
     public Assembler(Drive drive, boolean isActive) {
         this.drive = drive;
-        
+
         this.totalPaid = 0;
         this.isActive = isActive;
         this.daysGone = 0;
-        
+
         this.salary = 8;
         this.daysForDelivery = 2;
     }
-    
+
     @Override
     public void run() {
-        while(TLOUStudio.working) {
-            try{
-                if(isActive) {
+        while (TLOUStudio.isWorking) {
+            try {
+                if (isActive) {
                     Semaphore semaphore = this.drive.getSemaphore();
-                    
+
                     this.daysGone += 1;
-                    
-                    if(this.daysGone >= this.daysForDelivery) {
+
+                    if (this.daysGone >= this.daysForDelivery) {
                         semaphore.acquire();
-                        if(this.drive.allPartsValidation()) {
+                        if (this.drive.allPartsValidation()) {
                             this.drive.excludeParts();
                             this.drive.getChapterSection().insertWork();
                             this.daysGone = 0;
                         }
                         semaphore.release();
                     }
-                    
+
                     this.payDay();
                 }
                 Thread.sleep(TLOUStudio.timeSleep);
@@ -61,12 +61,11 @@ public class Assembler extends Thread {
             }
         }
     }
-    
+
     private void payDay() {
         this.totalPaid += this.salary;
     }
-    
-    
+
     public double getTotalPaid() {
         return totalPaid;
     }

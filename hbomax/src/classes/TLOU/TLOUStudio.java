@@ -13,8 +13,6 @@ import classes.PTypes;
  */
 public class TLOUStudio extends Thread {
     
-    private final int countdown;
-    
     static public int timeSleep;
     static public boolean working;
 
@@ -27,13 +25,14 @@ public class TLOUStudio extends Thread {
 
     private Drive drive;
     private ProducerTypes producerTypes;
+    private Counter counter;
+    
     private Producer[] producers;
     private Assembler[] assemblers;
     private Manager manager;
     private Director director;
 
     public TLOUStudio(int countdown, int timeSleep, int initAmount, int creditAmount, int startAmount, int endAmount, int twistAmount, int assemblersAmount) {
-        this.countdown = countdown;
         
         this.timeSleep = timeSleep;
         this.working = true;
@@ -45,10 +44,11 @@ public class TLOUStudio extends Thread {
 
         this.producerTypes = new ProducerTypes(this.numProducerTypes);
         this.drive = new Drive(numProducerSections);
+        this.counter = new Counter(countdown);
 
         this.producers = this.setProducers(initAmount, creditAmount, startAmount, endAmount, twistAmount);
         this.assemblers = this.setAssemblers(assemblersAmount);
-        this.manager = new Manager();
+        this.manager = new Manager(this.counter);
         this.director = new Director();
     }
     
@@ -175,16 +175,21 @@ public class TLOUStudio extends Thread {
             assembler.start();
         }
     }
+    
+    private void startManager() {
+        this.manager.start();
+    }
 
     @Override
     public void run() {
         this.startProducers();
         this.startAssemblers();
+        this.startManager();
         
         while(TLOUStudio.working) {
             try {
                 double totalPaid = this.getTotalPaid();
-                System.out.println(totalPaid);
+//                System.out.println(totalPaid);
                 Thread.sleep(TLOUStudio.timeSleep);
             } catch (InterruptedException e) {
                 System.out.println(e);

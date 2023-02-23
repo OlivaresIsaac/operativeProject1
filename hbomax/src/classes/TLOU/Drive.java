@@ -32,7 +32,7 @@ public class Drive {
     }
     
     private boolean isCapWithPlotTwist() {
-        return this.chapterSection.getCurrent() % 5 == 0;
+        return (this.chapterSection.getCurrent() + 1) % 5 == 0;
     }
     
     public boolean allPartsValidation() {
@@ -54,6 +54,9 @@ public class Drive {
             if (!this.isCapWithPlotTwist() && producerSection.getPType().equals(PTypes.twist)) {
                 continue;
             }
+//            if (this.isCapWithPlotTwist() && producerSection.getPType().equals(PTypes.twist))  {
+//                System.out.println("SE EXCLUYE TWIST");
+//            }
             producerSection.excludeWork();
         }
         

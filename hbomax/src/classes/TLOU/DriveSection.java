@@ -31,7 +31,7 @@ public class DriveSection {
 
     public void insertWork() {
         this.current += 1;
-        System.out.println(this.pType + ": " + this.current);
+//        System.out.println(this.pType + ": " + this.current);
     }
 
     public void excludeWork() {

@@ -19,32 +19,39 @@ public class Producer extends Thread {
     private double totalPaid;
     private int daysGone;
 
-    private DriveSection driveSection;
-    private ProducerType producerType;
+    private Drive drive;
+    private ProducerTypes producerTypes;
 
-    public Producer(String pType, DriveSection driveSection, ProducerType producerType) {
+    public Producer(String pType, Drive drive, ProducerTypes producerTypes) {
         this.pType = pType;
 
         this.totalPaid = 0;
         this.daysGone = 0;
-
-        this.driveSection = driveSection;
-        this.producerType = producerType;
+        
+        this.drive = drive;
+        this.producerTypes = producerTypes;
     }
     
     @Override
     public void run() {
         while(TLOUStudio.working) {
             try{
-                if(this.pType != PTypes.noType) {
-                    Semaphore semaphore = this.driveSection.getSemaphore();
+                if(!this.pType.equals(PTypes.noType)) {
+                    Semaphore semaphore = this.drive.getSemaphore();
+                    DriveSection producerSection = this.drive.getProducerSection(this.pType);
+                    ProducerType producerType = this.producerTypes.getProducerType(this.pType);
+                    
                     this.daysGone += 1;
-                    if(daysGone >= this.producerType.getdaysForDelivery()) {
+                    
+                    if(this.daysGone >= producerType.getdaysForDelivery()) {
                         semaphore.acquire();
-                        this.driveSection.insertWork();
+                        if(producerSection.partValidation()) {
+                            producerSection.insertWork();
+                            this.daysGone = 0;
+                        }
                         semaphore.release();
-                        this.daysGone = 0;
                     }
+                    
                     this.payDay();
                 }
                 Thread.sleep(TLOUStudio.timeSleep);
@@ -55,11 +62,13 @@ public class Producer extends Thread {
     }
     
     private void payDay() {
-        totalPaid += this.producerType.getSalary();
+        ProducerType producerType = this.producerTypes.getProducerType(this.pType);
+        
+        this.totalPaid += producerType.getSalary();
     }
 
     public String getPType() {
-        return pType;
+        return this.pType;
     }
 
     public void setPType(String pType) {
@@ -67,27 +76,7 @@ public class Producer extends Thread {
     }
 
     public double getTotalPaid() {
-        return totalPaid;
+        return this.totalPaid;
     }
-
-    public void setTotalPaid(double totalPaid) {
-        this.totalPaid = totalPaid;
-    }
-
-    public DriveSection getDriveSection() {
-        return driveSection;
-    }
-
-    public void setDriveSection(DriveSection driveSection) {
-        this.driveSection = driveSection;
-    }
-
-    public ProducerType getProducerType() {
-        return producerType;
-    }
-
-    public void setProducerType(ProducerType producerType) {
-        this.producerType = producerType;
-    }
-
+    
 }

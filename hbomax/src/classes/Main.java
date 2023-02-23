@@ -16,7 +16,7 @@ import classes.TLOU.TLOUStudio;
 public class Main {
    
 //     static RMStudio rm = new RMStudio();
-     static TLOUStudio tlou = new TLOUStudio(404, 100, 3, 2, 3, 2, 3, 0);
+     static TLOUStudio tlou = new TLOUStudio(404, 2000, 1, 1, 1, 1, 1, 2);
     /**
      * @param args the command line arguments
      */

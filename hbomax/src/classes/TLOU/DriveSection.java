@@ -12,30 +12,34 @@ import java.util.concurrent.Semaphore;
  * @author dsre1
  */
 public class DriveSection {
-    private String id;
+
+    private String pType;
 
     private int limit;
     private int current;
-    
-    private Semaphore semaphore;
-    
-    public DriveSection(String id, int limit) {
-        this.id = id;
-        
+
+    public DriveSection(String pType, int limit) {
+        this.pType = pType;
+
         this.limit = limit;
         this.current = 0;
-        
-        this.semaphore = new Semaphore(1);
     }
     
+    public boolean partValidation() {
+        return this.current + 1 <= this.limit;
+    }
+
     public void insertWork() {
-        if (this.current + 1 <= this.limit) {
-            this.current += 1;
-        }
+        this.current += 1;
+        System.out.println(this.pType + ": " + this.current);
     }
-    
-    public String getId() {
-        return id;
+
+    public void excludeWork() {
+        this.current -= 1;
+    }
+
+    public String getPType() {
+        return pType;
     }
 
     public int getLimit() {
@@ -45,7 +49,7 @@ public class DriveSection {
     public void setLimit(int limit) {
         this.limit = limit;
     }
-    
+
     public int getCurrent() {
         return current;
     }
@@ -53,14 +57,4 @@ public class DriveSection {
     public void setCurrent(int current) {
         this.current = current;
     }
-
-    public Semaphore getSemaphore() {
-        return semaphore;
-    }
-
-    public void setSemaphore(Semaphore semaphore) {
-        this.semaphore = semaphore;
-    }
-    
-    
 }

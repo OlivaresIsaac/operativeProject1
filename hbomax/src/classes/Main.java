@@ -15,7 +15,7 @@ import classes.TLOU.TLOUStudio;
  */
 public class Main {
     public static int[] generalParameters = FunctionsTXT.loadGeneralInitialParameters();
-//    public static RMStudio rm = new RMStudio(generalParameters[0], generalParameters[1]);
+    public static RMStudio rm = new RMStudio(generalParameters[0], generalParameters[1]);
     static TLOUStudio tlou = new TLOUStudio(4, 100, 1, 1, 1, 1, 1, 1);
     
     /**
@@ -24,8 +24,8 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         
-//        GlobalUI.openMainPage();
-//        rm.run();
+        GlobalUI.openMainPage();
+        rm.run();
         tlou.run();
     }
 }

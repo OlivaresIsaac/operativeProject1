@@ -65,7 +65,7 @@ public class Assembler extends Thread {
     }
 
     private void payDay() {
-        this.totalPaid += this.salary;
+        this.totalPaid += this.salary * 24;
     }
 
     public double getTotalPaid() {

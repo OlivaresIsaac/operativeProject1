@@ -91,7 +91,7 @@ public class Manager extends Thread {
     }
 
     public void payDay() {
-        this.totalPaid += this.salary;
+        this.totalPaid += this.salary * 24;
     }
 
     public boolean getIsWorking() {

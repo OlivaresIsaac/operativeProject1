@@ -66,7 +66,7 @@ public class Producer extends Thread {
     private void payDay() {
         ProducerType producerType = this.producerTypes.getProducerType(this.pType);
 
-        this.totalPaid += producerType.getSalary();
+        this.totalPaid += producerType.getSalary() * 24;
     }
 
     public String getPType() {

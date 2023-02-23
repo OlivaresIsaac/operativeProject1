@@ -11,7 +11,12 @@ import classes.PTypes;
  *
  * @author dsre1
  */
-public class TLOUStudio {
+public class TLOUStudio extends Thread {
+    
+    private final int countdown;
+    
+    static public int timeSleep;
+    static public boolean working;
 
     private final int numProducers;
     private final int numAssemblers;
@@ -26,7 +31,12 @@ public class TLOUStudio {
     private Manager manager;
     private Director director;
 
-    public TLOUStudio(int countdown, int initAmount, int creditAmount, int startAmount, int endAmount, int twistAmount, int assemblersAmount) {
+    public TLOUStudio(int countdown, int timeSleep, int initAmount, int creditAmount, int startAmount, int endAmount, int twistAmount, int assemblersAmount) {
+        this.countdown = countdown;
+        
+        this.timeSleep = timeSleep;
+        this.working = true;
+        
         this.numProducers = 16;
         this.numProducerTypes = this.numDriveSections = 5;
         this.numAssemblers = this.numProducers - this.numProducerTypes;
@@ -34,8 +44,8 @@ public class TLOUStudio {
         this.producerTypes = this.setProducerTypes();
         this.driveSections = this.setDriveSections();
 
-        this.producers = setProducers(initAmount, creditAmount, startAmount, endAmount, twistAmount);
-        this.assemblers = setAssemblers(assemblersAmount);
+        this.producers = this.setProducers(initAmount, creditAmount, startAmount, endAmount, twistAmount);
+        this.assemblers = this.setAssemblers(assemblersAmount);
         this.manager = new Manager();
         this.director = new Director();
     }
@@ -53,7 +63,7 @@ public class TLOUStudio {
     }
     
     private ProducerType getProducerType(String id) {
-        for (int i = 0; i <= this.numProducerTypes; i++) {
+        for (int i = 0; i < this.numProducerTypes; i++) {
             ProducerType aux = this.producerTypes[i];
             if (aux.getId().equals(id)) {
                 return aux;
@@ -75,7 +85,7 @@ public class TLOUStudio {
     }
     
     private DriveSection getDriveSection(String id) {
-        for (int i = 0; i <= this.numDriveSections; i++) {
+        for (int i = 0; i < this.numDriveSections; i++) {
             DriveSection aux = this.driveSections[i];
             if (aux.getId().equals(id)) {
                 return aux;
@@ -93,9 +103,8 @@ public class TLOUStudio {
 
                 Producer newProducer = new Producer(id, driveSection, producerType);
                 
-                producer = newProducer;
-                
-                return;
+                aux[i] = newProducer;
+                return ;
             }
         }
     }
@@ -128,14 +137,14 @@ public class TLOUStudio {
         return aux;
     }
     
-    private void assignProducer(String id) {
+    private void assignProducer(String pType) {
         for (int i = 0; i < this.numProducers; i++) {
             Producer producer = this.producers[i];
-            if (producer.getId().equals(PTypes.noType)) {
-                DriveSection driveSection = this.getDriveSection(id);
-                ProducerType producerType = this.getProducerType(id);
+            if (producer.getPType().equals(PTypes.noType)) {
+                DriveSection driveSection = this.getDriveSection(pType);
+                ProducerType producerType = this.getProducerType(pType);
                 
-                producer.setId(id);
+                producer.setPType(pType);
                 producer.setDriveSection(driveSection);
                 producer.setProducerType(producerType);
                 
@@ -144,11 +153,11 @@ public class TLOUStudio {
         }
     }
 
-    private void unassignProducer(String id) {
+    private void unassignProducer(String pType) {
         for (int i = 0; i < this.numProducers; i++) {
             Producer producer = this.producers[i];
-            if (producer.getId().equals(id)) {
-                producer.setId(PTypes.noType);
+            if (producer.getPType().equals(pType)) {
+                producer.setPType(PTypes.noType);
                 producer.setDriveSection(null);
                 producer.setProducerType(null);
                 
@@ -163,7 +172,7 @@ public class TLOUStudio {
             if (assembler == null) {
                 Assembler newAssembler = new Assembler(isActive);
                 
-                assembler = newAssembler;
+                aux[i] = newAssembler;
                 
                 return;
             }
@@ -185,48 +194,15 @@ public class TLOUStudio {
         return aux;
     }
     
-    private double payDay() {
-        double totalPaidToday = 0;
-        double payDay = 0;
-
-        for (int i = 0; i <= this.numProducers; i++) {
-            Producer producer = this.producers[i];
-            if (producer != null && !producer.getId().equals(PTypes.noType)) {
-                payDay = producer.getProducerType().getSalary();
-                totalPaidToday += payDay;
-                producer.setTotalPaid(producer.getTotalPaid() + payDay);
-            }
-        }
-
-        for (int i = 0; i <= this.numAssemblers; i++) {
-            Assembler assembler = this.assemblers[i];
-            if (assembler != null && assembler.getIsActive()) {
-                payDay = assembler.getSalary();
-                totalPaidToday += payDay;
-                assembler.setTotalPaid(assembler.getTotalPaid() + payDay);
-            }
-        }
-        
-        payDay = this.manager.getSalary();
-        totalPaidToday += payDay;
-        this.manager.setTotalPaid(this.manager.getTotalPaid() + payDay);
-
-        payDay = this.director.getSalary();
-        totalPaidToday += payDay;
-        this.director.setTotalPaid(this.director.getTotalPaid() + payDay);
-
-        return totalPaidToday;
-    }
-    
     private double getTotalPaid() {
         double totalPaid = 0;
 
-        for (int i = 0; i <= this.numProducers; i++) {
+        for (int i = 0; i < this.numProducers; i++) {
             Producer producer = this.producers[i];
             totalPaid += producer.getTotalPaid();
         }
 
-        for (int i = 0; i <= this.numAssemblers; i++) {
+        for (int i = 0; i < this.numAssemblers; i++) {
             Assembler assembler = this.assemblers[i];
             totalPaid += assembler.getTotalPaid();
         }
@@ -237,8 +213,27 @@ public class TLOUStudio {
         
         return totalPaid;
     }
+    
+    private void startProducers() {
+        for (int i = 0; i < this.numProducers; i++) {
+            Producer producer = this.producers[i];
+            producer.start();
+        }
+    }
 
-    public void startTest() {
+    @Override
+    public void run() {
+        this.startProducers();
+        
+        while(TLOUStudio.working) {
+            try {
+                double totalPaid = this.getTotalPaid();
+                System.out.println(totalPaid);
+                Thread.sleep(TLOUStudio.timeSleep);
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+        }
 
     }
 

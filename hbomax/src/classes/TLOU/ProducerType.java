@@ -16,13 +16,13 @@ public class ProducerType {
     private final double salary;
 
     private final int deliverables;
-    private final int timeForDeliver;
+    private final int daysForDelivery;
 
-    public ProducerType(String id, double salary, int deliverables, int timeForDeliver) {
+    public ProducerType(String id, double salary, int deliverables, int daysForDelivery) {
         this.id = id;
         this.salary = salary;
         this.deliverables = deliverables;
-        this.timeForDeliver = timeForDeliver;
+        this.daysForDelivery = daysForDelivery;
     }
 
     public String getId() {
@@ -37,8 +37,8 @@ public class ProducerType {
         return deliverables;
     }
 
-    public int getTimeForDeliver() {
-        return timeForDeliver;
+    public int getdaysForDelivery() {
+        return daysForDelivery;
     }
 
 }

@@ -5,34 +5,65 @@
  */
 package classes.TLOU;
 
+import classes.PTypes;
+import java.util.concurrent.Semaphore;
+
 /**
  *
  * @author dsre1
  */
-public class Producer {
+public class Producer extends Thread {
 
-    private String id;
+    private String pType;
 
     private double totalPaid;
+    private int daysGone;
 
     private DriveSection driveSection;
     private ProducerType producerType;
 
-    public Producer(String id, DriveSection driveSection, ProducerType producerType) {
-        this.id = id;
+    public Producer(String pType, DriveSection driveSection, ProducerType producerType) {
+        this.pType = pType;
 
         this.totalPaid = 0;
+        this.daysGone = 0;
 
         this.driveSection = driveSection;
         this.producerType = producerType;
     }
-
-    public String getId() {
-        return id;
+    
+    @Override
+    public void run() {
+        while(TLOUStudio.working) {
+            try{
+                if(this.pType != PTypes.noType) {
+                    Semaphore semaphore = this.driveSection.getSemaphore();
+                    this.daysGone += 1;
+                    if(daysGone >= this.producerType.getdaysForDelivery()) {
+                        semaphore.acquire();
+                        this.driveSection.insertWork();
+                        semaphore.release();
+                        this.daysGone = 0;
+                    }
+                    this.payDay();
+                }
+                Thread.sleep(TLOUStudio.timeSleep);
+            } catch(InterruptedException e) {
+                System.out.println(e);
+            }
+        }
+    }
+    
+    private void payDay() {
+        totalPaid += this.producerType.getSalary();
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getPType() {
+        return pType;
+    }
+
+    public void setPType(String pType) {
+        this.pType = pType;
     }
 
     public double getTotalPaid() {

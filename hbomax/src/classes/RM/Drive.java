@@ -87,6 +87,7 @@ public final class Drive {
                                 Main.rm.setPlotTwistChapterCounter(0);
                                 int chapterQty = Integer.parseInt(GlobalUI.getMainPage().getRMDashBoard1().getTwistChapterQty().getText());
                                 GlobalUI.getMainPage().getRMDashBoard1().getTwistChapterQty().setText(String.valueOf(chapterQty + 1));
+                                Main.rm.getDirector().addChapterWithTwist();
                             }
                         } else {
                             // normal chapter
@@ -95,6 +96,7 @@ public final class Drive {
                                  int chapterQty = Integer.parseInt(GlobalUI.getMainPage().getRMDashBoard1().getNormalChapterQty().getText());
                                  GlobalUI.getMainPage().getRMDashBoard1().getNormalChapterQty().setText(String.valueOf(chapterQty + 1));
                                  Main.rm.newChapterCreated();
+                                 Main.rm.getDirector().addNormalChapter();
                             }
                         }
                         getTotalChapters().setText(String.valueOf(section.getProducedQty()));

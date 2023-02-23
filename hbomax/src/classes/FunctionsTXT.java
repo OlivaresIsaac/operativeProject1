@@ -131,6 +131,7 @@ public class FunctionsTXT {
         }
         Main.rm.updateSpinnerAndProducersType(rmProducersQty);
         Main.rm.getDrive().updateDriveMaxLabels(driveMax);
+        Main.rm.setMonthlySalaries();
        
         
     }

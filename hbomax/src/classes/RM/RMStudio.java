@@ -200,6 +200,22 @@ public final class RMStudio extends Thread{
     }
     
     
+         /**
+     * Returns the daily salaries of all employees 
+     * in the studio
+     * @return 
+     */
+    public float getAllDailySalaries(){
+        int total = 0;
+         for(int i = 0; i<15;i++){
+            total += getProducer(i).getDolarPerHour()*24;
+        }
+        total += getPm().getDolarPerHour()*24;
+        total += getDirector().getDailyPay();
+        return total;
+    }
+    
+    
      /**
      * reAssings the roles of all producers
      * @param spinners
@@ -221,6 +237,8 @@ public final class RMStudio extends Thread{
             getProducer(innerCounter).setProducerType(PTypes.noType);
             innerCounter += 1;
         }
+        
+        setMonthlySalaries();
     }
     
     public String getProducerTypeByOrder(int position){
@@ -255,7 +273,8 @@ public final class RMStudio extends Thread{
     }
     
     public String getUtilityAsString(){
-        double num  = (getTotalUtility() < 1000 ) ? (Math.round((Math.abs(getTotalUtility()))*100)/100) : (Math.round((Math.abs(getTotalUtility()))*100)/100)/100;
+        // to do arreglar el redondeo
+        double num  = (getTotalUtility() < 1000 ) ? (Math.round((Math.abs(getTotalUtility()))*100)/100) : (Math.round((getTotalUtility()/1000)));
         String sufix = (getTotalUtility() >= 1000 )? "M" : "K";
         String prefix = (getTotalUtility() < 0) ? "-$" : "$";
         
@@ -284,6 +303,17 @@ public final class RMStudio extends Thread{
     }
     public Director getDirector() {
         return director;
+    }
+    
+    public void setMonthlySalaries(){
+        float total = (this.getAllDailySalaries()*30)/100;
+        String label = ("$"+total+"K");
+        GlobalUI.getMainPage().getRMDashBoard1().getMonthlySalariesLabel().setText(label);
+    }
+    
+    public float getLaunchIncome(){
+    int totalChapters = getDirector().getNormalChaptersAcc() + getDirector().getTwitChaptersAcc();
+    return (float) (totalChapters*666.666);
     }
 
 

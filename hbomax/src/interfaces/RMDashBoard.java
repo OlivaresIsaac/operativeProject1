@@ -74,19 +74,19 @@ public class RMDashBoard extends javax.swing.JPanel {
         twistDriveMax = new javax.swing.JLabel();
         creditDriveMax = new javax.swing.JLabel();
         startDriveMax = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        monthlySalariesLabel = new javax.swing.JLabel();
+        launchIncomeLabel = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         pmSalaryLabel = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
+        regularChapterLaunchLabel = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
+        twistChapterLaunchLabel = new javax.swing.JLabel();
         rmWallpaper = new javax.swing.JLabel();
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -325,17 +325,17 @@ public class RMDashBoard extends javax.swing.JPanel {
         startDriveMax.setText("0");
         jPanel1.add(startDriveMax, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 250, 100, -1));
 
-        jLabel21.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel21.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel21.setText("$0");
-        jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 280, 20, -1));
+        monthlySalariesLabel.setBackground(new java.awt.Color(255, 255, 255));
+        monthlySalariesLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        monthlySalariesLabel.setForeground(new java.awt.Color(255, 255, 255));
+        monthlySalariesLabel.setText("$0");
+        jPanel1.add(monthlySalariesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 280, 120, -1));
 
-        jLabel20.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel20.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel20.setText("$0");
-        jPanel1.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 190, -1, 20));
+        launchIncomeLabel.setBackground(new java.awt.Color(255, 255, 255));
+        launchIncomeLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        launchIncomeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        launchIncomeLabel.setText("$0");
+        jPanel1.add(launchIncomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 190, 90, 20));
 
         jLabel14.setBackground(new java.awt.Color(255, 255, 255));
         jLabel14.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -373,22 +373,22 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel32.setText("Capitulos regulares");
         jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 140, -1, -1));
 
-        jLabel33.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel33.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel33.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel33.setText("0");
-        jPanel1.add(jLabel33, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 140, -1, -1));
+        regularChapterLaunchLabel.setBackground(new java.awt.Color(255, 255, 255));
+        regularChapterLaunchLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        regularChapterLaunchLabel.setForeground(new java.awt.Color(255, 255, 255));
+        regularChapterLaunchLabel.setText("0");
+        jPanel1.add(regularChapterLaunchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 140, 70, -1));
 
         jLabel34.setBackground(new java.awt.Color(255, 255, 255));
         jLabel34.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel34.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel34.setText("Ganancias del mes");
+        jLabel34.setText("Ganancias del Lote");
         jPanel1.add(jLabel34, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 190, -1, 20));
 
         jLabel15.setBackground(new java.awt.Color(255, 255, 255));
         jLabel15.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Estadísticas Por lote");
+        jLabel15.setText("Estadísticas del último lote");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 100, -1, -1));
 
         jLabel35.setBackground(new java.awt.Color(255, 255, 255));
@@ -397,11 +397,11 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel35.setText("Capitulos con twist");
         jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 160, -1, 20));
 
-        jLabel36.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel36.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel36.setText("0");
-        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 160, -1, -1));
+        twistChapterLaunchLabel.setBackground(new java.awt.Color(255, 255, 255));
+        twistChapterLaunchLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        twistChapterLaunchLabel.setForeground(new java.awt.Color(255, 255, 255));
+        twistChapterLaunchLabel.setText("0");
+        jPanel1.add(twistChapterLaunchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 160, 90, -1));
 
         rmWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/rmWallpaper.png"))); // NOI18N
         jPanel1.add(rmWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
@@ -430,8 +430,6 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -444,10 +442,8 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
@@ -455,16 +451,20 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JLabel launchIncomeLabel;
+    private javax.swing.JLabel monthlySalariesLabel;
     private javax.swing.JLabel normalChapterQty;
     private javax.swing.JLabel pmFaultsLabel;
     private javax.swing.JLabel pmSalaryLabel;
     private javax.swing.JLabel pmStateLabel;
     private interfaces.ProducersQtyController producersQtyController1;
+    private javax.swing.JLabel regularChapterLaunchLabel;
     private javax.swing.JLabel rmWallpaper;
     private javax.swing.JLabel startDriveMax;
     private javax.swing.JLabel startDriveQty;
     private javax.swing.JLabel totalChapterQty;
     private javax.swing.JLabel totalUtility;
+    private javax.swing.JLabel twistChapterLaunchLabel;
     private javax.swing.JLabel twistChapterQty;
     private javax.swing.JLabel twistDriveMax;
     private javax.swing.JLabel twistDriveQty;
@@ -566,6 +566,21 @@ public class RMDashBoard extends javax.swing.JPanel {
     }
     public JLabel getPmSalaryLabel(){
         return pmSalaryLabel;
+    }
+    public JLabel getMonthlySalariesLabel(){
+        return monthlySalariesLabel;
+    }
+    
+    public JLabel getLaunchIncomeLabel(){
+        return launchIncomeLabel;
+    }
+    
+    public JLabel getRegularChapterLaunchLabel(){
+        return regularChapterLaunchLabel;
+    }
+    
+    public JLabel getTwistChapterLaunchLabel(){
+        return twistChapterLaunchLabel;
     }
 
 

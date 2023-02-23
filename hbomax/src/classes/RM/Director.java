@@ -19,7 +19,7 @@ public class Director extends Thread{
     private float dailyPay;
     private final boolean active = true;
     private int normalChaptersAcc;
-    private int twitChaptersAcc;
+    private int twistChaptersAcc;
     private String directorState;
     private int originalLaunchDays;
 
@@ -86,8 +86,9 @@ public class Director extends Thread{
     public boolean checkCounter(){
         try {
             Main.rm.getCounterMutex().acquire();
-            if (Main.rm.getPm().getDaysToPublish() == 0) {
+            if (Main.rm.getPm().getDaysToPublish() <= 0) {
                 Main.rm.getPm().setDaysToPublish(getOriginalLaunchDays());
+                launchAccChapters();
                 Main.rm.getCounterMutex().release();
                 return true;
             }
@@ -131,11 +132,11 @@ public class Director extends Thread{
     }
 
     public int getTwitChaptersAcc() {
-        return twitChaptersAcc;
+        return twistChaptersAcc;
     }
 
-    public void setTwitChaptersAcc(int twitChaptersAcc) {
-        this.twitChaptersAcc = twitChaptersAcc;
+    public void setTwistChaptersAcc(int twitChaptersAcc) {
+        this.twistChaptersAcc = twitChaptersAcc;
     }
 
     public String getDirectorState() {
@@ -153,6 +154,33 @@ public class Director extends Thread{
 
     public void setOriginalLaunchDays(int originalLaunchDays) {
         this.originalLaunchDays = originalLaunchDays;
+    }
+    
+    public void addChapterWithTwist(){
+        setTwistChaptersAcc(getTwitChaptersAcc()+1);
+    }
+    
+    public void addNormalChapter(){
+        setNormalChaptersAcc(getNormalChaptersAcc()+1);
+    }
+    
+    
+        /**
+ * Launch all chapters made when the deadline meets, also
+ * changes the ui label
+ */
+    public void launchAccChapters(){
+        GlobalUI.getMainPage().getRMDashBoard1().getRegularChapterLaunchLabel().setText(String.valueOf(getNormalChaptersAcc()));
+        GlobalUI.getMainPage().getRMDashBoard1().getTwistChapterLaunchLabel().setText(String.valueOf(getTwitChaptersAcc()));
+        float totalIncomeThisLaunch = Main.rm.getLaunchIncome();
+        String sufix = (totalIncomeThisLaunch >= 1000) ? "M" : "K"; 
+        float formatedIncome = (totalIncomeThisLaunch >= 1000) ? (totalIncomeThisLaunch/1000) : totalIncomeThisLaunch;
+        // 
+        String launchIncomeLabel = ("$"+String.valueOf(Math.round(formatedIncome*100)/100)+sufix);
+
+        GlobalUI.getMainPage().getRMDashBoard1().getLaunchIncomeLabel().setText(launchIncomeLabel);
+        setNormalChaptersAcc(0);
+        setTwistChaptersAcc(0);
     }
     
 }

@@ -320,6 +320,8 @@ public class TLOUStudio extends Thread {
     
     public void registerTodayUility(){
         this.utilityOverTime[this.totalDayCounter] = this.counter.getTotal() / 1000000;
+        System.out.println("aqui");
+        System.out.println( this.counter.getTotal() / 1000000);
         this.totalDayCounter += 1;
         GlobalUI.getMainPage().getTLOUDashBoard().getUtilityChart().setChart(XYChart.createChart(XYChart.createDataset(this.utilityOverTime), "Utilidad vs Tiempo"));
     }

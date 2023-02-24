@@ -13,36 +13,39 @@ import java.util.concurrent.Semaphore;
  * @author dsre1
  */
 public class Drive {
-    
+
+    private Counter counter;
+
     private final int numProducerSections;
     private final DriveSection[] producerSections;
-    
+
     private final DriveSection chapterSection;
-    
+
     private final Semaphore semaphore;
-    
-    public Drive(int numProducerSections) {
-        
+
+    public Drive(Counter counter, int numProducerSections) {
+        this.counter = counter;
+
         this.numProducerSections = numProducerSections;
         this.producerSections = this.setProducerSections();
-        
+
         this.chapterSection = this.setChapterSection();
-        
+
         this.semaphore = new Semaphore(1);
     }
-    
+
     private boolean isCapWithPlotTwist() {
         return (this.chapterSection.getCurrent() + 1) % 5 == 0;
     }
-    
+
     public void resetChapterDrive() {
         this.chapterSection.setCurrent(0);
     }
-    
+
     public boolean allPartsValidation() {
         for (int i = 0; i < this.numProducerSections; i++) {
             DriveSection producerSection = this.producerSections[i];
-            
+
             if (!this.isCapWithPlotTwist() && producerSection.getPType().equals(PTypes.twist)) {
                 continue;
             }
@@ -52,7 +55,7 @@ public class Drive {
         }
         return true;
     }
-    
+
     public void excludeParts() {
         for (int i = 0; i < this.numProducerSections; i++) {
             DriveSection producerSection = this.producerSections[i];
@@ -63,23 +66,22 @@ public class Drive {
         }
     }
 
-    
     public void insertChapter() {
         this.chapterSection.insertWork(1);
     }
-    
+
     private DriveSection[] setProducerSections() {
-        DriveSection intro = new DriveSection(PTypes.intro, 30, 1);
-        DriveSection credit = new DriveSection(PTypes.credit, 25, 1);
-        DriveSection start = new DriveSection(PTypes.start, 50, 2);
-        DriveSection end = new DriveSection(PTypes.end, 55, 2);
-        DriveSection twist = new DriveSection(PTypes.twist, 40, 2);
+        DriveSection intro = new DriveSection(PTypes.intro, this.counter, 30, 1);
+        DriveSection credit = new DriveSection(PTypes.credit, this.counter, 25, 1);
+        DriveSection start = new DriveSection(PTypes.start, this.counter, 50, 2);
+        DriveSection end = new DriveSection(PTypes.end, this.counter, 55, 2);
+        DriveSection twist = new DriveSection(PTypes.twist, this.counter, 40, 2);
 
         DriveSection[] aux = {intro, credit, start, end, twist};
 
         return aux;
     }
-    
+
     public DriveSection getProducerSection(String pType) {
         for (int i = 0; i < this.numProducerSections; i++) {
             DriveSection aux = this.producerSections[i];
@@ -89,11 +91,11 @@ public class Drive {
         }
         return null;
     }
-    
+
     private DriveSection setChapterSection() {
         // TODO: PONER CHAPTER COMO SIN LIMITE
-        DriveSection chapter = new DriveSection(PTypes.chapter, 100, 0);
-        
+        DriveSection chapter = new DriveSection(PTypes.chapter, this.counter, 100, 0);
+
         return chapter;
     }
 
@@ -104,5 +106,5 @@ public class Drive {
     public DriveSection getChapterSection() {
         return chapterSection;
     }
-    
+
 }

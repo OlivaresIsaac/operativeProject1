@@ -583,6 +583,4 @@ public class RMDashBoard extends javax.swing.JPanel {
         return twistChapterLaunchLabel;
     }
 
-
-
 }

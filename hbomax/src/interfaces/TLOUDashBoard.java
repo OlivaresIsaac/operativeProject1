@@ -5,6 +5,8 @@
  */
 package interfaces;
 
+import javax.swing.JLabel;
+
 /**
  *
  * @author isaac
@@ -28,7 +30,6 @@ public class TLOUDashBoard extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        TLOULogo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         totalChapterQty = new javax.swing.JLabel();
@@ -36,6 +37,7 @@ public class TLOUDashBoard extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         daysToLaunchLabel = new javax.swing.JLabel();
+        TLOULogo = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         directorStateLabel = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
@@ -84,9 +86,6 @@ public class TLOUDashBoard extends javax.swing.JPanel {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        TLOULogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/The_Last_of_Us_Logo_2.png"))); // NOI18N
-        jPanel1.add(TLOULogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 10, -1, -1));
-
         jPanel2.setBackground(new java.awt.Color(153, 153, 153));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -105,7 +104,7 @@ public class TLOUDashBoard extends javax.swing.JPanel {
         totalUtility.setBackground(new java.awt.Color(255, 255, 255));
         totalUtility.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         totalUtility.setForeground(new java.awt.Color(255, 255, 255));
-        totalUtility.setText("$1.200.350");
+        totalUtility.setText("$0");
         jPanel2.add(totalUtility, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 40, 130, 30));
 
         jLabel12.setBackground(new java.awt.Color(255, 255, 255));
@@ -123,8 +122,11 @@ public class TLOUDashBoard extends javax.swing.JPanel {
         daysToLaunchLabel.setBackground(new java.awt.Color(255, 255, 255));
         daysToLaunchLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         daysToLaunchLabel.setForeground(new java.awt.Color(255, 255, 255));
-        daysToLaunchLabel.setText("5 días");
+        daysToLaunchLabel.setText("0 días");
         jPanel2.add(daysToLaunchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 10, 120, -1));
+
+        TLOULogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/The_Last_of_Us_Logo_2.png"))); // NOI18N
+        jPanel2.add(TLOULogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 90));
 
@@ -441,4 +443,91 @@ public class TLOUDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel twistDriveMax;
     private javax.swing.JLabel twistDriveQty;
     // End of variables declaration//GEN-END:variables
+    
+    public JLabel getIntroDriveQtyLabel()
+    {
+        return this.introDriveQty;
+    }
+    
+    public JLabel getCreditDriveQtyLabel()
+    {
+        return this.creditDriveQty;
+    }
+    
+    public JLabel getStartDriveQtyLabel()
+    {
+        return this.startDriveQty;
+    }
+    
+    public JLabel getEndDriveQtyLabel()
+    {
+        return this.endDriveQty;
+    }
+    
+    public JLabel getTwistDriveQtyLabel()
+    {
+        return this.twistDriveQty;
+    }
+    
+    public JLabel getTotalChapterQtyLabel()
+    {
+        return this.totalChapterQty;
+    }
+            
+    public JLabel getIntroDriveMaxLabel()
+    {
+        return this.introDriveMax;
+    }
+    
+    public JLabel getCreditDriveMaxLabel()
+    {
+        return this.creditDriveMax;
+    }
+    
+    public JLabel getStartDriveMaxLabel()
+    {
+        return this.startDriveMax;
+    }
+    
+    public JLabel getEndDriveMaxLabel()
+    {
+        return this.endDriveMax;
+    }
+    
+    public JLabel getTwistDriveMaxLabel()
+    {
+        return this.twistDriveMax;
+    }
+    
+    public JLabel getDirectorStateLabel() {
+        return directorStateLabel;
+    }
+    
+    public JLabel getManagerStateLabel() {
+        return pmStateLabel;
+    }
+    
+    public JLabel getManagerSalaryLabel() {
+        return pmSalaryLabel;
+    }
+    
+    public JLabel getManagerFaultsLabel() {
+        return pmFaultsLabel;
+    }
+    
+    public JLabel getDaysToLaunchLabel() {
+        return daysToLaunchLabel;
+    }
+    
+    public JLabel getNormalChapterQtyLabel() {
+        return normalChapterQty;
+    }
+    
+    public JLabel getTwistChapterQtyLabel() {
+        return twistChapterQty;
+    }
+    
+    public JLabel getTotalUtilityLabel() {
+        return totalUtility;
+    }
 }

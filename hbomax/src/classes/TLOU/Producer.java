@@ -47,8 +47,8 @@ public class Producer extends Thread {
                         semaphore.acquire();
                         if (producerSection.partValidation(producerType.getDeliverables())) {
                             producerSection.insertWork(producerType.getDeliverables());
-                            System.out.print(this.pType + ": " + producerSection.getCurrent());
-                            System.out.print("\n");
+//                            System.out.print(this.pType + ": " + producerSection.getCurrent());
+//                            System.out.print("\n");
                             this.daysGone = 0;
                         }
                         semaphore.release();

@@ -5,6 +5,7 @@
  */
 package classes.TLOU;
 
+import classes.GlobalUI;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -44,12 +45,13 @@ public class Director extends Thread {
                 semaphore.release();
 
                 if (isZero) {
+                    GlobalUI.getMainPage().getTLOUDashBoard().getDirectorStateLabel().setText("Entregando los capítulos");
                     this.drive.resetChapterDrive();
                     this.counter.resetCountdown();
+                    this.counter.updateTotalGain();
 
                     Thread.sleep(TLOUStudio.timeSleep);
-                    
-//                    System.out.print("a");
+                    GlobalUI.getMainPage().getTLOUDashBoard().getDirectorStateLabel().setText("Trabajando");
 
                 } else {
                     int randomNumber1 = this.getRandomNumber(12, 18);
@@ -61,16 +63,16 @@ public class Director extends Thread {
                     int sleepCheckingTime = this.relativeTime(randomNumber2);
 
                     this.isChecking = true;
-
+                    
+                    GlobalUI.getMainPage().getTLOUDashBoard().getDirectorStateLabel().setText("Vigilando a PM");
                     Thread.sleep(sleepCheckingTime);
 
                     this.isChecking = false;
-
+                    
+                    GlobalUI.getMainPage().getTLOUDashBoard().getDirectorStateLabel().setText("Trabajando");
                     int restOfTheDay = TLOUStudio.timeSleep - sleepTime - sleepCheckingTime;
 
                     Thread.sleep(restOfTheDay);
-                    
-//                    System.out.print("b");
                 }
 
                 this.payDay();

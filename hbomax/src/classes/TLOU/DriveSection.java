@@ -5,6 +5,8 @@
  */
 package classes.TLOU;
 
+import classes.GlobalUI;
+import classes.PTypes;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -12,6 +14,8 @@ import java.util.concurrent.Semaphore;
  * @author dsre1
  */
 public class DriveSection {
+    
+    private final Counter counter;
 
     private final String pType;
 
@@ -22,12 +26,14 @@ public class DriveSection {
     
     private final int neededToChapter;
     
-    
-
-    public DriveSection(String pType, int limit, int neededToChapter) {
+    public DriveSection(String pType, Counter counter, int limit, int neededToChapter) {
         this.pType = pType;
+        
+        this.counter = counter;
 
         this.limit = limit;
+        this.setLimitInterface(String.valueOf(this.limit));
+                
         this.limited = true;
         
         this.current = 0;
@@ -44,10 +50,54 @@ public class DriveSection {
 
     public void insertWork(int deliverables) {
         this.current += deliverables;
+        if(this.pType.equals(PTypes.chapter)) {
+            this.counter.updateTotalChapter(1);
+        }
+        this.setQtyInterface(String.valueOf(this.current));
     }
-
+    
     public void excludeWork() {
-        this.current -= 1;
+        this.current -= this.neededToChapter;
+        this.setQtyInterface(String.valueOf(this.current));
+    }
+    
+    private void setQtyInterface(String newValue) {
+//        System.out.print(this.pType);
+
+        if(this.pType.equals(PTypes.intro)) {
+            GlobalUI.getMainPage().getTLOUDashBoard().getIntroDriveQtyLabel().setText(newValue);
+        }
+        if(this.pType.equals(PTypes.credit)) {
+            GlobalUI.getMainPage().getTLOUDashBoard().getCreditDriveQtyLabel().setText(newValue);
+        }
+        if(this.pType.equals(PTypes.start)) {
+            GlobalUI.getMainPage().getTLOUDashBoard().getStartDriveQtyLabel().setText(newValue);
+        }
+        if(this.pType.equals(PTypes.end)) {
+            GlobalUI.getMainPage().getTLOUDashBoard().getEndDriveQtyLabel().setText(newValue);
+        }
+        if(this.pType.equals(PTypes.twist)) {
+            GlobalUI.getMainPage().getTLOUDashBoard().getTwistDriveQtyLabel().setText(newValue);
+        }
+    }
+    
+    private void setLimitInterface(String newValue) {
+//        System.out.print(this.pType);
+        if(this.pType.equals(PTypes.intro)) {
+            GlobalUI.getMainPage().getTLOUDashBoard().getIntroDriveMaxLabel().setText(newValue);
+        }
+        if(this.pType.equals(PTypes.credit)) {
+            GlobalUI.getMainPage().getTLOUDashBoard().getCreditDriveMaxLabel().setText(newValue);
+        }
+        if(this.pType.equals(PTypes.start)) {
+            GlobalUI.getMainPage().getTLOUDashBoard().getStartDriveMaxLabel().setText(newValue);
+        }
+        if(this.pType.equals(PTypes.end)) {
+            GlobalUI.getMainPage().getTLOUDashBoard().getEndDriveMaxLabel().setText(newValue);
+        }
+        if(this.pType.equals(PTypes.twist)) {
+            GlobalUI.getMainPage().getTLOUDashBoard().getTwistDriveMaxLabel().setText(newValue);
+        }
     }
 
     public String getPType() {

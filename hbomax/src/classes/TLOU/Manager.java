@@ -5,6 +5,7 @@
  */
 package classes.TLOU;
 
+import classes.GlobalUI;
 import java.util.concurrent.Semaphore;
 
 /**
@@ -17,6 +18,8 @@ public class Manager extends Thread {
     private final Director director;
 
     private double totalPaid;
+    private int totalFaults;
+
     private boolean isWorking;
 
     private int workingTime;
@@ -29,6 +32,7 @@ public class Manager extends Thread {
         this.director = director;
 
         this.totalPaid = 0;
+        this.totalFaults = 0;
         this.isWorking = true;
 
         this.workingTime = 7;
@@ -45,6 +49,7 @@ public class Manager extends Thread {
                 int sleepWorkingTime = this.relativeTime(this.workingTime);
 
                 semaphore.acquire();
+                GlobalUI.getMainPage().getTLOUDashBoard().getManagerStateLabel().setText("Cambiando contador");
                 Thread.sleep(sleepWorkingTime);
                 if (this.counter.getCountdown() != 0) {
                     this.counter.dayPassed();
@@ -58,6 +63,11 @@ public class Manager extends Thread {
 
                 for (int i = 0; i < numIntervals; i++) {
                     this.isWorking = !this.isWorking;
+                    if (this.isWorking) {
+                        GlobalUI.getMainPage().getTLOUDashBoard().getManagerStateLabel().setText("Trabajando");
+                    } else {
+                        GlobalUI.getMainPage().getTLOUDashBoard().getManagerStateLabel().setText("Viendo series");
+                    }
                     if (!this.isWorking && this.director.getIsChecking()) {
                         discountToday += 1;
                     }
@@ -65,8 +75,15 @@ public class Manager extends Thread {
                 }
 
                 this.isWorking = true;
+                GlobalUI.getMainPage().getTLOUDashBoard().getManagerStateLabel().setText("Trabajando");
+
+                this.totalFaults += discountToday;
+                GlobalUI.getMainPage().getTLOUDashBoard().getManagerFaultsLabel().setText(String.valueOf(this.totalFaults) + " faltas");
+                
                 this.discountTotalPaid(discountToday);
+
                 this.payDay();
+                GlobalUI.getMainPage().getTLOUDashBoard().getManagerSalaryLabel().setText(String.valueOf("$" + this.totalPaid) );
 
                 int restOfTheDay = TLOUStudio.timeSleep - sleepWorkingTime - (sleepIntervalTime * numIntervals);
 

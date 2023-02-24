@@ -41,8 +41,8 @@ public class TLOUStudio extends Thread {
         this.numProducerSections = 5;
 
         this.producerTypes = new ProducerTypes(this.numProducerTypes);
-        this.drive = new Drive(numProducerSections);
         this.counter = new Counter(countdown);
+        this.drive = new Drive(this.counter, this.numProducerSections);
 
         this.producers = this.setProducers(initAmount, creditAmount, startAmount, endAmount, twistAmount);
         this.assemblers = this.setAssemblers(assemblersAmount);
@@ -185,14 +185,13 @@ public class TLOUStudio extends Thread {
     @Override
     public void run() {
         this.startProducers();
-//        this.startAssemblers();
-//        this.startDirector();
-//        this.startManager();
+        this.startAssemblers();
+        this.startDirector();
+        this.startManager();
 
         while (TLOUStudio.isWorking) {
             try {
-                double totalPaid = this.getTotalPaid();
-//                System.out.println(totalPaid);
+                this.counter.updateTotalPaid(this.getTotalPaid());
                 Thread.sleep(TLOUStudio.timeSleep);
             } catch (InterruptedException e) {
                 System.out.println(e);

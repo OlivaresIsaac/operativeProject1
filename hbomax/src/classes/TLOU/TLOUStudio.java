@@ -6,8 +6,10 @@
 package classes.TLOU;
 
 import classes.FunctionsTXT;
+import classes.GlobalUI;
 import classes.PTypes;
 import classes.RM.DriveObject;
+import interfaces.XYChart;
 
 /**
  *
@@ -37,6 +39,9 @@ public class TLOUStudio extends Thread {
     private Assembler[] assemblers;
     private Manager manager;
     private Director director;
+    
+    public static double[] utilityOverTime = new double [200];
+    int totalDayCounter = 0;
 
     public TLOUStudio(int countdown, int timeSleep, int introAmount, int creditAmount, int startAmount, int endAmount, int twistAmount, int assemblersAmount) {
 
@@ -229,6 +234,17 @@ public class TLOUStudio extends Thread {
     private void startManager() {
         this.manager.start();
     }
+    
+    public void registerTodayUility(){
+        this.utilityOverTime[this.totalDayCounter] = this.counter.getTotal() / 1000000;
+        this.totalDayCounter += 1;
+        GlobalUI.getMainPage().getTLOUDashBoard().getUtilityChart().setChart(XYChart.createChart(XYChart.createDataset(this.utilityOverTime), "Utilidad vs Tiempo"));
+    }
+
+    public double[] getUtilityOverTime() {
+        return utilityOverTime;
+    }
+    
 
     @Override
     public void run() {
@@ -241,6 +257,7 @@ public class TLOUStudio extends Thread {
             try {
                 this.counter.updateTotalPaid(this.getTotalPaid());
                 this.counter.setSalaryPerMonth(this.getPaid());
+                this.registerTodayUility();
                 Thread.sleep(TLOUStudio.timeSleep);
             } catch (InterruptedException e) {
                 System.out.println(e);
@@ -252,4 +269,6 @@ public class TLOUStudio extends Thread {
     public void updateProducersPieChart(){
         
     }
+    
+    
 }

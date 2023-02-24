@@ -141,5 +141,11 @@ public class Counter {
         this.salaryPerMonth = setSalaryPerMonth * 30;
         GlobalUI.getMainPage().getTLOUDashBoard().getMonthlySalariesLabel().setText("$" + String.valueOf(this.salaryPerMonth));
     }
+
+    public double getTotal() {
+        return total;
+    }
+    
+    
     
 }

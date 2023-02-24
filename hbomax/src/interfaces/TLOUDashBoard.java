@@ -580,4 +580,16 @@ public class TLOUDashBoard extends javax.swing.JPanel {
     public JLabel getMonthlySalariesLabel() {
         return monthlySalariesLabel;
     }
+    
+    public JLabel getRegularChapterLaunchLabel() {
+        return regularChapterLaunchLabel;
+    }
+    
+    public JLabel getTwistChapterLaunchLabel() {
+        return twistChapterLaunchLabel;
+    }
+    
+    public JLabel getLaunchIncomeLabel() {
+        return launchIncomeLabel;
+    }
 }

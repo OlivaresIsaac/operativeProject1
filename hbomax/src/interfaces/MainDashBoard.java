@@ -6,8 +6,12 @@
 package interfaces;
 
 import classes.FunctionsTXT;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 
 /**
  *
@@ -20,6 +24,14 @@ public class MainDashBoard extends javax.swing.JPanel {
      */
     public MainDashBoard() {
         initComponents();
+//        chartPanel1.removeAll();
+//        chartPanel1.setLayout(new FlowLayout(FlowLayout.LEFT));
+//        ChartPanel pie = PieChart.createProducersPieChart("test");
+//        pie.setPreferredSize(new Dimension(500,500));
+//        chartPanel1.add(pie);
+        
+        
+        
     }
     
     public void setTotalPayedLabel(String text){
@@ -55,6 +67,7 @@ public class MainDashBoard extends javax.swing.JPanel {
         daysToLaunchSpinner = new javax.swing.JSpinner();
         dayDurationSpinner = new javax.swing.JSpinner();
         loadFileButton = new javax.swing.JButton();
+        chartPanel1 = new javax.swing.JPanel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -147,6 +160,9 @@ public class MainDashBoard extends javax.swing.JPanel {
         });
         jPanel3.add(loadFileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, -1));
 
+        chartPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(chartPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 460, 390));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 90, 1060, 530));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
@@ -162,6 +178,7 @@ public class MainDashBoard extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TotalPayedLabel;
+    private javax.swing.JPanel chartPanel1;
     private javax.swing.JSpinner dayDurationSpinner;
     private javax.swing.JSpinner daysToLaunchSpinner;
     private interfaces.ProducersQtyController driveController;

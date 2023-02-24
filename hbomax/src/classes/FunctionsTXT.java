@@ -6,10 +6,12 @@
 package classes;
 
 import classes.RM.DriveObject;
+import interfaces.PieChart;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.PrintWriter;
 import javax.swing.JOptionPane;
+import org.jfree.chart.JFreeChart;
 
 /**
  *
@@ -130,6 +132,8 @@ public class FunctionsTXT {
             JOptionPane.showMessageDialog(null, "No se pudo guardar la información");
         }
         Main.rm.updateSpinnerAndProducersType(rmProducersQty);
+//        JFreeChart newProducerChart = PieChart.createProducersPieChart("Productores", rmProducersQty);
+        GlobalUI.getMainPage().getRMDashBoard1().getProducerPie().setChart(PieChart.createChart(PieChart.createDataset(rmProducersQty), "Productores"));
         Main.rm.getDrive().updateDriveMaxLabels(driveMax);
         Main.rm.setMonthlySalaries();
        

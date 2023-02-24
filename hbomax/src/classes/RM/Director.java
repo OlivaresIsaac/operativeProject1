@@ -7,6 +7,7 @@ package classes.RM;
 
 import classes.GlobalUI;
 import classes.Main;
+import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,7 +54,7 @@ public class Director extends Thread{
        /**
      * Gives the chapter to HBO max and updates UI
      */
-    //DOCUMENTA
+
     public void launchChapters(){
         try {
             // hace entrega de capitulos
@@ -68,7 +69,7 @@ public class Director extends Thread{
     
        /**
        * Works most of the day, and checks the PM in randoms periods of time
-     */ //DOCUMENTA
+     */ 
     public void normalWork(){
         setDirectorState("Trabajando");
         Random random = new Random();
@@ -78,36 +79,33 @@ public class Director extends Thread{
         
         float timeToCheckPM = (random.nextInt(61)+30);
         int secondBreak = (int) ((timeToCheckPM/1440)*Main.rm.getDayDuration());
-        System.out.println(secondBreak);
+       
         int thirdBreak = Main.rm.getDayDuration()-firstBreak-secondBreak;
-        // ahora implementar el random para vigilar a PM
-        int checking = 0;
-        
         try {
             //trabaja normal
             sleep(firstBreak);
             // vigila al PM
             setDirectorState("Vigilando al PM");
-            sleep(secondBreak);
-            
-            Main.rm.getPm().setTotalPay(Main.rm.getPm().getTotalPay()-1);
-            Main.rm.getPm().setFaults(Main.rm.getPm().getFaults()+1);
-            String faultLabel = ( String.valueOf(Main.rm.getPm().getFaults())+ " faltas");
-            GlobalUI.getMainPage().getRMDashBoard1().getPmFaultsLabel().setText(faultLabel);
-            
-           
-            
+            sleep(secondBreak);         
+//            giveFaultToPm();
             setDirectorState("Trabajando");
             sleep(thirdBreak);
             // sleep (el resto del dia)
-            
-            
-            
+   
         } catch (InterruptedException ex) {
             Logger.getLogger(Director.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
+           /**
+       * Works most of the day, and checks the PM in randoms periods of time
+     */
+    public void giveFaultToPm(){
+        Main.rm.getPm().setTotalPay(Main.rm.getPm().getTotalPay()-1);
+        Main.rm.getPm().setFaults(Main.rm.getPm().getFaults()+1);
+        String faultLabel = ( String.valueOf(Main.rm.getPm().getFaults())+ " faltas");
+        GlobalUI.getMainPage().getRMDashBoard1().getPmFaultsLabel().setText(faultLabel);
+    }
     
     /**
  *Checks the day counter of the PM, if its 0 resets it
@@ -198,15 +196,16 @@ public class Director extends Thread{
  * Launch all chapters made when the deadline meets, also
  * changes the ui label
  */
-//    DOCUMENTA
+
     public void launchAccChapters(){
+        final DecimalFormat df = new DecimalFormat("0.00");
         GlobalUI.getMainPage().getRMDashBoard1().getRegularChapterLaunchLabel().setText(String.valueOf(getNormalChaptersAcc()));
         GlobalUI.getMainPage().getRMDashBoard1().getTwistChapterLaunchLabel().setText(String.valueOf(getTwitChaptersAcc()));
         float totalIncomeThisLaunch = Main.rm.getLaunchIncome();
         String sufix = (totalIncomeThisLaunch >= 1000) ? "M" : "K"; 
         float formatedIncome = (totalIncomeThisLaunch >= 1000) ? (totalIncomeThisLaunch/1000) : totalIncomeThisLaunch;
         // 
-        String launchIncomeLabel = ("$"+String.valueOf(Math.round(formatedIncome*100)/100)+sufix);
+        String launchIncomeLabel = ("$"+String.valueOf(df.format(formatedIncome))+sufix);
 
         GlobalUI.getMainPage().getRMDashBoard1().getLaunchIncomeLabel().setText(launchIncomeLabel);
         setNormalChaptersAcc(0);

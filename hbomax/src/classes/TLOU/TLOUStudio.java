@@ -9,7 +9,10 @@ import classes.FunctionsTXT;
 import classes.GlobalUI;
 import classes.PTypes;
 import classes.RM.DriveObject;
+import interfaces.PieChart;
+import interfaces.ProducersQtyController;
 import interfaces.XYChart;
+import javax.swing.JSpinner;
 
 /**
  *
@@ -42,6 +45,8 @@ public class TLOUStudio extends Thread {
     
     public static double[] utilityOverTime = new double [200];
     int totalDayCounter = 0;
+    
+    private final ProducersQtyController producersController;
 
     public TLOUStudio(int countdown, int timeSleep) {
         
@@ -55,7 +60,7 @@ public class TLOUStudio extends Thread {
         int assemblersAmount = driveParts[5].getInitialProducerQty();
         
         int [] driveMaxSections = new int[6];
-        for (int i = 0; i< 6; i++) {
+        for (int i = 0; i < 6; i++) {
             driveMaxSections[i] = driveParts[i].getMaxCapacity();
         }
         
@@ -82,6 +87,67 @@ public class TLOUStudio extends Thread {
         this.assemblers = this.setAssemblers(assemblersAmount);
         this.director = new Director(this.counter, this.drive);
         this.manager = new Manager(this.counter, this.director);
+        
+        this.producersController = GlobalUI.getMainPage().getRMDashBoard1().getProducersQtyController1();
+        int [] producersQty = {introAmount, startAmount, creditAmount, twistAmount, endAmount, assemblersAmount};
+        this.updateSpinnerAndProducersType(producersQty);
+    }
+    
+    public void updateSpinnerAndProducersType(int [] producersQty){
+        this.producersController.updateQtysInSpinners(producersQty);
+        reAssingProducerRoles(this.producersController.getSpinners());
+    }
+    
+    public void reAssingProducerRoles(JSpinner[] spinners){
+        int outerCounter = 0;
+        int innerCounter = 0;
+        int[] producersQty = new int[6];
+        for (JSpinner spinner : spinners) {
+           
+            int typeAmount = Integer.parseInt(spinner.getValue().toString());
+            for (int i = 0; i < typeAmount; i++) {
+                String newPType = this.getProducerTypeByOrder(outerCounter);
+                
+                Producer producer = this.producers[innerCounter];
+                
+                if(newPType == "assembler") {
+                    //TODO: SEGUIR PENSANDO
+                    producer.setPType(PTypes.noType);
+                } else {
+                    producer.setPType(newPType);
+                }
+                
+                innerCounter += 1;
+            }
+            
+            producersQty[outerCounter] = typeAmount;
+            outerCounter +=1 ;
+        }
+        
+        while (innerCounter <= 15){
+            this.producers[innerCounter].setPType(PTypes.noType);
+            innerCounter += 1;
+        }
+        GlobalUI.getMainPage().getTLOUDashBoard().getProducerPie().setChart(PieChart.createChart(PieChart.createDataset(producersQty), "Productores"));
+    }
+    
+    public String getProducerTypeByOrder(int position){
+        switch (position) {
+            case 0:
+                return PTypes.intro;
+            case 1:
+                return PTypes.start;
+            case 2:
+                return PTypes.credit;
+            case 3:
+                return PTypes.twist;
+            case 4:
+                return PTypes.end;
+            case 5:
+                return PTypes.assembler;
+            default:
+                return PTypes.noType;
+        }
     }
 
     private void addProducer(Producer[] aux, String pType) {

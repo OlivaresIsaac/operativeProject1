@@ -9,6 +9,7 @@ import classes.FunctionsTXT;
 import classes.FunctionsUI;
 import classes.GlobalUI;
 import classes.PTypes;
+import classes.TLOU.TLOUStudio;
 import interfaces.PieChart;
 import interfaces.ProducersQtyController;
 import interfaces.XYChart;
@@ -21,7 +22,7 @@ import javax.swing.JSpinner;
  *
  * @author isaac
  */
-public final class RMStudio extends Thread{
+public final class RMStudio extends Thread {
    
     private Producer[] producers;
     final private boolean active = true;
@@ -346,7 +347,7 @@ public final class RMStudio extends Thread{
     
     public void updateChartsInMainDashboard(){
     //TLOU
-     GlobalUI.getMainPage().getMainDashBoard1().getUtilityChart().setChart(XYChart.createChart(XYChart.createDoubleDataset(this.utilityOverTime, new double[100]), "Utilidad vs Tiempo"));
+     GlobalUI.getMainPage().getMainDashBoard1().getUtilityChart().setChart(XYChart.createChart(XYChart.createDoubleDataset(this.utilityOverTime, TLOUStudio.utilityOverTime), "Utilidad vs Tiempo"));
     }
 
 

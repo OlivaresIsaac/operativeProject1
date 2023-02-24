@@ -37,9 +37,11 @@ public class XYChart {
       final XYPlot plot = xyChart.getXYPlot( );
       
       XYLineAndShapeRenderer renderer = new XYLineAndShapeRenderer( );
-      renderer.setSeriesPaint( 0 , Color.GREEN );
+      renderer.setSeriesPaint( 0 , Color.RED );
+      renderer.setSeriesPaint( 1 , Color.BLUE );
  
-      renderer.setSeriesStroke( 0 , new BasicStroke( 4.0f ) );
+      renderer.setSeriesStroke( 0 , new BasicStroke( 8.0f ) );
+      renderer.setSeriesStroke( 1 , new BasicStroke( 8.0f ) );
       plot.setRenderer( renderer ); 
      
         return chartPanel;
@@ -59,6 +61,38 @@ public class XYChart {
              
       final XYSeriesCollection dataset = new XYSeriesCollection();          
       dataset.addSeries( serie1 ); 
+      
+      
+        return dataset;
+
+    }
+    
+        public static XYDataset createDoubleDataset(double[] utilityOverTimeRM, double[] utilityOverTimeTLOU) {
+     
+        final XYSeries serie1 = new XYSeries( "Studio RM" );    
+        
+        for (int i = 0; i<utilityOverTimeRM.length;i++){
+            if (utilityOverTimeRM[i] == 0) {
+                break;
+            }
+            
+            serie1.add(i, utilityOverTimeRM[i]);
+        }
+        
+        final XYSeries serie2 = new XYSeries( "Studio TLOU" );    
+        
+        for (int i = 0; i<utilityOverTimeTLOU.length;i++){
+            if (utilityOverTimeTLOU[i] == 0) {
+                break;
+            }
+            
+            serie2.add(i, utilityOverTimeTLOU[i]);
+        }
+
+             
+      final XYSeriesCollection dataset = new XYSeriesCollection();          
+      dataset.addSeries( serie1 ); 
+      dataset.addSeries( serie2 );
       
       
         return dataset;

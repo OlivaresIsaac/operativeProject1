@@ -25,7 +25,7 @@ public class FunctionsTXT {
      * @param direction
      * @return DriveObject[]
  */
-    public static DriveObject[] loadStudioInitialParametersRM(String direction){
+    public static DriveObject[] loadStudioInitialParameters(String direction){
         DriveObject[] formatedParameters = new DriveObject[6];
         String data = loadTextFromFile(direction);
         System.out.println(data);

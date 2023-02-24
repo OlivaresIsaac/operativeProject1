@@ -117,4 +117,9 @@ public class Counter {
         return (int) (audience * 10) / 15;
     }
     
+    public void setSalaryPerMonth(double setSalaryPerMonth) {
+        this.salaryPerMonth = setSalaryPerMonth * 30;
+        GlobalUI.getMainPage().getTLOUDashBoard().getMonthlySalariesLabel().setText("$" + String.valueOf(this.salaryPerMonth));
+    }
+    
 }

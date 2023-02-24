@@ -15,6 +15,12 @@ public class TLOUStudio extends Thread {
 
     static public int timeSleep;
     static public boolean isWorking;
+    
+    private int introAmount;
+    private int creditAmount;
+    private int startAmount;
+    private int endAmount;
+    private int twistAmount;
 
     private final int numProducers;
     private final int numAssemblers;
@@ -30,10 +36,16 @@ public class TLOUStudio extends Thread {
     private Manager manager;
     private Director director;
 
-    public TLOUStudio(int countdown, int timeSleep, int initAmount, int creditAmount, int startAmount, int endAmount, int twistAmount, int assemblersAmount) {
+    public TLOUStudio(int countdown, int timeSleep, int introAmount, int creditAmount, int startAmount, int endAmount, int twistAmount, int assemblersAmount) {
 
         this.timeSleep = timeSleep;
         this.isWorking = true;
+        
+        this.introAmount = introAmount;
+        this.creditAmount = creditAmount;
+        this.startAmount = startAmount;
+        this.endAmount = endAmount;
+        this.twistAmount = twistAmount;
 
         this.numProducers = 16;
         this.numProducerTypes = 5;
@@ -44,7 +56,7 @@ public class TLOUStudio extends Thread {
         this.counter = new Counter(countdown);
         this.drive = new Drive(this.counter, this.numProducerSections);
 
-        this.producers = this.setProducers(initAmount, creditAmount, startAmount, endAmount, twistAmount);
+        this.producers = this.setProducers(introAmount, creditAmount, startAmount, endAmount, twistAmount);
         this.assemblers = this.setAssemblers(assemblersAmount);
         this.director = new Director(this.counter, this.drive);
         this.manager = new Manager(this.counter, this.director);
@@ -139,6 +151,32 @@ public class TLOUStudio extends Thread {
 
         return aux;
     }
+    
+    private double getPaid() {
+        double totalPaidToday = 0;
+        
+        for(int i = 0; i < this.numProducers; i++) {
+            Producer producer = this.producers[i];
+            
+            if (!producer.getPType().equals(PTypes.noType)) {
+                ProducerType producerType = this.producerTypes.getProducerType(producer.getPType());
+                totalPaidToday += producerType.getSalary() * 24;
+            }
+        }
+        
+        for(int i = 0; i < this.numAssemblers; i++) {
+            Assembler assembler = this.assemblers[i];
+            
+            if (assembler.getIsActive()) {
+                totalPaidToday += assembler.getSalary() * 24;
+            }
+        }
+        
+        totalPaidToday += this.manager.getSalary() * 24;
+        totalPaidToday += this.director.getSalary();
+        
+        return totalPaidToday;
+    }
 
     private double getTotalPaid() {
         double totalPaid = 0;
@@ -192,6 +230,7 @@ public class TLOUStudio extends Thread {
         while (TLOUStudio.isWorking) {
             try {
                 this.counter.updateTotalPaid(this.getTotalPaid());
+                this.counter.setSalaryPerMonth(this.getPaid());
                 Thread.sleep(TLOUStudio.timeSleep);
             } catch (InterruptedException e) {
                 System.out.println(e);

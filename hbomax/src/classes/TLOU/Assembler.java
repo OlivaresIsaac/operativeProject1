@@ -80,4 +80,10 @@ public class Assembler extends Thread {
     public void setIsActive(boolean isActive) {
         this.isActive = isActive;
     }
+
+    public double getSalary() {
+        return salary;
+    }
+    
+    
 }

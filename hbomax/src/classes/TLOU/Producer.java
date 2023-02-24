@@ -80,5 +80,7 @@ public class Producer extends Thread {
     public double getTotalPaid() {
         return this.totalPaid;
     }
+    
+    
 
 }

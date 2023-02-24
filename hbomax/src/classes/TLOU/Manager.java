@@ -115,4 +115,8 @@ public class Manager extends Thread {
         return isWorking;
     }
 
+    public double getSalary() {
+        return salary;
+    }
+
 }

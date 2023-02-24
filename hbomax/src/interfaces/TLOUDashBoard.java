@@ -530,4 +530,8 @@ public class TLOUDashBoard extends javax.swing.JPanel {
     public JLabel getTotalUtilityLabel() {
         return totalUtility;
     }
+    
+    public JLabel getMonthlySalariesLabel() {
+        return monthlySalariesLabel;
+    }
 }

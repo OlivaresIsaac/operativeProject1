@@ -103,4 +103,10 @@ public class Director extends Thread {
         this.totalPaid += this.salary;
     }
 
+    public double getSalary() {
+        return salary;
+    }
+    
+    
+
 }

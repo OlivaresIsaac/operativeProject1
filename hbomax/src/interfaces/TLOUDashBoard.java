@@ -5,7 +5,10 @@
  */
 package interfaces;
 
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.JLabel;
+import org.jfree.chart.ChartPanel;
 
 /**
  *
@@ -13,11 +16,36 @@ import javax.swing.JLabel;
  */
 public class TLOUDashBoard extends javax.swing.JPanel {
 
+    
+    ChartPanel producerPie;
+   ChartPanel utilityChart;
+
+    public ChartPanel getUtilityChart() {
+        return utilityChart;
+    }
+
+    public ChartPanel getProducerPie() {
+        return producerPie;
+    }
     /**
      * Creates new form TLOUDashBoard
      */
     public TLOUDashBoard() {
         initComponents();
+        producerPie = PieChart.createProducersPieChart("Productores", this.producersQtyController1.getProducersQtys());
+        producerChartPanel.removeAll();
+        producerChartPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+     
+        producerPie.setPreferredSize(new Dimension(350,200));
+        producerChartPanel.add(producerPie);
+        
+        utilityChart = XYChart.createUtilityXYChart("Utilidad vs Tiempo", new double[100]);
+        
+        utilityChartPanel.removeAll();
+        utilityChartPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+     
+        utilityChart.setPreferredSize(new Dimension(350,200));
+        utilityChartPanel.add(utilityChart);
     }
 
     /**
@@ -78,8 +106,11 @@ public class TLOUDashBoard extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         monthlySalariesLabel = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        producerChartPanel = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        utilityChartPanel = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        producersQtyController1 = new interfaces.ProducersQtyController(16, "TLOu","Productores disponibles", false, true);
         jLabel1 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -370,16 +401,28 @@ public class TLOUDashBoard extends javax.swing.JPanel {
         monthlySalariesLabel.setText("$0");
         jPanel1.add(monthlySalariesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 280, 120, -1));
 
-        jPanel4.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        producerChartPanel.setBackground(new java.awt.Color(153, 153, 153));
+        producerChartPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel9.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Gráfico de producción");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Productores");
+        producerChartPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 390, 270));
+        jPanel1.add(producerChartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 370, 220));
+
+        utilityChartPanel.setBackground(new java.awt.Color(153, 153, 153));
+        utilityChartPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel21.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel21.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Utilidad vs Tiempo");
+        utilityChartPanel.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+
+        jPanel1.add(utilityChartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 370, 220));
+        jPanel1.add(producersQtyController1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/TLOUWallpaper.png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -406,9 +449,11 @@ public class TLOUDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -423,16 +468,16 @@ public class TLOUDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel launchIncomeLabel;
     private javax.swing.JLabel monthlySalariesLabel;
     private javax.swing.JLabel normalChapterQty;
     private javax.swing.JLabel pmFaultsLabel;
     private javax.swing.JLabel pmSalaryLabel;
     private javax.swing.JLabel pmStateLabel;
+    private javax.swing.JPanel producerChartPanel;
+    private interfaces.ProducersQtyController producersQtyController1;
     private javax.swing.JLabel regularChapterLaunchLabel;
     private javax.swing.JLabel startDriveMax;
     private javax.swing.JLabel startDriveQty;
@@ -442,6 +487,7 @@ public class TLOUDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel twistChapterQty;
     private javax.swing.JLabel twistDriveMax;
     private javax.swing.JLabel twistDriveQty;
+    private javax.swing.JPanel utilityChartPanel;
     // End of variables declaration//GEN-END:variables
     
     public JLabel getIntroDriveQtyLabel()

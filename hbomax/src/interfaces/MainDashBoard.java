@@ -9,6 +9,7 @@ import classes.FunctionsTXT;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -18,6 +19,10 @@ import org.jfree.chart.JFreeChart;
  * @author isaac
  */
 public class MainDashBoard extends javax.swing.JPanel {
+
+    
+    ChartPanel utilityChart;
+
 
     /**
      * Creates new form MainDashBoard
@@ -29,6 +34,15 @@ public class MainDashBoard extends javax.swing.JPanel {
 //        ChartPanel pie = PieChart.createProducersPieChart("test");
 //        pie.setPreferredSize(new Dimension(500,500));
 //        chartPanel1.add(pie);
+
+
+        utilityChart = XYChart.createUtilityXYChart("Utilidad vs Tiempo", new double[100]);
+        
+        utilityChartPanel.removeAll();
+        utilityChartPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+     
+        utilityChart.setPreferredSize(new Dimension(400,400));
+        utilityChartPanel.add(utilityChart);
         
         
         
@@ -67,7 +81,7 @@ public class MainDashBoard extends javax.swing.JPanel {
         daysToLaunchSpinner = new javax.swing.JSpinner();
         dayDurationSpinner = new javax.swing.JSpinner();
         loadFileButton = new javax.swing.JButton();
-        chartPanel1 = new javax.swing.JPanel();
+        utilityChartPanel = new javax.swing.JPanel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -111,46 +125,46 @@ public class MainDashBoard extends javax.swing.JPanel {
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Dias Entre lanzamientos");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
-        jPanel3.add(driveController, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, -1, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, -1, -1));
+        jPanel3.add(driveController, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Configurar parámetros iniciales");
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 170, -1, -1));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Studio TLOU");
-        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 290, -1, -1));
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 290, -1, -1));
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Studio RM");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 290, -1, -1));
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("General");
-        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
+        jPanel3.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
         jLabel10.setBackground(new java.awt.Color(255, 255, 255));
         jLabel10.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Duración del día (segundos)");
-        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, -1, -1));
-        jPanel3.add(tlouController, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, -1, -1));
-        jPanel3.add(rmController, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, -1, -1));
+        jLabel10.setText("Duración del día (s)");
+        jPanel3.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
+        jPanel3.add(tlouController, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 330, -1, -1));
+        jPanel3.add(rmController, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, -1, -1));
 
         daysToLaunchSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-        jPanel3.add(daysToLaunchSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 290, 40, -1));
+        jPanel3.add(daysToLaunchSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 210, 40, -1));
 
         dayDurationSpinner.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
-        jPanel3.add(dayDurationSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 260, 40, -1));
+        jPanel3.add(dayDurationSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 170, 40, -1));
 
         loadFileButton.setText("Guardar");
         loadFileButton.addActionListener(new java.awt.event.ActionListener() {
@@ -158,12 +172,12 @@ public class MainDashBoard extends javax.swing.JPanel {
                 loadFileButtonActionPerformed(evt);
             }
         });
-        jPanel3.add(loadFileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, -1));
+        jPanel3.add(loadFileButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, -1, -1));
 
-        chartPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel3.add(chartPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 0, 460, 390));
+        utilityChartPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel3.add(utilityChartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 20, 480, 420));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 90, 1060, 530));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 90, 1060, 550));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1000, 600));
     }// </editor-fold>//GEN-END:initComponents
@@ -178,7 +192,6 @@ public class MainDashBoard extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TotalPayedLabel;
-    private javax.swing.JPanel chartPanel1;
     private javax.swing.JSpinner dayDurationSpinner;
     private javax.swing.JSpinner daysToLaunchSpinner;
     private interfaces.ProducersQtyController driveController;
@@ -198,6 +211,7 @@ public class MainDashBoard extends javax.swing.JPanel {
     private javax.swing.JButton loadFileButton;
     private interfaces.ProducersQtyController rmController;
     private interfaces.ProducersQtyController tlouController;
+    private javax.swing.JPanel utilityChartPanel;
     // End of variables declaration//GEN-END:variables
 
     public ProducersQtyController getDriveController() {
@@ -218,6 +232,14 @@ public class MainDashBoard extends javax.swing.JPanel {
     
     public JSpinner getDayDurationSpinner(){
         return dayDurationSpinner;
+    }
+    
+    public ChartPanel getUtilityChart() {
+        return utilityChart;
+    }
+
+    public JPanel getUtilityChartPanel() {
+        return utilityChartPanel;
     }
 
 

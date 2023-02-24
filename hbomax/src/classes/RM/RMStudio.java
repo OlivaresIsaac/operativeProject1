@@ -36,7 +36,7 @@ public final class RMStudio extends Thread{
 //    private final Semaphore synchPmAndDirector = new Semaphore(1);
     private final PM pm;
     private final Director director;
-    private final double[] utilityOverTime = new double [100];
+    private final double[] utilityOverTime = new double [200];
 
 
     int totalDayCounter = 0;
@@ -54,7 +54,7 @@ public final class RMStudio extends Thread{
         this.director = new Director(this.daysUntilLaunch);
        
         String initialParametersFile = "src\\assets\\initialParametersRM.txt";
-        DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParametersRM(initialParametersFile);
+        DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParameters(initialParametersFile);
 
        int [] producersQty = this.initializeProducers(driveParts);
        GlobalUI.getMainPage().getRMDashBoard1().getProducerPie().setChart(PieChart.createChart(PieChart.createDataset(producersQty), "Productores"));
@@ -325,7 +325,7 @@ public final class RMStudio extends Thread{
     }
     
     public void setMonthlySalaries(){
-        float total = (this.getAllDailySalaries()*30)/100;
+        float total = (this.getAllDailySalaries()*30)/1000;
         String label = ("$"+total+"K");
         GlobalUI.getMainPage().getRMDashBoard1().getMonthlySalariesLabel().setText(label);
     }
@@ -340,6 +340,13 @@ public final class RMStudio extends Thread{
         this.totalDayCounter+=1;
         GlobalUI.getMainPage().getRMDashBoard1().getTotalDaysLabel().setText(String.valueOf(this.totalDayCounter)+" dias");
         GlobalUI.getMainPage().getRMDashBoard1().getUtilityChart().setChart(XYChart.createChart(XYChart.createDataset(this.utilityOverTime), "Utilidad vs Tiempo"));
+        
+       updateChartsInMainDashboard();
+    }
+    
+    public void updateChartsInMainDashboard(){
+    //TLOU
+     GlobalUI.getMainPage().getMainDashBoard1().getUtilityChart().setChart(XYChart.createChart(XYChart.createDoubleDataset(this.utilityOverTime, new double[100]), "Utilidad vs Tiempo"));
     }
 
 

@@ -5,7 +5,9 @@
  */
 package classes.TLOU;
 
+import classes.FunctionsTXT;
 import classes.PTypes;
+import classes.RM.DriveObject;
 
 /**
  *
@@ -37,6 +39,14 @@ public class TLOUStudio extends Thread {
     private Director director;
 
     public TLOUStudio(int countdown, int timeSleep, int introAmount, int creditAmount, int startAmount, int endAmount, int twistAmount, int assemblersAmount) {
+
+
+        
+//        String initialParametersFile = "src\\assets\\initialParametersTLOU.txt";
+//        DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParameters(initialParametersFile);
+//        
+        
+        
 
         this.timeSleep = timeSleep;
         this.isWorking = true;
@@ -238,5 +248,8 @@ public class TLOUStudio extends Thread {
         }
 
     }
-
+   
+    public void updateProducersPieChart(){
+        
+    }
 }

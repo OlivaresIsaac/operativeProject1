@@ -85,11 +85,16 @@ public class PM extends Thread{
     public void restOfDay(){
         boolean work = true;
         
+       
         for (int i = 0; i<54;i++) {
             if (work) {
                 setPmState("Trabajando");
             } else {
                 setPmState("Viendo series");
+                if (Main.rm.getDirector().getDirectorState().equals("Vigilando al PM")) {
+                Main.rm.getDirector().giveFaultToPm();       
+                }
+                    
             }
             work = !work;
             try {

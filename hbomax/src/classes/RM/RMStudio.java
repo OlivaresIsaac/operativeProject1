@@ -9,7 +9,10 @@ import classes.FunctionsTXT;
 import classes.FunctionsUI;
 import classes.GlobalUI;
 import classes.PTypes;
+import interfaces.PieChart;
 import interfaces.ProducersQtyController;
+import interfaces.XYChart;
+import java.text.DecimalFormat;
 import java.util.concurrent.Semaphore;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
@@ -33,6 +36,10 @@ public final class RMStudio extends Thread{
 //    private final Semaphore synchPmAndDirector = new Semaphore(1);
     private final PM pm;
     private final Director director;
+    private final double[] utilityOverTime = new double [100];
+
+
+    int totalDayCounter = 0;
 
 
 
@@ -50,6 +57,7 @@ public final class RMStudio extends Thread{
         DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParametersRM(initialParametersFile);
 
        int [] producersQty = this.initializeProducers(driveParts);
+       GlobalUI.getMainPage().getRMDashBoard1().getProducerPie().setChart(PieChart.createChart(PieChart.createDataset(producersQty), "Productores"));
         
        this.updateSpinnerAndProducersType(producersQty);
        this.updateDashboardSpinner(producersQty);
@@ -110,6 +118,10 @@ public final class RMStudio extends Thread{
         }
         return producersQty;
     }
+    
+    public double[] getUtilityOverTime() {
+        return utilityOverTime;
+    }
 
     
     public JLabel getUtilityLabel() {
@@ -146,6 +158,7 @@ public final class RMStudio extends Thread{
             try {
 //                getDrive().showDriveParts();
                 getUtilityLabel().setText(getUtilityAsString());
+                registerTodayUility();
 //                this.printAllSalariesPayed();
 //                for (Producer producer : producers) {
 //                    producer.printProducerProduction();
@@ -223,13 +236,17 @@ public final class RMStudio extends Thread{
     public void reAssingProducerRoles(JSpinner[] spinners){
         int outerCounter = 0;
         int innerCounter = 0;
+        int[] producersQty = new int[6];
         for (JSpinner spinner : spinners) {
+           
             int typeAmount = Integer.parseInt(spinner.getValue().toString());
             for (int i = 0; i < typeAmount; i++) {
                 
                 getProducer(innerCounter).setProducerType(getProducerTypeByOrder(outerCounter));
                 innerCounter += 1;
             }
+            
+            producersQty[outerCounter] = typeAmount;
             outerCounter+=1;
         }
         
@@ -237,7 +254,7 @@ public final class RMStudio extends Thread{
             getProducer(innerCounter).setProducerType(PTypes.noType);
             innerCounter += 1;
         }
-        
+        GlobalUI.getMainPage().getRMDashBoard1().getProducerPie().setChart(PieChart.createChart(PieChart.createDataset(producersQty), "Productores"));
         setMonthlySalaries();
     }
     
@@ -273,12 +290,14 @@ public final class RMStudio extends Thread{
     }
     
     public String getUtilityAsString(){
-        // to do arreglar el redondeo
-        double num  = (getTotalUtility() < 1000 ) ? (Math.round((Math.abs(getTotalUtility()))*100)/100) : (Math.round((getTotalUtility()/1000)));
+        
+        final DecimalFormat df = new DecimalFormat("0.00");
+        double num  = (getTotalUtility() < 1000 ) ? (Math.abs(getTotalUtility())) : ((getTotalUtility()/1000));
+//        double num  = (getTotalUtility() < 1000 ) ? (Math.round((Math.abs(getTotalUtility()))*100)/100) : (Math.round((getTotalUtility()/1000)));
         String sufix = (getTotalUtility() >= 1000 )? "M" : "K";
         String prefix = (getTotalUtility() < 0) ? "-$" : "$";
         
-        return (prefix + num + sufix);
+        return (prefix + df.format(num) + sufix);
      
     }
     
@@ -314,6 +333,13 @@ public final class RMStudio extends Thread{
     public float getLaunchIncome(){
     int totalChapters = getDirector().getNormalChaptersAcc() + getDirector().getTwitChaptersAcc();
     return (float) (totalChapters*666.666);
+    }
+    
+    public void registerTodayUility(){
+        this.utilityOverTime[this.totalDayCounter] = getTotalUtility()/1000;
+        this.totalDayCounter+=1;
+        GlobalUI.getMainPage().getRMDashBoard1().getTotalDaysLabel().setText(String.valueOf(this.totalDayCounter)+" dias");
+        GlobalUI.getMainPage().getRMDashBoard1().getUtilityChart().setChart(XYChart.createChart(XYChart.createDataset(this.utilityOverTime), "Utilidad vs Tiempo"));
     }
 
 

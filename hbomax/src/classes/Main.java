@@ -7,8 +7,8 @@ package classes;
 
 import classes.RM.Producer;
 import classes.RM.RMStudio;
-import classes.TLOU.TLOUStudio;
 
+import classes.TLOU.TLOUStudio;
 /**
  *
  * @author isaac
@@ -28,6 +28,8 @@ public class Main {
         rm.start();
         
         GlobalUI.openMainPage();
+
         
     }
+
 }

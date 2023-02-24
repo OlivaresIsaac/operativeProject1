@@ -7,8 +7,12 @@
 package interfaces;
 
 import classes.FunctionsUI;
+import classes.Main;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import javax.swing.JLabel;
 import javax.swing.JSpinner;
+import org.jfree.chart.ChartPanel;
 
 /**
  *
@@ -17,10 +21,35 @@ import javax.swing.JSpinner;
 public class RMDashBoard extends javax.swing.JPanel {
 
     /** Creates new form RMDashBoard */
+   ChartPanel producerPie;
+   ChartPanel utilityChart;
+
+    public ChartPanel getUtilityChart() {
+        return utilityChart;
+    }
+
+    public ChartPanel getProducerPie() {
+        return producerPie;
+    }
+    
     public RMDashBoard() {
         initComponents();
-   
+        producerPie = PieChart.createProducersPieChart("Productores", this.producersQtyController1.getProducersQtys());
+        producerChartPanel.removeAll();
+        producerChartPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+     
+        producerPie.setPreferredSize(new Dimension(350,200));
+        producerChartPanel.add(producerPie);
+        
+        utilityChart = XYChart.createUtilityXYChart("Utilidad vs Tiempo", new double[100]);
+        
+        utilityChartPanel.removeAll();
+        utilityChartPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+     
+        utilityChart.setPreferredSize(new Dimension(350,200));
+        utilityChartPanel.add(utilityChart);
     }
+    
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -43,8 +72,9 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jProgressBar1 = new javax.swing.JProgressBar();
-        jPanel4 = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        totalDaysLabel = new javax.swing.JLabel();
+        producerChartPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         pmFaultsLabel = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -87,6 +117,8 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         twistChapterLaunchLabel = new javax.swing.JLabel();
+        utilityChartPanel = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
         rmWallpaper = new javax.swing.JLabel();
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -143,24 +175,35 @@ public class RMDashBoard extends javax.swing.JPanel {
         jLabel13.setBackground(new java.awt.Color(255, 255, 255));
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel13.setText("Próximo corte en");
-        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 210, -1));
-        jPanel3.add(jProgressBar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 270, -1));
+        jLabel13.setText("Dias Totales");
+        jPanel3.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 190, -1));
+
+        jLabel20.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel20.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Próximo corte en");
+        jPanel3.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 210, -1));
+
+        totalDaysLabel.setBackground(new java.awt.Color(255, 255, 255));
+        totalDaysLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        totalDaysLabel.setForeground(new java.awt.Color(255, 255, 255));
+        totalDaysLabel.setText("0 días");
+        jPanel3.add(totalDaysLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 50, 120, -1));
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 90));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1010, 90));
 
-        jPanel4.setBackground(new java.awt.Color(153, 102, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        producerChartPanel.setBackground(new java.awt.Color(153, 102, 255));
+        producerChartPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Gráfico de producción");
-        jPanel4.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
+        jLabel9.setText("Productores");
+        producerChartPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, -1, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 390, 270));
+        jPanel1.add(producerChartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, 370, 220));
 
         pmFaultsLabel.setBackground(new java.awt.Color(255, 255, 255));
         pmFaultsLabel.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
@@ -403,6 +446,17 @@ public class RMDashBoard extends javax.swing.JPanel {
         twistChapterLaunchLabel.setText("0");
         jPanel1.add(twistChapterLaunchLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 160, 90, -1));
 
+        utilityChartPanel.setBackground(new java.awt.Color(153, 102, 255));
+        utilityChartPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel16.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel16.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Utilidad vs Tiempo");
+        utilityChartPanel.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, -1, -1));
+
+        jPanel1.add(utilityChartPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 370, 370, 220));
+
         rmWallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/assets/rmWallpaper.png"))); // NOI18N
         jPanel1.add(rmWallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, -1, -1));
 
@@ -427,9 +481,11 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel24;
@@ -449,25 +505,26 @@ public class RMDashBoard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JLabel launchIncomeLabel;
     private javax.swing.JLabel monthlySalariesLabel;
     private javax.swing.JLabel normalChapterQty;
     private javax.swing.JLabel pmFaultsLabel;
     private javax.swing.JLabel pmSalaryLabel;
     private javax.swing.JLabel pmStateLabel;
+    private javax.swing.JPanel producerChartPanel;
     private interfaces.ProducersQtyController producersQtyController1;
     private javax.swing.JLabel regularChapterLaunchLabel;
     private javax.swing.JLabel rmWallpaper;
     private javax.swing.JLabel startDriveMax;
     private javax.swing.JLabel startDriveQty;
     private javax.swing.JLabel totalChapterQty;
+    private javax.swing.JLabel totalDaysLabel;
     private javax.swing.JLabel totalUtility;
     private javax.swing.JLabel twistChapterLaunchLabel;
     private javax.swing.JLabel twistChapterQty;
     private javax.swing.JLabel twistDriveMax;
     private javax.swing.JLabel twistDriveQty;
+    private javax.swing.JPanel utilityChartPanel;
     // End of variables declaration//GEN-END:variables
 
     public JLabel getCreditDriveMax() {
@@ -581,6 +638,10 @@ public class RMDashBoard extends javax.swing.JPanel {
     
     public JLabel getTwistChapterLaunchLabel(){
         return twistChapterLaunchLabel;
+    }
+    
+    public JLabel getTotalDaysLabel(){
+        return totalDaysLabel;
     }
 
 }

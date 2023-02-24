@@ -23,13 +23,13 @@ public class Drive {
 
     private final Semaphore semaphore;
 
-    public Drive(Counter counter, int numProducerSections) {
+    public Drive(Counter counter, int numProducerSections, int [] maxDrive) {
         this.counter = counter;
 
         this.numProducerSections = numProducerSections;
-        this.producerSections = this.setProducerSections();
+        this.producerSections = this.setProducerSections(maxDrive);
 
-        this.chapterSection = this.setChapterSection();
+        this.chapterSection = this.setChapterSection(maxDrive[5]);
 
         this.semaphore = new Semaphore(1);
     }
@@ -70,12 +70,13 @@ public class Drive {
         this.chapterSection.insertWork(1);
     }
 
-    private DriveSection[] setProducerSections() {
-        DriveSection intro = new DriveSection(PTypes.intro, this.counter, 30, 1);
-        DriveSection credit = new DriveSection(PTypes.credit, this.counter, 25, 1);
-        DriveSection start = new DriveSection(PTypes.start, this.counter, 50, 2);
-        DriveSection end = new DriveSection(PTypes.end, this.counter, 55, 2);
-        DriveSection twist = new DriveSection(PTypes.twist, this.counter, 40, 2);
+    private DriveSection[] setProducerSections(int [] driveMax) {
+        DriveSection intro = new DriveSection(PTypes.intro, this.counter, driveMax[0], 1);
+        DriveSection start = new DriveSection(PTypes.start, this.counter, driveMax[1], 2);
+        DriveSection credit = new DriveSection(PTypes.credit, this.counter, driveMax[2], 1);
+        DriveSection twist = new DriveSection(PTypes.twist, this.counter, driveMax[3], 2);
+        DriveSection end = new DriveSection(PTypes.end, this.counter, driveMax[4], 2);
+       
 
         DriveSection[] aux = {intro, credit, start, end, twist};
 
@@ -92,9 +93,9 @@ public class Drive {
         return null;
     }
 
-    private DriveSection setChapterSection() {
+    private DriveSection setChapterSection(int chaptersLimit) {
         // TODO: PONER CHAPTER COMO SIN LIMITE
-        DriveSection chapter = new DriveSection(PTypes.chapter, this.counter, 100, 0);
+        DriveSection chapter = new DriveSection(PTypes.chapter, this.counter, 100, chaptersLimit);
 
         return chapter;
     }

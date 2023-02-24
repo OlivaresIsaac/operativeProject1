@@ -1,6 +1,6 @@
 intro,0,-1,1
 start,0,-1,1
 credit,0,-1,1
-twist,0,-1,1
+twist,0,20,1
 end,0,-1,1
 chapter,0,-1,1

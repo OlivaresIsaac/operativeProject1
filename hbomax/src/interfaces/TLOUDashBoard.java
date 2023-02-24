@@ -592,4 +592,8 @@ public class TLOUDashBoard extends javax.swing.JPanel {
     public JLabel getLaunchIncomeLabel() {
         return launchIncomeLabel;
     }
+    
+    public ProducersQtyController getProducersQtyController1(){
+        return producersQtyController1;
+    }
 }

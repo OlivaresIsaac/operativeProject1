@@ -53,9 +53,11 @@ public class TLOUStudio extends Thread {
     int totalDayCounter = 0;
     
     private final ProducersQtyController producersController;
+    private final ProducersQtyController dashboardProducerController;
 
     public TLOUStudio(int countdown, int timeSleep) {
         
+        dashboardProducerController = GlobalUI.getMainPage().getMainDashBoard1().getTlouController();
         String initialParametersFile = "src\\assets\\initialParametersTLOU.txt";
         DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParameters(initialParametersFile);
         int introAmount = driveParts[0].getInitialProducerQty();
@@ -94,9 +96,11 @@ public class TLOUStudio extends Thread {
         this.director = new Director(this.counter, this.drive);
         this.manager = new Manager(this.counter, this.director);
         
-        this.producersController = GlobalUI.getMainPage().getRMDashBoard1().getProducersQtyController1();
+        this.producersController = GlobalUI.getMainPage().getTLOUDashBoard().getProducersQtyController1();
         int [] producersQty = {introAmount, startAmount, creditAmount, twistAmount, endAmount, assemblersAmount};
         this.updateSpinnerAndProducersType(producersQty);
+         this.updateDashboardSpinner(producersQty);
+        GlobalUI.getMainPage().getTLOUDashBoard().getProducerPie().setChart(PieChart.createChart(PieChart.createDataset(producersQty), "Productores"));
     }
     
     public void updateSpinnerAndProducersType(int [] producersQty){
@@ -345,12 +349,15 @@ public class TLOUStudio extends Thread {
 
     }
    
-    public void updateProducersPieChart(){
-        
-    }
+   
     
         public Counter getCounter() {
         return counter;
+    }
+        
+           public void updateDashboardSpinner(int [] producersQty){
+        dashboardProducerController.updateQtysInSpinners(producersQty);
+        reAssingProducerRoles(this.producersController.getSpinners());
     }
     
     

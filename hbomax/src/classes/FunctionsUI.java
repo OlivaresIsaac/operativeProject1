@@ -44,6 +44,7 @@ public class FunctionsUI {
                
             } else {
                 //TODO poner reasignacción productores TLOU
+                Main.tlou.reAssingProducerRoles(spinners);
             }
             
             return newValue;

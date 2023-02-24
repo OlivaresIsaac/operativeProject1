@@ -163,7 +163,9 @@ public class FunctionsTXT {
             JOptionPane.showMessageDialog(null, "No se pudo guardar la información");
         }
         
-        //chart
+       
+        Main.tlou.updateSpinnerAndProducersType(tlouProducersQty);
+        GlobalUI.getMainPage().getTLOUDashBoard().getProducerPie().setChart(PieChart.createChart(PieChart.createDataset(tlouProducersQty), "Productores"));
         Main.tlou.getDrive().updateDriveMaxLabels(driveMax);
 //        Main.tlou.getCounter().setSalaryPerMonth(Main.tlou.getPaid());
         // monthly

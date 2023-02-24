@@ -42,7 +42,7 @@ public class TLOUStudio extends Thread {
         
         String initialParametersFile = "src\\assets\\initialParametersTLOU.txt";
         DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParameters(initialParametersFile);
-        int initAmount = driveParts[0].getInitialProducerQty();
+        int introAmount = driveParts[0].getInitialProducerQty();
         int startAmount = driveParts[1].getInitialProducerQty();
         int creditAmount = driveParts[2].getInitialProducerQty();
         int twistAmount = driveParts[3].getInitialProducerQty();

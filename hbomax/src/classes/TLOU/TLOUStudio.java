@@ -32,8 +32,14 @@ public class TLOUStudio extends Thread {
     private final int numProducerSections;
 
     private Drive drive;
+
+    public Drive getDrive() {
+        return drive;
+    }
     private ProducerTypes producerTypes;
     private Counter counter;
+
+
 
     private Producer[] producers;
     private Assembler[] assemblers;
@@ -174,7 +180,7 @@ public class TLOUStudio extends Thread {
         return aux;
     }
     
-    private double getPaid() {
+    public double getPaid() {
         double totalPaidToday = 0;
         
         for(int i = 0; i < this.numProducers; i++) {
@@ -275,6 +281,10 @@ public class TLOUStudio extends Thread {
    
     public void updateProducersPieChart(){
         
+    }
+    
+        public Counter getCounter() {
+        return counter;
     }
     
     

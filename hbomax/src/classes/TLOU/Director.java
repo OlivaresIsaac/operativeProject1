@@ -38,7 +38,9 @@ public class Director extends Thread {
         while (TLOUStudio.isWorking) {
             try {
                 Semaphore semaphore = this.counter.getSemaphore();
+                int localTimeSleep = TLOUStudio.timeSleep;
                 boolean isZero = false;
+                
 
                 semaphore.acquire();
                 isZero = this.counter.getCountdown() == 0;
@@ -50,7 +52,7 @@ public class Director extends Thread {
                     this.counter.resetCountdown();
                     this.counter.updateTotalGain();
 
-                    Thread.sleep(TLOUStudio.timeSleep);
+                    Thread.sleep(localTimeSleep);
                     GlobalUI.getMainPage().getTLOUDashBoard().getDirectorStateLabel().setText("Trabajando");
 
                 } else {
@@ -70,7 +72,7 @@ public class Director extends Thread {
                     this.isChecking = false;
                     
                     GlobalUI.getMainPage().getTLOUDashBoard().getDirectorStateLabel().setText("Trabajando");
-                    int restOfTheDay = TLOUStudio.timeSleep - sleepTime - sleepCheckingTime;
+                    int restOfTheDay = localTimeSleep - sleepTime - sleepCheckingTime;
 
                     Thread.sleep(restOfTheDay);
                 }

@@ -21,6 +21,10 @@ public class DriveSection {
 
     private int limit;
     private boolean limited;
+
+    public void setLimited(boolean limited) {
+        this.limited = limited;
+    }
     
     private int current;
     
@@ -81,7 +85,7 @@ public class DriveSection {
         }
     }
     
-    private void setLimitInterface(String newValue) {
+    public void setLimitInterface(String newValue) {
 //        System.out.print(this.pType);
         String newValueAux = (newValue.equals("-1")) ? "Sin Límites" : newValue;
         System.out.println(newValueAux);

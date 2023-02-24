@@ -16,6 +16,10 @@ public class Counter {
 
     private int countdown;
     private int originalCountdown;
+
+    public void setOriginalCountdown(int originalCountdown) {
+        this.originalCountdown = originalCountdown;
+    }
     
     private double total;
     private double totalPaid;

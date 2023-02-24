@@ -6,6 +6,7 @@
 package classes;
 
 import classes.RM.DriveObject;
+import classes.TLOU.TLOUStudio;
 import interfaces.PieChart;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -57,6 +58,7 @@ public class FunctionsTXT {
 
         String newValue = (String.valueOf(values[1])+" días");
         GlobalUI.getMainPage().getRMDashBoard1().getDaysToLaunchLabel().setText(newValue);
+        GlobalUI.getMainPage().getTLOUDashBoard().getDaysToLaunchLabel().setText(newValue);
         FunctionsUI.updateDaytoLaunchAndDayTime(values[1], (values[0]/1000));
         
         return values;
@@ -112,6 +114,8 @@ public class FunctionsTXT {
         Main.rm.getPm().setDaysToPublish(daysToLaunch);
         Main.rm.getDirector().setOriginalLaunchDays(daysToLaunch);
         
+        TLOUStudio.timeSleep = durationDayInms;
+        Main.tlou.getCounter().setOriginalCountdown(daysToLaunch);
     }
           /**
      * Saves all initial parameters of RmStudio into their respective TXT
@@ -158,6 +162,11 @@ public class FunctionsTXT {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "No se pudo guardar la información");
         }
+        
+        //chart
+        Main.tlou.getDrive().updateDriveMaxLabels(driveMax);
+//        Main.tlou.getCounter().setSalaryPerMonth(Main.tlou.getPaid());
+        // monthly
     
     }
 }

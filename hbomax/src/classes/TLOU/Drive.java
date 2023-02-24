@@ -78,7 +78,7 @@ public class Drive {
         DriveSection end = new DriveSection(PTypes.end, this.counter, driveMax[4], 2);
        
 
-        DriveSection[] aux = {intro, credit, start, end, twist};
+        DriveSection[] aux = {intro, start, credit, twist, end };
 
         return aux;
     }
@@ -107,5 +107,23 @@ public class Drive {
     public DriveSection getChapterSection() {
         return chapterSection;
     }
+    
+    
+    public void updateDriveMaxLabels(int[] driveMax){
+         for (int i = 0; i<this.producerSections.length; i++) {
+            
+             this.producerSections[i].setLimit(driveMax[i]);
+             
+            if (driveMax[i] == -1) {
+                this.producerSections[i].setLimitInterface("Sin límite");
+                this.producerSections[i].setLimited(false);
+              
+            } else {
+                this.producerSections[i].setLimitInterface(String.valueOf(driveMax[i]));
+              this.producerSections[i].setLimited(true);
+            }
+        }
+    }
+    
 
 }

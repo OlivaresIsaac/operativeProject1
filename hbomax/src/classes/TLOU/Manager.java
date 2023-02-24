@@ -45,7 +45,7 @@ public class Manager extends Thread {
         while (TLOUStudio.isWorking) {
             try {
                 Semaphore semaphore = this.counter.getSemaphore();
-
+                int localTimeSleep = TLOUStudio.timeSleep;
                 int sleepWorkingTime = this.relativeTime(this.workingTime);
 
                 semaphore.acquire();
@@ -58,7 +58,7 @@ public class Manager extends Thread {
 
                 int sleepIntervalTime = this.relativeTime(this.intervalTime);
 
-                int numIntervals = (int) ((TLOUStudio.timeSleep - sleepWorkingTime) / sleepIntervalTime);
+                int numIntervals = (int) ((localTimeSleep - sleepWorkingTime) / sleepIntervalTime);
                 int discountToday = 0;
 
                 for (int i = 0; i < numIntervals; i++) {
@@ -85,7 +85,7 @@ public class Manager extends Thread {
                 this.payDay();
                 GlobalUI.getMainPage().getTLOUDashBoard().getManagerSalaryLabel().setText(String.valueOf("$" + this.totalPaid) );
 
-                int restOfTheDay = TLOUStudio.timeSleep - sleepWorkingTime - (sleepIntervalTime * numIntervals);
+                int restOfTheDay = localTimeSleep - sleepWorkingTime - (sleepIntervalTime * numIntervals);
 
                 Thread.sleep(restOfTheDay);
 

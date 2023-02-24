@@ -38,14 +38,21 @@ public class TLOUStudio extends Thread {
     private Manager manager;
     private Director director;
 
-    public TLOUStudio(int countdown, int timeSleep, int introAmount, int creditAmount, int startAmount, int endAmount, int twistAmount, int assemblersAmount) {
-
-
+    public TLOUStudio(int countdown, int timeSleep) {
         
-//        String initialParametersFile = "src\\assets\\initialParametersTLOU.txt";
-//        DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParameters(initialParametersFile);
-//        
+        String initialParametersFile = "src\\assets\\initialParametersTLOU.txt";
+        DriveObject[] driveParts = FunctionsTXT.loadStudioInitialParameters(initialParametersFile);
+        int initAmount = driveParts[0].getInitialProducerQty();
+        int startAmount = driveParts[1].getInitialProducerQty();
+        int creditAmount = driveParts[2].getInitialProducerQty();
+        int twistAmount = driveParts[3].getInitialProducerQty();
+        int endAmount =  driveParts[4].getInitialProducerQty();
+        int assemblersAmount = driveParts[5].getInitialProducerQty();
         
+        int [] driveMaxSections = new int[6];
+        for (int i = 0; i< 6; i++) {
+            driveMaxSections[i] = driveParts[i].getMaxCapacity();
+        }
         
 
         this.timeSleep = timeSleep;
@@ -64,7 +71,7 @@ public class TLOUStudio extends Thread {
 
         this.producerTypes = new ProducerTypes(this.numProducerTypes);
         this.counter = new Counter(countdown);
-        this.drive = new Drive(this.counter, this.numProducerSections);
+        this.drive = new Drive(this.counter, this.numProducerSections, driveMaxSections);
 
         this.producers = this.setProducers(introAmount, creditAmount, startAmount, endAmount, twistAmount);
         this.assemblers = this.setAssemblers(assemblersAmount);

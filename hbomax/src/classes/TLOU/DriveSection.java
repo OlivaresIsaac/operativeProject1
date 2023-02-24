@@ -34,7 +34,7 @@ public class DriveSection {
         this.limit = limit;
         this.setLimitInterface(String.valueOf(this.limit));
                 
-        this.limited = true;
+        this.limited = (limit != -1);
         
         this.current = 0;
         
@@ -83,20 +83,23 @@ public class DriveSection {
     
     private void setLimitInterface(String newValue) {
 //        System.out.print(this.pType);
+        String newValueAux = (newValue.equals("-1")) ? "Sin Límites" : newValue;
+        System.out.println(newValueAux);
+
         if(this.pType.equals(PTypes.intro)) {
-            GlobalUI.getMainPage().getTLOUDashBoard().getIntroDriveMaxLabel().setText(newValue);
+            GlobalUI.getMainPage().getTLOUDashBoard().getIntroDriveMaxLabel().setText(newValueAux);
         }
         if(this.pType.equals(PTypes.credit)) {
-            GlobalUI.getMainPage().getTLOUDashBoard().getCreditDriveMaxLabel().setText(newValue);
+            GlobalUI.getMainPage().getTLOUDashBoard().getCreditDriveMaxLabel().setText(newValueAux);
         }
         if(this.pType.equals(PTypes.start)) {
-            GlobalUI.getMainPage().getTLOUDashBoard().getStartDriveMaxLabel().setText(newValue);
+            GlobalUI.getMainPage().getTLOUDashBoard().getStartDriveMaxLabel().setText(newValueAux);
         }
         if(this.pType.equals(PTypes.end)) {
-            GlobalUI.getMainPage().getTLOUDashBoard().getEndDriveMaxLabel().setText(newValue);
+            GlobalUI.getMainPage().getTLOUDashBoard().getEndDriveMaxLabel().setText(newValueAux);
         }
         if(this.pType.equals(PTypes.twist)) {
-            GlobalUI.getMainPage().getTLOUDashBoard().getTwistDriveMaxLabel().setText(newValue);
+            GlobalUI.getMainPage().getTLOUDashBoard().getTwistDriveMaxLabel().setText(newValueAux);
         }
     }
 

@@ -5,8 +5,6 @@
  */
 package classes;
 
-import static classes.GlobalUI.updateTotalPayedText;
-import interfaces.MainPage;
 import javax.swing.JSpinner;
 
 /**
@@ -15,10 +13,7 @@ import javax.swing.JSpinner;
  */
 public class FunctionsUI {
     
-    
-        public static void updateMainDashBoardUI(String text){
-       updateTotalPayedText(text);
-    }
+
     
       /**
      * Validates all spinners numbers for RM studio

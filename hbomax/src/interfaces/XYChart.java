@@ -52,7 +52,7 @@ public class XYChart {
         final XYSeries serie1 = new XYSeries( "Utilidad" );    
         
         for (int i = 0; i<utilityOverTime.length;i++){
-            if (utilityOverTime[i] == 0) {
+            if (i!=0 && utilityOverTime[i] == 0) {
                 break;
             }
             
@@ -72,7 +72,7 @@ public class XYChart {
         final XYSeries serie1 = new XYSeries( "Studio RM" );    
         
         for (int i = 0; i<utilityOverTimeRM.length;i++){
-            if (utilityOverTimeRM[i] == 0) {
+            if (i!=0 &&  utilityOverTimeRM[i] == 0) {
                 break;
             }
             
@@ -82,7 +82,7 @@ public class XYChart {
         final XYSeries serie2 = new XYSeries( "Studio TLOU" );    
         
         for (int i = 0; i<utilityOverTimeTLOU.length;i++){
-            if (utilityOverTimeTLOU[i] == 0) {
+            if ( i!=0 && utilityOverTimeTLOU[i] == 0) {
                 break;
             }
             

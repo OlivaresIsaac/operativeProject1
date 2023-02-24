@@ -99,9 +99,9 @@ public class Counter {
         GlobalUI.getMainPage().getTLOUDashBoard().getRegularChapterLaunchLabel().setText(String.valueOf(this.normalChaptersThisBatch));
         this.normalChaptersThisBatch = 0;
         
-        this.twistChaptersThisBatch = 0;
+       
         GlobalUI.getMainPage().getTLOUDashBoard().getTwistChapterLaunchLabel().setText(String.valueOf(this.twistChaptersThisBatch));
-        
+        this.twistChaptersThisBatch = 0;
     }
     
     public void updateTotalChapter(int deliverables) {

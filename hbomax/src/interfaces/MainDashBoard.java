@@ -48,9 +48,7 @@ public class MainDashBoard extends javax.swing.JPanel {
         
     }
     
-    public void setTotalPayedLabel(String text){
-        this.TotalPayedLabel.setText(text);
-    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,7 +62,6 @@ public class MainDashBoard extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         hboLogo = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        TotalPayedLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -92,11 +89,6 @@ public class MainDashBoard extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(102, 0, 102));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        TotalPayedLabel.setBackground(new java.awt.Color(255, 255, 255));
-        TotalPayedLabel.setForeground(new java.awt.Color(255, 255, 255));
-        TotalPayedLabel.setText("$0");
-        jPanel2.add(TotalPayedLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 110, -1));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
@@ -191,7 +183,6 @@ public class MainDashBoard extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel TotalPayedLabel;
     private javax.swing.JSpinner dayDurationSpinner;
     private javax.swing.JSpinner daysToLaunchSpinner;
     private interfaces.ProducersQtyController driveController;

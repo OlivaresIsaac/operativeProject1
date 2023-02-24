@@ -120,7 +120,7 @@ public class TLOUStudio extends Thread {
                 
                 Producer producer = this.producers[innerCounter];
                 
-                if(newPType == "assembler") {
+                if(newPType.equals("assembler")) {
                     //TODO: SEGUIR PENSANDO
                     producer.setPType(PTypes.noType);
                 } else {
@@ -340,9 +340,10 @@ public class TLOUStudio extends Thread {
 
         while (TLOUStudio.isWorking) {
             try {
+                this.registerTodayUility();
                 this.counter.updateTotalPaid(this.getTotalPaid());
                 this.counter.setSalaryPerMonth(this.getPaid());
-                this.registerTodayUility();
+                
                 Thread.sleep(TLOUStudio.timeSleep);
             } catch (InterruptedException e) {
                 System.out.println(e);

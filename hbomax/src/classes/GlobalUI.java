@@ -24,8 +24,4 @@ public class GlobalUI {
         getMainPage().setVisible(true);
         
     }
-    
-    public static void updateTotalPayedText(String text){
-        mainPage.getMainDashBoard1().setTotalPayedLabel(text);
-    }
 }

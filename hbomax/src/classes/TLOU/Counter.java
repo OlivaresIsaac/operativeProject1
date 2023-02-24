@@ -23,10 +23,13 @@ public class Counter {
     private double salaryPerMonth;
     
     private int chaptersThisBatch;
+    private double totalThisBatch;
+    private int normalChaptersThisBatch;
+    private int twistChaptersThisBatch;
 
     private int totalChapters;
-    private int normalChapters;
-    private int twistChapters;
+    private int totalNormalChapters;
+    private int totalTwistChapters;
 
     private Semaphore semaphore;
 
@@ -39,7 +42,10 @@ public class Counter {
         this.totalGain = 0;
         this.salaryPerMonth = 0;
         
+        this.totalThisBatch = 0;
         this.chaptersThisBatch = 0;
+        this.normalChaptersThisBatch = 0;
+        this.twistChaptersThisBatch = 0;
 
         this.totalChapters = 0;
 
@@ -77,9 +83,21 @@ public class Counter {
     }
     
     public void updateTotalGain() {
-        this.totalGain += this.profitPerAudience(110) * 10000 * this.chaptersThisBatch;
+        this.totalThisBatch = this.profitPerAudience(110) * 10000 * this.chaptersThisBatch;
+        this.totalGain += this.totalThisBatch;
         this.updateTotal();
+        
         this.chaptersThisBatch = 0;
+        
+        GlobalUI.getMainPage().getTLOUDashBoard().getLaunchIncomeLabel().setText(String.valueOf(this.totalThisBatch));
+        this.totalThisBatch = 0;
+        
+        GlobalUI.getMainPage().getTLOUDashBoard().getRegularChapterLaunchLabel().setText(String.valueOf(this.normalChaptersThisBatch));
+        this.normalChaptersThisBatch = 0;
+        
+        this.twistChaptersThisBatch = 0;
+        GlobalUI.getMainPage().getTLOUDashBoard().getTwistChapterLaunchLabel().setText(String.valueOf(this.twistChaptersThisBatch));
+        
     }
     
     public void updateTotalChapter(int deliverables) {
@@ -96,13 +114,15 @@ public class Counter {
     }
 
     private void addNewTwistChapter() {
-        this.twistChapters += 1;
-        GlobalUI.getMainPage().getTLOUDashBoard().getTwistChapterQtyLabel().setText(String.valueOf(this.twistChapters));
+        this.totalTwistChapters += 1;
+        this.twistChaptersThisBatch += 1;
+        GlobalUI.getMainPage().getTLOUDashBoard().getTwistChapterQtyLabel().setText(String.valueOf(this.totalTwistChapters));
     }
 
     private void addNewNormalChapter() {
-        this.normalChapters += 1;
-        GlobalUI.getMainPage().getTLOUDashBoard().getNormalChapterQtyLabel().setText(String.valueOf(this.normalChapters));
+        this.totalNormalChapters += 1;
+        this.normalChaptersThisBatch += 1;
+        GlobalUI.getMainPage().getTLOUDashBoard().getNormalChapterQtyLabel().setText(String.valueOf(this.totalNormalChapters));
     }
     
     public int getCountdown() {
